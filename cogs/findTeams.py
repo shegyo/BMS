@@ -35,21 +35,21 @@ class TicketModal(discord.ui.Modal):
     if not desiredMode:
       return await interaction.response.send_message("Could not find desired gamemode.")
     
-    searchPost = f"<a:Announcement:1216306085565042710> {interaction.user} is looking for Mates\n"
-    searchPost += f"<:right_arrow:1216305900961271859> <:Trophy:1223277455821902046> {self.trophies}\n"
+    searchPost = f"<:right_arrow:1216305900961271859> <:Trophy:1223277455821902046> {self.trophies}\n"
     searchPost += f"<:right_arrow:1216305900961271859> <:list:1216305645083689111> {self.trophyRange.value} Lobby\n"
     searchPost += f"<:right_arrow:1216305900961271859> {modeEmojis[desiredMode]} {desiredMode}\n"
     searchPost += f"<:right_arrow:1216305900961271859> <a:Global:1223361709729779896> {self.region.value}\n"
     searchPost += f"<:right_arrow:1216305900961271859> Team Code: {self.teamCode.value}"
-    JoinButton = LinkButton("Join Team", f"https://link.brawlstars.com/invite/gameroom/en?tag={self.teamCode.value}")
+    embed = discord.Embed(title=f"<a:Announcement:1216306085565042710> {interaction.user}", description=searchPost, color=int("ffffff", 16))
 
+    JoinButton = LinkButton("Join Team", f"https://link.brawlstars.com/invite/gameroom/en?tag={self.teamCode.value}")
 
     await interaction.response.send_message("sending Search post on all servers...", ephemeral=True, delete_after=5)
 
     for guild in self.bot.guilds:
       findMatesChannel = discord.utils.get(guild.text_channels, name="find-mates")
       if findMatesChannel:
-        await findMatesChannel.send(searchPost, view=View([JoinButton]))
+        await findMatesChannel.send(embed=embed, view=View([JoinButton]))
 
     await interaction.edit_original_response(content="Search post sent successfully on all servers <a:verifyblack:1216302923441504287>")
     
