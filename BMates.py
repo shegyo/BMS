@@ -18,7 +18,7 @@ class BMates(commands.Bot):
 
   async def on_guild_join(self, guild: discord.guild):
     # Maps Kanäle erstellen
-    for guild in self.bot.guilds:
+    for guild in self.guilds:
       # Kategorie erstmal finden
       mapsCategory = discord.utils.get(guild.categories, name="Map Rotation")
       # Erstellen falls nicht da
@@ -37,7 +37,7 @@ class BMates(commands.Bot):
         await findMatesCategory.create_text_channel("next-maps", topic="Predicted Upcoming Maps!")
 
     # Find Mates Kanäle erstellen
-    for guild in self.bot.guilds:
+    for guild in self.guilds:
       # Kategorie erstmal finden
       findMatesCategory = discord.utils.get(guild.categories, name="FIND MATES")
       # Erstellen falls nicht da
