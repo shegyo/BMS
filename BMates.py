@@ -53,7 +53,7 @@ class BMates(commands.Bot):
       if not findMatesChannel:
         await findMatesCategory.create_text_channel("find-mates", overwrites=onlyRead, topic="find a team to join in this channel")
       if not teamInquiriesChannel:
-        await findMatesCategory.create_text_channel("team-inquiries", topic="run /find_mates to post your search!")
+        teamInquiriesChannel = await findMatesCategory.create_text_channel("team-inquiries", topic="run /find_mates to post your search!")
 
       await teamInquiriesChannel.send("<a:Announcement:1216306085565042710> Type `/find_mates` to search for teammates.\n"
                         +f"<:info:1216306156222287894> You can find all current search queries in {findMatesChannel.mention}\n\n"
