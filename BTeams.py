@@ -16,7 +16,7 @@ class BTeams(commands.Bot):
 
   async def on_member_join(self, member: discord.Member):
     # Wenn der bot selbst gejoint ist
-    if member == self.user:
+    if member.id == 1223344546260193280:
       # Kategorie erstmal finden
       findMatesCategory = discord.utils.find(member.guild.categories, name="FIND MATES")
       # Erstellen falls nicht da
