@@ -35,11 +35,11 @@ class TicketModal(discord.ui.Modal):
     if not desiredMode:
       return await interaction.response.send_message("Could not find desired gamemode.")
     
-    searchPost = f"# <a:Announcement:1216306085565042710> {interaction.user}\n"
+    searchPost = f"## <a:Announcement:1216306085565042710> `{interaction.user}` is looking for mates\n"
     searchPost += f"<:Trophy:1223277455821902046> **{self.trophies}**\n"
     searchPost += f"<:list:1216305645083689111> **{self.trophyRange.value}** Lobby\n"
     searchPost += f"{modeEmojis[desiredMode]} **{desiredMode}**\n"
-    searchPost += f"<a:Global:1223361709729779896> **{self.region.value}**\n"
+    searchPost += f"<a:Global:1223361709729779896> **{self.region.value.upper()}**\n"
     searchPost += f"<:right_arrow:1216305900961271859> Code: **{self.teamCode.value.upper()}**"
     embed = discord.Embed(title="", description=searchPost, color=int("ffffff", 16))
 
