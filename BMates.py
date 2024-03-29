@@ -69,7 +69,7 @@ class BMates(commands.Bot):
 
                                 +"To support me, check out our Social Media in the Linktree <:Linktree:1218980236260278292>\n"
                                 +"<:thx:1216304741949374504> for your support! You are the best",
-                                view=View[LinkButton("Linktree", "https://linktr.ee/bsystems")])
+                                view=View([LinkButton("Linktree", "https://linktr.ee/bsystems")]))
       
 
 intents = discord.Intents.all()
