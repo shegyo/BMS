@@ -37,9 +37,9 @@ class findTeams(commands.Cog):
     headers = {
         "Authorization": f"Bearer {envData['BsApi']}"
     }
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        print(response.json())
+    profileData = requests.get(url, headers=headers).json()
+    print(profileData)
+    if True:
         await interaction.response.send_modal(TicketModal(self.bot))
     else:
       await interaction.response.send_message(f"No profile found for Id: {bs_id}", ephemeral=True, delete_after=3)
