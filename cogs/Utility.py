@@ -29,7 +29,7 @@ class Utility(commands.Cog):
     description = "For help and Support, please contact the System Administrators!\n\n"
     description += "<:discord:1216307276927733800> <@324607583841419276>\n"
     description += "<:discord:1216307276927733800> <@818879706350092298>\n"
-    embed = discord.Embed(title="SUPPORT", description=description, color=int("000000", 16))
+    embed = discord.Embed(title="SUPPORT", description=description, color=int("ffffff", 16))
     embed.set_image(url="https://media.discordapp.net/attachments/1216040586348593213/1223366470088790046/bms_avatar.jpg")
     viewItems = [LinkButton("Linktree", "https://linktr.ee/bsystems")]
     await interaction.response.send_message(embed=embed, view=View(viewItems))
@@ -38,8 +38,10 @@ class Utility(commands.Cog):
   # Invite Command -> get Link
   @app_commands.command(description="get link")
   async def invite(self, interaction: discord.Interaction):
-    description = "make use of Cross Server Team Search!\n"
-    embed = discord.Embed(title="<:discord:1216307276927733800>  Invite me to your Server!", description=description, color=int("000000", 16))
+    description += "- Keep track of current and upcoming maps!\n"
+    description = "- Make use of FREE Cross Server Team Search!\n"
+    description += "- Enjoy FREE profile images!"
+    embed = discord.Embed(title="<:discord:1216307276927733800>  Invite me to your Server!", description=description, color=int("ffffff", 16))
     viewItems = [LinkButton("Invite me!", "https://discord.com/oauth2/authorize?client_id=1223344546260193280&permissions=8&scope=bot")]
     await interaction.response.send_message(embed=embed, view=View(viewItems))
 
