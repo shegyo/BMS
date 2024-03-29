@@ -65,14 +65,16 @@ class getMaps(commands.Cog):
       if not currentMapsChannel or not nextMapsChannel:
           continue
     
-      async for msg in currentMapsChannel.history(limit=10):
+      messages = [message async for message in currentMapsChannel.history()]
+      for msg in messages:
           if msg.author != self.bot:
               await msg.delete()
           else:
               await msg.edit(content="# Active Maps", embeds=ActiveEmbeds)
               break
 
-      async for msg in nextMapsChannel.history(limit=10):
+      messages = [message async for message in nextMapsChannel.history()]
+      for msg in messages:
           if msg.author != self.bot:
               await msg.delete()
           else:
