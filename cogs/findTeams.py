@@ -21,7 +21,5 @@ class findTeams(commands.Cog):
         await interaction.response.send_message(str(error), ephemeral=True)
 
 
-
-
 async def setup(bot):
   await bot.add_cog(findTeams(bot))

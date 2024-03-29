@@ -22,6 +22,7 @@ class Utility(commands.Cog):
   
   def __init__(self, bot):
     self.bot = bot
+    self.create_channels.start()
     
   # Help Command -> get Support
   @app_commands.command(description="bot help")
@@ -47,7 +48,7 @@ class Utility(commands.Cog):
 
   #loop for creating channels
   @tasks.loop(minutes=1)
-  async def refresh_brackets(self):
+  async def create_channels(self):
     guilds = await self.fetch_guilds()
     for guild in guilds:
       # Kategorie erstmal finden
