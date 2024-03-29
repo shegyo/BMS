@@ -1,7 +1,10 @@
 from discord.ext import commands
-import discord
+import discord, requests
 from discord import app_commands
 from cogs.Utility import View
+
+gamemodes = requests.get("https://api.brawlapi.com/v1/gamemodes").json()["list"]
+print(gamemodes)
 
 # The Commands
 class findTeams(commands.Cog):
