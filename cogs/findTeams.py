@@ -1,26 +1,50 @@
 from discord.ext import commands, tasks
 import discord, requests, json
 from discord import app_commands
-from cogs.Utility import View
+from cogs.Utility import View, LinkButton
 
 gamemodes = requests.get("https://api.brawlapi.com/v1/gamemodes").json()["list"]
 
 with open("jsons/env.json", "r", encoding="UTF-8") as f:
   envData = json.load(f)
 
+with open("jsons/modeEmojis.json", "r", encoding="UTF-8") as f:
+  modeEmojis = json.load(f)
+
 # Formular to fill out, creates the Search post
 class TicketModal(discord.ui.Modal):
-  def __init__(self, bot):
+  def __init__(self, bot, trophies):
     super().__init__(title="Create Ticket")
     self.bot = bot
+    self.trophies = trophies
 
   trophyRange = discord.ui.TextInput(label="Desired trophy range", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="e.g. 600-750")
   gameMode = discord.ui.TextInput(label="Game Mode", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="e.g. knockout")
   region = discord.ui.TextInput(label="Region", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="EMEA/NA/SA/APAC")
   teamCode = discord.ui.TextInput(label="Team Code", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="X??????")
 
+
   async def on_submit(self, interaction: discord.Interaction):
-    pass
+    desiredMode = None
+    for mode in gamemodes:
+      if mode["name"].lower().replace(" ", "") == self.gameMode.lower().replace(" ", ""):
+        desiredMode = mode["name"]
+    
+    if not desiredMode:
+      return await interaction.response.send_message("Could not find desired gamemode. ")
+    
+    user = interaction.user
+    searchPost = f"<a:Announcement:1216306085565042710> {user} is looking for Mates"
+    searchPost += f"<:right_arrow:1216305900961271859> <:Trophy:1223277455821902046> {self.trophies}"
+    searchPost += f"<:right_arrow:1216305900961271859> <:list:1216305645083689111> {self.trophyRange} Lobby"
+    searchPost += f"<:right_arrow:1216305900961271859> {modeEmojis[desiredMode]} {desiredMode}"
+    searchPost += f"<:right_arrow:1216305900961271859> <a:Global:1223361709729779896> {self.region}"
+    searchPost += f"<:right_arrow:1216305900961271859> Team Code: {self.teamCode}"
+    JoinButton = LinkButton("Join Team", f"https://link.brawlstars.com/invite/gameroom/en?tag={self.teamCode}")
+
+    findMatesChannel = discord.utils.get(interaction.guild.text_channels, name="find-mates")
+    await findMatesChannel.send(searchPost, view=View([JoinButton]))
+    
 
 # The Commands
 class findTeams(commands.Cog):
@@ -38,9 +62,8 @@ class findTeams(commands.Cog):
         "Authorization": f"Bearer {envData['BsApi']}"
     }
     profileData = requests.get(url, headers=headers).json()
-    print(profileData)
-    if True:
-        await interaction.response.send_modal(TicketModal(self.bot))
+    if "trophies" in profileData:
+        await interaction.response.send_modal(TicketModal(self.bot, profileData["trophies"]))
     else:
       await interaction.response.send_message(f"No profile found for Id: {bs_id}", ephemeral=True, delete_after=3)
 
