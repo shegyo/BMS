@@ -14,7 +14,10 @@ class BMates(commands.Bot):
         await bot.load_extension(f'cogs.{f[:-3]}')
     await self.tree.sync()    
 
-  async def on_guild_join(guild):
+  async def on_guild_join(self, guild: discord.guild):
+    systemChannel = guild.system_channel
+    if systemChannel:
+      await systemChannel.send("Message on join!")
     print(f'Bot has joined the server: {guild.name} (ID: {guild.id})')
 
 intents = discord.Intents.all()
