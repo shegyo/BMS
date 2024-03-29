@@ -41,6 +41,9 @@ class TicketModal(discord.ui.Modal):
     if not desiredMode:
       return await interaction.response.send_message("Could not find desired gamemode.")
     
+    if desiredMode in ["Friendly Fight", "Friendly Match", "Test Match"]:
+      desiredMode = "Friendly Battle"
+
     searchPost = f"## <a:Announcement:1216306085565042710> `{interaction.user}`\n"
     searchPost += f"<:Trophy:1223277455821902046> **{self.trophies}**\n"
     searchPost += f"<:list:1216305645083689111> **{self.trophyRange.value}** Lobby\n"
