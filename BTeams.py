@@ -4,7 +4,7 @@ from discord.ext import commands
 class BTeams(commands.Bot):
   
   def __init__(self, intents):
-    super().__init__(command_prefix="-------", intents=intents, activity=discord.Activity(type=discord.ActivityType.listening, name="to team searches"))
+    super().__init__(command_prefix="-------", intents=intents, activity=discord.Activity(type=discord.ActivityType.listening, name="team searches"))
     
 
   async def on_ready(self):
@@ -16,7 +16,7 @@ class BTeams(commands.Bot):
 
   async def on_member_join(self, member: discord.Member):
     # Wenn der bot selbst gejoint ist
-    if member == self:
+    if member == self.bot:
       # Kategorie erstmal finden
       findMatesCategory = discord.utils.find(member.guild.categories, name="FIND MATES")
       # Erstellen falls nicht da
