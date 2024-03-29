@@ -1,10 +1,12 @@
 from discord.ext import commands, tasks
-import discord, requests
+import discord, requests, json
 from discord import app_commands
 from cogs.Utility import View
 
 gamemodes = requests.get("https://api.brawlapi.com/v1/gamemodes").json()["list"]
 
+with open("jsons/env.json" "r", encoding="UTF-8") as f:
+  envData = json.load(f)
 
 # Formular to fill out, creates the Search post
 class TicketModal(discord.ui.Modal):
@@ -12,7 +14,6 @@ class TicketModal(discord.ui.Modal):
     super().__init__(title="Create Ticket")
     self.bot = bot
 
-  totalTrophies = discord.ui.TextInput(label="Your total trophies", style=discord.TextStyle.short, required=True, min_length=3, max_length=30, placeholder="e.g. 51.000")
   trophyRange = discord.ui.TextInput(label="Desired trophy range", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="e.g. 600-750")
   gameMode = discord.ui.TextInput(label="Game Mode", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="e.g. knockout")
   region = discord.ui.TextInput(label="Region", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="EMEA/NA/SA/APAC")
@@ -30,8 +31,18 @@ class findTeams(commands.Cog):
 
   @app_commands.command(description="Creates a Support Ticket")
   @app_commands.checks.cooldown(1, 60*5, key=lambda i: (i.guild_id, i.user.id))
-  async def find_mates(self, interaction: discord.Interaction, your_total_trophies: int, trophy_minimum: int, game_mode: str, team_code: str):
-    await interaction.response.send_modal(TicketModal(self.bot))
+  async def find_mates(self, interaction: discord.Interaction, bs_id: str):
+    bs_id = bs_id.upper().replace(" ", "").replace("#", "")
+    url = f"https://api.brawlstars.com/v1/players/%23{bs_id}"
+    headers = {
+        "Authorization": f"Bearer {envData['BsApi']}"
+    }
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        print(response.json())
+        await interaction.response.send_modal(TicketModal(self.bot))
+    else:
+      await interaction.response.send_message(f"No profile found for Id: {bs_id}", ephemeral=True, delete_after=3)
 
   @find_mates.error
   async def ticket_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
