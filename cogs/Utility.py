@@ -49,8 +49,7 @@ class Utility(commands.Cog):
   #loop for creating channels
   @tasks.loop(minutes=1)
   async def create_channels(self):
-    guilds = self.bot.fetch_guilds()
-    for guild in guilds:
+    for guild in self.bot.guilds:
       # Kategorie erstmal finden
       findMatesCategory = discord.utils.find(guild.categories, name="FIND MATES")
       # Erstellen falls nicht da
