@@ -13,9 +13,29 @@ class BMates(commands.Bot):
     for f in os.listdir('./cogs'):
       if f.endswith('.py'):
         await bot.load_extension(f'cogs.{f[:-3]}')
-    await self.tree.sync()    
+    await self.tree.sync()
+
 
   async def on_guild_join(self, guild: discord.guild):
+    # Maps Kanäle erstellen
+    for guild in self.bot.guilds:
+      # Kategorie erstmal finden
+      mapsCategory = discord.utils.get(guild.categories, name="Map Rotation")
+      # Erstellen falls nicht da
+      if not mapsCategory:
+        mapsCategory = await guild.create_category_channel("Map Rotation", position = 0)
+
+      # Kanäle erstmal finden
+      currentMaps = discord.utils.get(mapsCategory.text_channels, name="current-maps")
+      nextMaps = discord.utils.get(mapsCategory.text_channels, name="next-maps")
+      onlyRead = {
+        guild.default_role: discord.PermissionOverwrite(send_messages=False),
+      }
+      if not currentMaps:
+        await findMatesCategory.create_text_channel("current-maps", overwrites=onlyRead, topic="Active Maps!")
+      if not nextMaps:
+        await findMatesCategory.create_text_channel("next-maps", topic="Predicted Upcoming Maps!")
+
     # Find Mates Kanäle erstellen
     for guild in self.bot.guilds:
       # Kategorie erstmal finden
@@ -23,12 +43,22 @@ class BMates(commands.Bot):
       # Erstellen falls nicht da
       if not findMatesCategory:
         findMatesCategory = await guild.create_category_channel("FIND MATES")
-        # Kanäle erstellen
-        onlyRead = {
-          guild.default_role: discord.PermissionOverwrite(send_messages=False),
-        }
+
+      # Kanäle erstmal finden
+      teamInquiriesChannel = discord.utils.get(findMatesCategory.text_channels, name="team-inquiries")
+      findMatesChannel = discord.utils.get(findMatesCategory.text_channels, name="find-mates")
+      onlyRead = {
+        guild.default_role: discord.PermissionOverwrite(send_messages=False),
+      }
+      if not findMatesChannel:
         await findMatesCategory.create_text_channel("find-mates", overwrites=onlyRead, topic="find a team to join in this channel")
-        await findMatesCategory.create_text_channel("search-mates", topic="run /find_mates to post your search!")
+      if not teamInquiriesChannel:
+        await findMatesCategory.create_text_channel("team-inquiries", topic="run /find_mates to post your search!")
+
+      await teamInquiriesChannel.send("<a:Announcement:1216306085565042710> Type `/find_mates` to search for teammates.\n"
+                        +f"<:info:1216306156222287894> You can find all current search queries in {findMatesChannel.mention}\n\n"
+
+                        +"I hope you find good mates and wish you a lot of fun and good luck! <a:pikacool:1216303417119735808>")
 
     systemChannel = guild.system_channel
     if systemChannel:
@@ -40,6 +70,7 @@ class BMates(commands.Bot):
                                 +"To support me, check out our Social Media in the Linktree <:Linktree:1218980236260278292>\n"
                                 +"<:thx:1216304741949374504> for your support! You are the best",
                                 view=View[LinkButton("Linktree", "https://linktr.ee/bsystems")])
+      
 
 intents = discord.Intents.all()
 bot = BMates(intents=intents)
