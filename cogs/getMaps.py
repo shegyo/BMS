@@ -79,8 +79,6 @@ class getMaps(commands.Cog):
       if not messages:
          await nextMapsChannel.send("# Upcoming Maps", embeds=UpcomingEmbeds)
       for msg in messages:
-          print(msg.author)
-          print(self.bot.user)
           if msg.author != self.bot.user:
               await msg.delete()
           else:
