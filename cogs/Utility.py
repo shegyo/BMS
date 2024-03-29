@@ -51,7 +51,7 @@ class Utility(commands.Cog):
   async def create_channels(self):
     for guild in self.bot.guilds:
       # Kategorie erstmal finden
-      findMatesCategory = discord.utils.find(guild.categories, name="FIND MATES")
+      findMatesCategory = discord.utils.get(guild.categories, name="FIND MATES")
       # Erstellen falls nicht da
       if not findMatesCategory:
         findMatesCategory = await guild.create_category_channel("FIND MATES")
