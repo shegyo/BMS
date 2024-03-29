@@ -1,7 +1,7 @@
-import os, discord, asyncio, json
+import os, discord, json
 from discord.ext import commands
 
-class BTeams(commands.Bot):
+class BMates(commands.Bot):
   
   def __init__(self, intents):
     super().__init__(command_prefix="-------", intents=intents, activity=discord.Activity(type=discord.ActivityType.listening, name="team searches"))
@@ -16,7 +16,7 @@ class BTeams(commands.Bot):
 
 
 intents = discord.Intents.all()
-bot = BTeams(intents=intents)
+bot = BMates(intents=intents)
 with open("jsons/env.json", "r") as f:
   env = json.load(f)
 bot.run(env['TOKEN'])

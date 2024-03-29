@@ -12,8 +12,11 @@ class TicketModal(discord.ui.Modal):
     super().__init__(title="Create Ticket")
     self.bot = bot
 
-  topic = discord.ui.TextInput(label="Topic", style=discord.TextStyle.short, required=True, min_length=3, max_length=30)
-  description = discord.ui.TextInput(label="Description", style=discord.TextStyle.long, min_length=10, max_length=200)
+  totalTrophies = discord.ui.TextInput(label="Your total trophies", style=discord.TextStyle.short, required=True, min_length=3, max_length=30, placeholder="e.g. 51.000")
+  trophyRange = discord.ui.TextInput(label="Desired trophy range", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="e.g. 600-750")
+  gameMode = discord.ui.TextInput(label="Game Mode", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="e.g. knockout")
+  region = discord.ui.TextInput(label="Region", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="EMEA/NA/SA/APAC")
+  teamCode = discord.ui.TextInput(label="Team Code", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="X??????")
 
   async def on_submit(self, interaction: discord.Interaction):
     pass
