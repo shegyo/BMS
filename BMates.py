@@ -54,7 +54,7 @@ class BMates(commands.Bot):
         guild.default_role: discord.PermissionOverwrite(send_messages=False),
       }
       if not findMatesChannel:
-        await findMatesCategory.create_text_channel("find-mates", overwrites=onlyRead, topic="find a team to join in this channel")
+        findMatesChannel = await findMatesCategory.create_text_channel("find-mates", overwrites=onlyRead, topic="find a team to join in this channel")
       if not teamInquiriesChannel:
         teamInquiriesChannel = await findMatesCategory.create_text_channel("team-inquiries", topic="run /find_mates to post your search!")
 
