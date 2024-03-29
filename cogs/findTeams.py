@@ -1,7 +1,7 @@
-from discord.ext import commands, tasks
+from discord.ext import commands
 import discord
 from discord import app_commands
-
+from cogs.Utility import View
 
 # The Commands
 class findTeams(commands.Cog):
