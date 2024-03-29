@@ -20,14 +20,14 @@ class TicketModal(discord.ui.Modal):
 
   trophyRange = discord.ui.TextInput(label="Desired trophy range", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="e.g. 600-750")
   gameMode = discord.ui.TextInput(label="Game Mode", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="e.g. knockout")
-  region = discord.ui.TextInput(label="Region", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="EMEA/NA/SA/APAC")
+  region = discord.ui.TextInput(label="Region", style=discord.TextStyle.short, min_length=2, max_length=25, placeholder="EMEA/NA/SA/APAC")
   teamCode = discord.ui.TextInput(label="Team Code", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="X??????")
 
 
   async def on_submit(self, interaction: discord.Interaction):
     desiredMode = None
     for mode in gamemodes:
-      if mode["name"].lower().replace(" ", "") == self.gameMode.lower().replace(" ", ""):
+      if mode["name"].lower().replace(" ", "") == self.gameMode.value.lower().replace(" ", ""):
         desiredMode = mode["name"]
     
     if not desiredMode:
@@ -36,11 +36,11 @@ class TicketModal(discord.ui.Modal):
     user = interaction.user
     searchPost = f"<a:Announcement:1216306085565042710> {user} is looking for Mates"
     searchPost += f"<:right_arrow:1216305900961271859> <:Trophy:1223277455821902046> {self.trophies}"
-    searchPost += f"<:right_arrow:1216305900961271859> <:list:1216305645083689111> {self.trophyRange} Lobby"
+    searchPost += f"<:right_arrow:1216305900961271859> <:list:1216305645083689111> {self.trophyRange.value} Lobby"
     searchPost += f"<:right_arrow:1216305900961271859> {modeEmojis[desiredMode]} {desiredMode}"
-    searchPost += f"<:right_arrow:1216305900961271859> <a:Global:1223361709729779896> {self.region}"
-    searchPost += f"<:right_arrow:1216305900961271859> Team Code: {self.teamCode}"
-    JoinButton = LinkButton("Join Team", f"https://link.brawlstars.com/invite/gameroom/en?tag={self.teamCode}")
+    searchPost += f"<:right_arrow:1216305900961271859> <a:Global:1223361709729779896> {self.region.value}"
+    searchPost += f"<:right_arrow:1216305900961271859> Team Code: {self.teamCode.value}"
+    JoinButton = LinkButton("Join Team", f"https://link.brawlstars.com/invite/gameroom/en?tag={self.teamCode.value}")
 
     findMatesChannel = discord.utils.get(interaction.guild.text_channels, name="find-mates")
     await findMatesChannel.send(searchPost, view=View([JoinButton]))
