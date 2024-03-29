@@ -1,4 +1,4 @@
-from discord.ext import commands
+from discord.ext import commands, tasks
 import discord
 from discord import app_commands
 
@@ -44,6 +44,24 @@ class Utility(commands.Cog):
     viewItems = [LinkButton("Invite me!", "https://discord.com/oauth2/authorize?client_id=1223344546260193280&permissions=8&scope=bot")]
     await interaction.response.send_message(embed=embed, view=View(viewItems))
   
+
+  #loop for creating channels
+  @tasks.loop(minutes=1)
+  async def refresh_brackets(self):
+    guilds = await self.fetch_guilds()
+    for guild in guilds:
+      # Kategorie erstmal finden
+      findMatesCategory = discord.utils.find(guild.categories, name="FIND MATES")
+      # Erstellen falls nicht da
+      if not findMatesCategory:
+        findMatesCategory = await guild.create_category_channel("FIND MATES")
+        # Kanäle erstellen
+        onlyRead = {
+          guild.default_role: discord.PermissionOverwrite(send_messages=False),
+        }
+        await findMatesCategory.create_text_channel("find-mates", overwrites=onlyRead, topic="find a team to join in this channel")
+        await findMatesCategory.create_text_channel("search-mates", topic="run /find_mates to post your search!")
+
 
 async def setup(bot):
   await bot.add_cog(Utility(bot))

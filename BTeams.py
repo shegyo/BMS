@@ -12,25 +12,7 @@ class BTeams(commands.Bot):
     for f in os.listdir('./cogs'):
       if f.endswith('.py'):
         await bot.load_extension(f'cogs.{f[:-3]}')
-    await self.tree.sync()
-
-  async def on_member_join(self, member: discord.Member):
-    
-    print("hallo")
-    # Wenn der bot selbst gejoint ist
-    if member.id == 1223344546260193280:
-      print("hallo i joined")
-      # Kategorie erstmal finden
-      findMatesCategory = discord.utils.find(member.guild.categories, name="FIND MATES")
-      # Erstellen falls nicht da
-      if not findMatesCategory:
-        findMatesCategory = await member.guild.create_category_channel("FIND MATES")
-        # Kanäle erstellen
-        onlyRead = {
-          member.guild.default_role: discord.PermissionOverwrite(send_messages=False),
-        }
-        await findMatesCategory.create_text_channel("find-mates", overwrites=onlyRead, topic="find a team to join in this channel")
-        await findMatesCategory.create_text_channel("search-mates", topic="run /find_mates to post your search!")
+    await self.tree.sync()    
 
 
 intents = discord.Intents.all()
