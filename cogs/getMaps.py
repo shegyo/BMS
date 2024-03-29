@@ -62,24 +62,23 @@ class getMaps(commands.Cog):
     for guild in self.bot.guilds:
       currentMapsChannel = discord.utils.get(guild.channels, name="current-maps")
       nextMapsChannel = discord.utils.get(guild.channels, name="next-maps")
-      if not currentMapsChannel:
-        continue
-      if not nextMapsChannel:
-        continue
-      
-      for msg in currentMapsChannel.history(limit = 10):
-        if msg.author != self.bot:
-          await msg.delete()
-        else:
-          await msg.edit(content="# Active Maps", embeds=ActiveEmbeds)
-          break
+      if not currentMapsChannel or not nextMapsChannel:
+          continue
+    
+      async for msg in currentMapsChannel.history(limit=10):
+          if msg.author != self.bot:
+              await msg.delete()
+          else:
+              await msg.edit(content="# Active Maps", embeds=ActiveEmbeds)
+              break
 
-      for msg in nextMapsChannel.history(limit = 10):
-        if msg.author != self.bot:
-          await msg.delete()
-        else:
-          await msg.edit(content="# Upcoming Maps", embeds=UpcomingEmbeds)
-          break
+      async for msg in nextMapsChannel.history(limit=10):
+          if msg.author != self.bot:
+              await msg.delete()
+          else:
+              await msg.edit(content="# Upcoming Maps", embeds=UpcomingEmbeds)
+              break
+
 
 async def setup(bot):
   await bot.add_cog(getMaps(bot))
