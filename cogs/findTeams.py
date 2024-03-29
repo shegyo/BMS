@@ -5,7 +5,11 @@ from cogs.Utility import View, LinkButton
 
 gamemodes = requests.get("https://api.brawlapi.com/v1/gamemodes").json()["list"]
 gamemodes.append({"name" : "Ranked"})
+gamemodes.append({"name" : "Show"})
 gamemodes.append({"name" : "Friendly Battle"})
+gamemodes.append({"name" : "Friendly Fight"})
+gamemodes.append({"name" : "Friendly Match"})
+gamemodes.append({"name" : "Test Match"})
 gamemodes.append({"name" : "Present Plunder"})
 gamemodes.append({"name" : "Pumpkin Plunder"})
 

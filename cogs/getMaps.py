@@ -67,7 +67,7 @@ class getMaps(commands.Cog):
     
       messages = [message async for message in currentMapsChannel.history()]
       for msg in messages:
-          if msg.author != self.bot:
+          if msg.author != self.bot.user:
               await msg.delete()
           else:
               await msg.edit(content="# Active Maps", embeds=ActiveEmbeds)
@@ -76,8 +76,8 @@ class getMaps(commands.Cog):
       messages = [message async for message in nextMapsChannel.history()]
       for msg in messages:
           print(msg.author)
-          print(self.bot)
-          if msg.author != self.bot:
+          print(self.bot.user)
+          if msg.author != self.bot.user:
               await msg.delete()
           else:
               await msg.edit(content="# Upcoming Maps", embeds=UpcomingEmbeds)
