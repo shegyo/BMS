@@ -32,9 +32,12 @@ class BMates(commands.Bot):
         guild.default_role: discord.PermissionOverwrite(send_messages=False),
       }
       if not currentMaps:
-        await mapsCategory.create_text_channel("current-maps", overwrites=onlyRead, topic="Active Maps!")
+        currentMaps = await mapsCategory.create_text_channel("current-maps", overwrites=onlyRead, topic="Active Maps!")
       if not nextMaps:
-        await mapsCategory.create_text_channel("next-maps", topic="Predicted Upcoming Maps!")
+        nextMaps = await mapsCategory.create_text_channel("next-maps", topic="Predicted Upcoming Maps!")
+
+      await currentMaps.send("<:info:1216306156222287894> Current maps will be here soon!")
+      await nextMaps.send("<:info:1216306156222287894> Predicted upcoming maps will be here soon!")
 
     # Find Mates Kanäle erstellen
     for guild in self.guilds:

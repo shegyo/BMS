@@ -51,7 +51,7 @@ class TicketModal(discord.ui.Modal):
       if findMatesChannel:
         await findMatesChannel.send(searchPost, view=View([JoinButton]))
 
-    await interaction.edit_original_response("Search post sent successfully on all servers <a:verifyblack:1216302923441504287>")
+    await interaction.edit_original_response(content="Search post sent successfully on all servers <a:verifyblack:1216302923441504287>")
     
     
 
