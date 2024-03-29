@@ -75,6 +75,8 @@ class getMaps(commands.Cog):
 
       messages = [message async for message in nextMapsChannel.history()]
       for msg in messages:
+          print(msg.author)
+          print(self.bot)
           if msg.author != self.bot:
               await msg.delete()
           else:

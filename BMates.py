@@ -58,10 +58,10 @@ class BMates(commands.Bot):
       if not teamInquiriesChannel:
         teamInquiriesChannel = await findMatesCategory.create_text_channel("team-inquiries", topic="run /find_mates to post your search!")
 
-      await teamInquiriesChannel.send("<a:Announcement:1216306085565042710> Type `/find_mates` to search for teammates.\n"
-                        +f"<:info:1216306156222287894> You can find all current search queries in {findMatesChannel.mention}\n\n"
+        await teamInquiriesChannel.send("<a:Announcement:1216306085565042710> Type `/find_mates` to search for teammates.\n"
+                          +f"<:info:1216306156222287894> You can find all current search queries in {findMatesChannel.mention}\n\n"
 
-                        +"I hope you find good mates and wish you a lot of fun and good luck! <a:pikacool:1216303417119735808>")
+                          +"I hope you find good mates and wish you a lot of fun and good luck! <a:pikacool:1216303417119735808>")
 
     systemChannel = guild.system_channel
     if systemChannel:

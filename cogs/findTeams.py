@@ -6,6 +6,8 @@ from cogs.Utility import View, LinkButton
 gamemodes = requests.get("https://api.brawlapi.com/v1/gamemodes").json()["list"]
 gamemodes.append({"name" : "Ranked"})
 gamemodes.append({"name" : "Friendly Battle"})
+gamemodes.append({"name" : "Present Plunder"})
+gamemodes.append({"name" : "Pumpkin Plunder"})
 
 with open("jsons/env.json", "r", encoding="UTF-8") as f:
   envData = json.load(f)
