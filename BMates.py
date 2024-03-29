@@ -14,6 +14,8 @@ class BMates(commands.Bot):
         await bot.load_extension(f'cogs.{f[:-3]}')
     await self.tree.sync()    
 
+  async def on_guild_join(guild):
+    print(f'Bot has joined the server: {guild.name} (ID: {guild.id})')
 
 intents = discord.Intents.all()
 bot = BMates(intents=intents)
