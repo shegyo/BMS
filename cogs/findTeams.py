@@ -53,7 +53,7 @@ class TicketModal(discord.ui.Modal):
     if self.note.value:
       searchPost += f"\n<:info:1216306156222287894> `{self.note.value}`"
     embed = discord.Embed(title="", description=searchPost, color=int("ffffff", 16))
-    embed.set_author(icon_url=interaction.user.display_avatar.url)
+    embed.set_author(name="new inquiry",icon_url=interaction.user.display_avatar.url)
     embed.set_footer(text=f"sent from: {interaction.guild}", icon_url=interaction.guild.icon.url)
 
     JoinButton = LinkButton("Join Team", f"https://link.brawlstars.com/invite/gameroom/en?tag={self.teamCode.value}")
