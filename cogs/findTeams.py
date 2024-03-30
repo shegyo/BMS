@@ -63,6 +63,7 @@ class TicketModal(discord.ui.Modal):
       findMatesCategory = None
       for category in guild.categories:
         if "FINDMATES" in category.name.upper().replace(" ", ""):
+          print("found cat")
           findMatesCategory = category
           break
       if not findMatesCategory:
@@ -73,6 +74,7 @@ class TicketModal(discord.ui.Modal):
       for channel in findMatesCategory.text_channels:
         if "find-mates" in category.name.lower():
           findMatesChannel = channel
+          print("found cha")
           break
 
       # Nachricht posten wenn Kanal gefunden wurde
