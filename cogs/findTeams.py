@@ -32,7 +32,7 @@ class TicketModal(discord.ui.Modal):
     desiredMode = None
     if self.gameMode.value.lower().replace(" ", "") in ["friendlyfight", "friendlymatch", "testmatch", "friendlybattle"]:
       desiredMode = "Friendly Battle"
-    elif self.gameMode.value.lower().replace(" ", "") in "duoshowdown":
+    elif self.gameMode.value.lower().replace(" ", "") in ["duoshowdown", "duos", "sd", "duosd", "duo"]:
       desiredMode = "Duo Showdown"
     else:
       for mode in gamemodes:
