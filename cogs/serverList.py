@@ -7,11 +7,11 @@ class serverList(commands.Cog):
   
   def __init__(self, bot):
     self.bot = bot
-    self.mapRota.start()
+    self.serverList.start()
 
 
   @tasks.loop(seconds=120)
-  async def mapRota(self):
+  async def serverList(self):
     description = ""
     for guild in self.bot.guilds:
         inviteLink = ""
@@ -31,7 +31,7 @@ class serverList(commands.Cog):
         
         messages = [message async for message in serverListChannel.history()]
         if not messages:
-                await serverListChannel.send(embed=serverListEmbed)
+                return await serverListChannel.send(embed=serverListEmbed)
         for msg in messages:
             if msg.author == self.bot.user:
                 await msg.edit(embed=serverListEmbed)
