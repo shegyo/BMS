@@ -5,11 +5,7 @@ from cogs.Utility import View, LinkButton
 
 gamemodes = requests.get("https://api.brawlapi.com/v1/gamemodes").json()["list"]
 gamemodes.append({"name" : "Ranked"})
-gamemodes.append({"name" : "Show"})
-gamemodes.append({"name" : "Friendly Battle"})
-gamemodes.append({"name" : "Friendly Fight"})
-gamemodes.append({"name" : "Friendly Match"})
-gamemodes.append({"name" : "Test Match"})
+gamemodes.append({"name" : "Showdown"})
 gamemodes.append({"name" : "Present Plunder"})
 gamemodes.append({"name" : "Pumpkin Plunder"})
 
@@ -34,15 +30,19 @@ class TicketModal(discord.ui.Modal):
 
   async def on_submit(self, interaction: discord.Interaction):
     desiredMode = None
-    for mode in gamemodes:
-      if mode["name"].lower().replace(" ", "") == self.gameMode.value.lower().replace(" ", ""):
-        desiredMode = mode["name"]
+    if self.gameMode.value.lower().replace(" ", "") in ["friendlyfight", "friendlymatch", "testmatch", "friendlybattle"]:
+      desiredMode = "Friendly Battle"
+    elif self.gameMode.value.lower().replace(" ", "") in "duoshowdown":
+      desiredMode = "Duo Showdown"
+    else:
+      for mode in gamemodes:
+        if mode["name"].lower().replace(" ", "") == self.gameMode.value.lower().replace(" ", ""):
+          desiredMode = mode["name"]
     
     if not desiredMode:
       return await interaction.response.send_message("Could not find desired gamemode.")
     
-    if desiredMode in ["Friendly Fight", "Friendly Match", "Test Match"]:
-      desiredMode = "Friendly Battle"
+    
 
     searchPost = f"## <a:Announcement:1216306085565042710> `{interaction.user}`\n"
     searchPost += f"<:Trophy:1223277455821902046> **{self.trophies}**\n"
