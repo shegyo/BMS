@@ -96,7 +96,7 @@ class findTeams(commands.Cog):
     self.bot = bot
 
   @app_commands.command(description="Creates a Support Ticket")
-  @app_commands.checks.cooldown(1, 60*5, key=lambda i: (i.guild_id, i.user.id))
+  @app_commands.checks.cooldown(1, 60*5, key=lambda i: (i.user.id))
   async def find_mates(self, interaction: discord.Interaction, bs_id: str):
     bs_id = bs_id.upper().replace(" ", "").replace("#", "")
     url = f"https://api.brawlstars.com/v1/players/%23{bs_id}"
