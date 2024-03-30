@@ -67,7 +67,6 @@ class TicketModal(discord.ui.Modal):
       while not findMatesCategory and i < len(guild.categories):
         if "FINDMATES" in guild.categories[i].name.upper().replace(" ", ""):
           findMatesCategory = guild.categories[i]
-          print("cat found")
         i += 1
 
       if not findMatesCategory:
@@ -79,11 +78,9 @@ class TicketModal(discord.ui.Modal):
       while not findMatesChannel and i < len(findMatesCategory.text_channels):
         if "find-mates" in findMatesCategory.text_channels[i].name.lower():
           findMatesChannel = findMatesCategory.text_channels[i]
-          print("cha found")
         i += 1
 
       
-      print("moin")
       # Nachricht posten wenn Kanal gefunden wurde
       if findMatesChannel:
         await findMatesChannel.send(embed=embed, view=View([JoinButton]))

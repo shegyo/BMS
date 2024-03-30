@@ -60,8 +60,27 @@ class getMaps(commands.Cog):
 
 
     for guild in self.bot.guilds:
-      currentMapsChannel = discord.utils.get(guild.channels, name="current-maps")
-      nextMapsChannel = discord.utils.get(guild.channels, name="next-maps")
+      # Kategorie suchen
+      mapRotaCategory = None
+      i = 0
+      while not mapRotaCategory and i < len(guild.categories):
+        if "maprotation" in guild.categories[i].name.lower().replace(" ", ""):
+          mapRotaCategory = guild.categories[i]
+        i += 1
+
+      if not mapRotaCategory:
+        continue
+            
+      # Kanal suchen
+      currentMapsChannel = None
+      nextMapsChannel = None
+      i = 0
+      while not currentMapsChannel or not nextMapsChannel and i < len(mapRotaCategory.text_channels):
+        if "current-maps" in mapRotaCategory.text_channels[i].name.lower():
+          currentMapsChannel = mapRotaCategory.text_channels[i]
+        elif "next-maps" in mapRotaCategory.text_channels[i].name.lower():
+          nextMapsChannel = mapRotaCategory.text_channels[i]
+        i += 1
       if not currentMapsChannel or not nextMapsChannel:
           continue
     
