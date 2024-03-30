@@ -74,6 +74,7 @@ class TicketModal(discord.ui.Modal):
       # Kanal suchen
       findMatesChannel = None
       while not findMatesChannel and i < len(findMatesCategory.text_channels):
+        print(findMatesCategory.text_channels[i].name.lower())
         if "find-mates" in findMatesCategory.text_channels[i].name.lower():
           findMatesChannel = findMatesCategory.text_channels[i]
           print("cha found")
