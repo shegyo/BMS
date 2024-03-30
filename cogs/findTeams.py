@@ -30,7 +30,7 @@ class TicketModal(discord.ui.Modal):
   gameMode = discord.ui.TextInput(label="Game Mode", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="e.g. knockout")
   region = discord.ui.TextInput(label="Region", style=discord.TextStyle.short, min_length=2, max_length=25, placeholder="EMEA/NA/SA/APAC")
   teamCode = discord.ui.TextInput(label="Team Code", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="X??????")
-  note = discord.ui.TextInput(label="Add whatever info", style=discord.TextStyle.short, max_length=200, placeholder="only people with brain pls. Ill be offline at 12:00")
+  note = discord.ui.TextInput(label="Add whatever info", style=discord.TextStyle.short, max_length=200, required=False placeholder="only people with brain pls. Ill be offline at 12:00")
 
   async def on_submit(self, interaction: discord.Interaction):
     desiredMode = None
@@ -61,21 +61,21 @@ class TicketModal(discord.ui.Modal):
     for guild in self.bot.guilds:
       # Kategorie suchen
       findMatesCategory = None
-      for category in guild.categories:
-        if "FINDMATES" in category.name.upper().replace(" ", ""):
-          print("found cat")
-          findMatesCategory = category
-          break
+      i = 0
+      while not findMatesCategory and i < len(guild.categories):
+        if "FINDMATES" in guild.categories[i].name.upper().replace(" ", ""):
+          findMatesCategory = guild.categories[i]
+        i += 1
+
       if not findMatesCategory:
         continue
             
       # Kanal suchen
       findMatesChannel = None
-      for channel in findMatesCategory.text_channels:
-        if "find-mates" in category.name.lower():
-          findMatesChannel = channel
-          print("found cha")
-          break
+      while not findMatesChannel and i < len(findMatesCategory.text_channels):
+        if "find-mates" in findMatesCategory.text_channels[i].name.lower():
+          findMatesChannel = findMatesCategory.text_channels[i]
+        i += 1
 
       # Nachricht posten wenn Kanal gefunden wurde
       if findMatesChannel:
