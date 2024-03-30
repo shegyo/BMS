@@ -30,7 +30,7 @@ class TicketModal(discord.ui.Modal):
   gameMode = discord.ui.TextInput(label="Game Mode", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="e.g. knockout")
   region = discord.ui.TextInput(label="Region", style=discord.TextStyle.short, min_length=2, max_length=25, placeholder="EMEA/NA/SA/APAC")
   teamCode = discord.ui.TextInput(label="Team Code", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="X??????")
-
+  note = discord.ui.TextInput(label="Add whatever info", style=discord.TextStyle.short, max_length=200, placeholder="only people with brain pls. Ill be offline at 12:00")
 
   async def on_submit(self, interaction: discord.Interaction):
     desiredMode = None
@@ -50,6 +50,8 @@ class TicketModal(discord.ui.Modal):
     searchPost += f"{modeEmojis[desiredMode]} **{desiredMode}**\n"
     searchPost += f"<a:Global:1223361709729779896> **{self.region.value.upper()}**\n"
     searchPost += f"<:right_arrow:1216305900961271859> **{self.teamCode.value.upper()}**"
+    if self.note.value:
+      searchPost += f"<:info:1216306156222287894> `{self.note.value}`"
     embed = discord.Embed(title="", description=searchPost, color=int("ffffff", 16))
 
     JoinButton = LinkButton("Join Team", f"https://link.brawlstars.com/invite/gameroom/en?tag={self.teamCode.value}")
@@ -57,7 +59,23 @@ class TicketModal(discord.ui.Modal):
     await interaction.response.send_message("sending Search post on all servers...", ephemeral=True, delete_after=5)
 
     for guild in self.bot.guilds:
-      findMatesChannel = discord.utils.get(guild.text_channels, name="find-mates")
+      # Kategorie suchen
+      findMatesCategory = None
+      for category in guild.categories:
+        if "FINDMATES" in category.name.upper().replace(" ", ""):
+          findMatesCategory = category
+          break
+      if not findMatesCategory:
+        continue
+            
+      # Kanal suchen
+      findMatesChannel = None
+      for channel in findMatesCategory.text_channels:
+        if "find-mates" in category.name.lower():
+          findMatesChannel = channel
+          break
+
+      # Nachricht posten wenn Kanal gefunden wurde
       if findMatesChannel:
         await findMatesChannel.send(embed=embed, view=View([JoinButton]))
 
