@@ -35,7 +35,7 @@ class BMates(commands.Bot):
         currentMaps = await mapsCategory.create_text_channel("current-maps", overwrites=onlyRead, topic="Active Maps!")
         await currentMaps.send("<:info:1216306156222287894> Current maps will be here soon!")
       if not nextMaps:
-        nextMaps = await mapsCategory.create_text_channel("next-maps", topic="Predicted Upcoming Maps!")
+        nextMaps = await mapsCategory.create_text_channel("next-maps", overwrites=onlyRead, topic="Predicted Upcoming Maps!")
         await nextMaps.send("<:info:1216306156222287894> Predicted upcoming maps will be here soon!")
 
     # Find Mates Kanäle erstellen
