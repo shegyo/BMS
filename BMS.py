@@ -5,7 +5,7 @@ from cogs.Utility import View, LinkButton
 class BMates(commands.Bot):
   
   def __init__(self, intents):
-    super().__init__(command_prefix="-------", intents=intents, activity=discord.Activity(type=discord.ActivityType.listening, name="team searches"))
+    super().__init__(command_prefix="-------", intents=intents, activity=discord.Activity(type=discord.ActivityType.playing, name="with good mates"))
     
 
   async def on_ready(self):
