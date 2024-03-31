@@ -23,6 +23,8 @@ class BMates(commands.Bot):
       guild.default_role: discord.PermissionOverwrite(send_messages=False),
     }
     
+    # Map Rota Kanäle erstellen 
+    
     # Kategorie suchen
     mapRotaCategory = None
     i = 0
@@ -47,12 +49,12 @@ class BMates(commands.Bot):
       i += 1
 
     # Erstellen und eine Nachricht senden falls nicht vorhanden
-    if not currentMaps:
-      currentMaps = await mapRotaCategory.create_text_channel("current-maps", overwrites=onlyRead, topic="Active Maps!")
-      await currentMaps.send("<:info:1216306156222287894> Current maps will be here soon!")
-    if not nextMaps:
-      nextMaps = await mapRotaCategory.create_text_channel("next-maps", overwrites=onlyRead, topic="Predicted Upcoming Maps!")
-      await nextMaps.send("<:info:1216306156222287894> Predicted upcoming maps will be here soon!")
+    if not currentMapsChannel:
+      currentMapsChannel = await mapRotaCategory.create_text_channel("current-maps", overwrites=onlyRead, topic="Active Maps!")
+      await nextMapsChannel.send("<:info:1216306156222287894> Current maps will be here soon!")
+    if not nextMapsChannel:
+      nextMapsChannel = await mapRotaCategory.create_text_channel("next-maps", overwrites=onlyRead, topic="Predicted Upcoming Maps!")
+      await nextMapsChannel.send("<:info:1216306156222287894> Predicted upcoming maps will be here soon!")
     
 
     # Find Mates Kanäle erstellen
@@ -75,9 +77,9 @@ class BMates(commands.Bot):
     i = 0
     while not currentMapsChannel or not nextMapsChannel and i < len(mapRotaCategory.text_channels):
       if "find-mates" in mapRotaCategory.text_channels[i].name.lower():
-        currentMapsChannel = mapRotaCategory.text_channels[i]
+        findMatesChannel = mapRotaCategory.text_channels[i]
       elif "team-inquiries" in mapRotaCategory.text_channels[i].name.lower():
-        nextMapsChannel = mapRotaCategory.text_channels[i]
+        teamInquiriesChannel = mapRotaCategory.text_channels[i]
       i += 1
 
     if not findMatesChannel:
