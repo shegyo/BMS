@@ -75,7 +75,7 @@ class getMaps(commands.Cog):
       currentMapsChannel = None
       nextMapsChannel = None
       i = 0
-      while not currentMapsChannel or not nextMapsChannel and i < len(mapRotaCategory.text_channels):
+      while (not currentMapsChannel or not nextMapsChannel) and i < len(mapRotaCategory.text_channels):
         if "current-maps" in mapRotaCategory.text_channels[i].name.lower():
           currentMapsChannel = mapRotaCategory.text_channels[i]
         elif "next-maps" in mapRotaCategory.text_channels[i].name.lower():
