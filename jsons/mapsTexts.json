@@ -1,0 +1,37 @@
+{
+    "activeMapsTitle" : {
+        "german" : "Aktive Karten",
+        "english" : "Active Maps",
+        "french" : "Cartes actives",
+        "spanish" : "Mapas activos",
+        "russian" : "Активные карты"
+    },
+    "upcomingMapsTitle" : {
+        "german" : "Aktive Karten",
+        "english" : "Active Maps",
+        "french" : "Cartes actives",
+        "spanish" : "Mapas activos",
+        "russian" : "Активные карты"
+    },
+    "starts" : {
+        "german" : "Start",
+        "english" : "Start",
+        "french" : "Cartes actives",
+        "spanish" : "Mapas activos",
+        "russian" : "Активные карты"
+    },
+    "ends" : {
+        "german" : "Ende",
+        "english" : "Ends",
+        "french" : "Cartes actives",
+        "spanish" : "Mapas activos",
+        "russian" : "Активные карты"
+    },
+    "footer" : {
+        "german" : "Letztes Update: {lastUpdate}\nCredits an: Brawlify.com",
+        "english" : "Active Maps",
+        "french" : "Cartes actives",
+        "spanish" : "Mapas activos",
+        "russian" : "Активные карты"
+    }
+}
