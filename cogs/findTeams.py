@@ -212,7 +212,7 @@ class findTeams(commands.Cog):
   @app_commands.command(description="remove all your search posts")
   @app_commands.checks.cooldown(1, 60*5, key=lambda i: (i.user.id))
   async def cancel_search(self, interaction: discord.Interaction):
-    await interaction.response.send_message(content="Traveling across all servers <a:verifyblack:1216302923441504287>", ephemeral=True, delete_after=30)
+    await interaction.response.send_message(content="Traveling across all servers...", ephemeral=True, delete_after=30)
     for guild in self.bot.guilds:
       # Kategorie suchen
       findMatesCategory = None
