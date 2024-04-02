@@ -74,16 +74,21 @@ class BMates(commands.Bot):
     # Kanäle erstmal finden
     findMatesChannel = None
     teamInquiriesChannel = None
+    findEsportChannel = None
     i = 0
-    while (not currentMapsChannel or not nextMapsChannel) and i < len(mapRotaCategory.text_channels):
+    while (not currentMapsChannel or not nextMapsChannel or not findEsportChannel) and i < len(mapRotaCategory.text_channels):
       if "find-mates" in mapRotaCategory.text_channels[i].name.lower():
         findMatesChannel = mapRotaCategory.text_channels[i]
       elif "team-inquiries" in mapRotaCategory.text_channels[i].name.lower():
         teamInquiriesChannel = mapRotaCategory.text_channels[i]
+      elif "find-esport" in mapRotaCategory.text_channels[i].name.lower():
+        findEsportChannel = mapRotaCategory.text_channels[i]
       i += 1
 
     if not findMatesChannel:
-      findMatesChannel = await findMatesCategory.create_text_channel("find-mates", overwrites=onlyRead, topic="find a team to join in this channel")
+      findMatesChannel = await findMatesCategory.create_text_channel("find-mates", overwrites=onlyRead, topic="find a team to join here")
+    if not findEsportChannel:
+      findEsportChannel = await findMatesCategory.create_text_channel("find-esport", overwrites=onlyRead, topic="find an esport team or players here")
     if not teamInquiriesChannel:
       teamInquiriesChannel = await findMatesCategory.create_text_channel("team-inquiries", topic="run /find_mates to post your search!")
 

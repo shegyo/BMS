@@ -44,6 +44,8 @@ class SelectLanguage(discord.ui.Select):
 
         # Channel Names umbenennen
 
+        # Text in Team Inquiry Channel umändern
+
 def getNiceFormatLanguage(language):
     if language == "german":
       return "German 🇩🇪"
@@ -103,7 +105,7 @@ class Utility(commands.Cog):
   @app_commands.command(description="get link")
   async def invite(self, interaction: discord.Interaction):
     description = "- Make use of FREE Cross Server Team Search!\n"
-    description += "- Keep track of current and upcoming maps!\n"
+    description += "- Keep track of current and upcoming maps for FREE!\n"
     description += "- Enjoy FREE profile images!"
     embed = discord.Embed(title="<:discord:1216307276927733800>  Invite me to your Server!", description=description, color=int("ffffff", 16))
     viewItems = [LinkButton("Invite me!", "https://discord.com/oauth2/authorize?client_id=1223344546260193280&permissions=8&scope=bot")]
