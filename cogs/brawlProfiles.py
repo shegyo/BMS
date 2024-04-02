@@ -3,10 +3,10 @@ import discord, requests, tempfile, json
 from discord import app_commands
 from cogs.Utility import View, LinkButton
 
-
 # ENV Daten laden
 with open("jsons/env.json", "r", encoding="UTF-8") as f:
   envData = json.load(f)
+
 
 def getPlayerNameForId(bs_id):
   bs_id = bs_id.upper().replace(" ", "").replace("#", "")
@@ -48,7 +48,7 @@ class brawlProfiles(commands.Cog):
   # Get your Profile Image
   @app_commands.command(description="get your brawl stars profile")
   async def brawl_profile(self, interaction: discord.Interaction, bs_id: str):
-      await interaction.response.send_message("🔎...")
+      await interaction.response.send_message("🔎 ...")
       profileImg, bs_id, player_name = getBsProfile(bs_id, "https://share.brawlify.com/player/")
       if not (profileImg and player_name):
         embed = discord.Embed(title=player_name, description=f"### <:info:1216306156222287894> ID: #{bs_id}", color=int("000000", 16))
@@ -62,7 +62,7 @@ class brawlProfiles(commands.Cog):
   # Get your Profile Ranks Image
   @app_commands.command(description="get your brawl stars profile")
   async def brawl_ranks(self, interaction: discord.Interaction, bs_id: str):
-      await interaction.response.send_message("🔎...")
+      await interaction.response.send_message("🔎 ...")
       profileImg, bs_id, player_name = getBsProfile(bs_id, "https://brawlbot.xyz/api/image/")
       if not (profileImg and player_name):
         embed = discord.Embed(title=player_name, description=f"### <:info:1216306156222287894> ID: #{bs_id}", color=int("000000", 16))

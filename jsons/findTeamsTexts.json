@@ -1,0 +1,26 @@
+{
+    "cancelStart" : {
+        "german": "Iteriere über alle Server...",
+        "english": "Iterating over all servers...",
+        "french": "Itération sur tous les serveurs...",
+        "spanish": "Iterando sobre todos los servidores...",
+        "russian": "Итерация по всем серверам..."
+    },
+    "cancelSuccessful" : {
+        "german": "Alle deine Auftritte in den letzten 50 Beiträgen gelöscht <a:verifyblack:1216302923441504287>",
+        "english": "Deleted all your appearances in last 50 posts <a:verifyblack:1216302923441504287>",
+        "french": "Supprimé toutes vos apparitions dans les 50 derniers messages <a:verifyblack:1216302923441504287>",
+        "spanish": "Eliminadas todas tus apariciones en los últimos 50 mensajes <a:verifyblack:1216302923441504287>",
+        "russian": "Удалены все ваши появления в последних 50 сообщениях <a:verifyblack:1216302923441504287>"
+    },
+    "noProfileFound" : {
+        "german": "Kein Profil gefunden für ID: {bs_id}",
+        "english": "No profile found for ID: {bs_id}",
+        "french": "Aucun profil trouvé pour l'ID : {bs_id}",
+        "spanish": "No se encontró ningún perfil para el ID: {bs_id}",
+        "russian": "Профиль не найден по ID: {bs_id}"
+    }
+    
+    
+    
+}

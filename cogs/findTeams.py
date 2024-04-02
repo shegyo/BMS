@@ -2,6 +2,7 @@ from discord.ext import commands
 import discord, requests, json
 from discord import app_commands
 from cogs.Utility import View, LinkButton
+import mongodb
 
 gamemodes = requests.get("https://api.brawlapi.com/v1/gamemodes").json()["list"]
 gamemodes.append({"name" : "Ranked"})
@@ -9,21 +10,28 @@ gamemodes.append({"name" : "Showdown"})
 gamemodes.append({"name" : "Present Plunder"})
 gamemodes.append({"name" : "Pumpkin Plunder"})
 
+# EnvData laden
 with open("jsons/env.json", "r", encoding="UTF-8") as f:
   envData = json.load(f)
 
+# Emoji Listen laden
 with open("jsons/modeEmojis.json", "r", encoding="UTF-8") as f:
   modeEmojis = json.load(f)
 
 with open("jsons/tierEmojis.json", "r", encoding="UTF-8") as f:
   tierEmojis = json.load(f)
 
+# Texte laden
+with open("jsons/findTeamsTexts.json", "r", encoding="UTF-8") as f:
+  findTeamsTexts = json.load(f)
+
 # Formular to fill out, creates the Search post
 class findMatesModal(discord.ui.Modal):
-  def __init__(self, bot, trophies):
+  def __init__(self, bot, trophies, language):
     super().__init__(title="Post New Inquiry")
     self.bot = bot
     self.trophies = trophies
+    self.language = language
 
   gameMode = discord.ui.TextInput(label="Game Mode", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="e.g. knockout")
   teamCode = discord.ui.TextInput(label="Team Code", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="X??????")
@@ -102,9 +110,10 @@ class findMatesModal(discord.ui.Modal):
     
 # Formular to fill out, creates the Search post
 class findEsportModal(discord.ui.Modal):
-  def __init__(self, bot):
+  def __init__(self, bot, language):
     super().__init__(title="Post New Esport Inquiry")
     self.bot = bot
+    self.language = language
 
   lookingFor = discord.ui.TextInput(label="Looking For", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="Team/Players")
   playerAmount = discord.ui.TextInput(label="Player Amount (if players)", style=discord.TextStyle.short, required=False, max_length=1, placeholder="1/2/3")
@@ -179,6 +188,10 @@ class findTeams(commands.Cog):
   @app_commands.command(description="post a new inquiry")
   @app_commands.checks.cooldown(1, 60*5, key=lambda i: (i.user.id))
   async def find_mates(self, interaction: discord.Interaction, bs_id: str):
+    # Ausgewählte Sprache fetchen
+    options = mongodb.findGuildOptions(interaction.guild.id)
+    language = options["language"]
+
     bs_id = bs_id.upper().replace(" ", "").replace("#", "")
     url = f"https://api.brawlstars.com/v1/players/%23{bs_id}"
     headers = {
@@ -186,9 +199,9 @@ class findTeams(commands.Cog):
     }
     profileData = requests.get(url, headers=headers).json()
     if "trophies" in profileData:
-        await interaction.response.send_modal(findMatesModal(self.bot, profileData["trophies"]))
+        await interaction.response.send_modal(findMatesModal(self.bot, profileData["trophies"], language))
     else:
-      await interaction.response.send_message(f"No profile found for Id: {bs_id}", ephemeral=True, delete_after=3)
+      await interaction.response.send_message(findTeamsTexts["noProfileFound"][language].format(bs_id = bs_id), ephemeral=True, delete_after=3)
 
   @find_mates.error
   async def ticket_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
@@ -200,7 +213,11 @@ class findTeams(commands.Cog):
   @app_commands.command(description="post a new inquiry")
   @app_commands.checks.cooldown(1, 60*5, key=lambda i: (i.user.id))
   async def find_esport(self, interaction: discord.Interaction):
-    await interaction.response.send_modal(findEsportModal(self.bot))
+    # Ausgewählte Sprache fetchen
+    options = mongodb.findGuildOptions(interaction.guild.id)
+    language = options["language"]
+
+    await interaction.response.send_modal(findEsportModal(self.bot, language))
 
   @find_esport.error
   async def find_esport_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
@@ -212,7 +229,11 @@ class findTeams(commands.Cog):
   @app_commands.command(description="remove all your search posts")
   @app_commands.checks.cooldown(1, 60*5, key=lambda i: (i.user.id))
   async def cancel_search(self, interaction: discord.Interaction):
-    await interaction.response.send_message(content="Traveling across all servers...", ephemeral=True, delete_after=30)
+    # Ausgewählte Sprache fetchen
+    options = mongodb.findGuildOptions(interaction.guild.id)
+    language = options["language"]
+
+    await interaction.response.send_message(findTeamsTexts["cancelStart"][language], ephemeral=True, delete_after=30)
     for guild in self.bot.guilds:
       # Kategorie suchen
       findMatesCategory = None
@@ -243,7 +264,7 @@ class findTeams(commands.Cog):
             if msg.embeds[0].author.icon_url == interaction.user.display_avatar.url:
               await msg.delete()
 
-    await interaction.edit_original_response(content="Deleted all your appearances in last 50 posts <a:verifyblack:1216302923441504287>")
+    await interaction.edit_original_response(content=findTeamsTexts["cancelSuccessful"][language])
 
   @find_esport.error
   async def find_esport_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
