@@ -208,5 +208,46 @@ class findTeams(commands.Cog):
         await interaction.response.send_message(str(error), ephemeral=True)
 
 
+  # Esport Team Suche Command
+  @app_commands.command(description="remove all your search posts")
+  @app_commands.checks.cooldown(1, 60*5, key=lambda i: (i.user.id))
+  async def cancel_search(self, interaction: discord.Interaction):
+    for guild in self.bot.guilds:
+      # Kategorie suchen
+      findMatesCategory = None
+      i = 0
+      while not findMatesCategory and i < len(guild.categories):
+        if "FINDMATES" in guild.categories[i].name.upper().replace(" ", ""):
+          findMatesCategory = guild.categories[i]
+        i += 1
+
+      if not findMatesCategory:
+        continue
+            
+      # Kanäle erstmal finden
+      findMatesChannel = None
+      findEsportChannel = None
+      i = 0
+      while (not findMatesChannel or not findEsportChannel) and i < len(findMatesCategory.text_channels):
+        if "find-mates" in findMatesCategory.text_channels[i].name.lower():
+          findMatesChannel = findMatesCategory.text_channels[i]
+        elif "find-esport" in findMatesCategory.text_channels[i].name.lower():
+          findEsportChannel = findMatesCategory.text_channels[i]
+        i += 1
+
+      for channel in [findMatesChannel, findEsportChannel]:
+        if channel:
+          messages = [message async for message in channel.history(limit=50)]
+          for msg in messages:
+            if msg.embeds[0].author.icon_url == interaction.user.display_avatar.url:
+              await msg.delete()
+
+    await interaction.edit_original_response(content="Deleted all your appearances in last 50 posts <a:verifyblack:1216302923441504287>")
+
+  @find_esport.error
+  async def find_esport_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
+    if isinstance(error, app_commands.CommandOnCooldown):
+        await interaction.response.send_message(str(error), ephemeral=True)
+
 async def setup(bot):
   await bot.add_cog(findTeams(bot))

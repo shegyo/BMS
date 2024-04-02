@@ -76,13 +76,13 @@ class BMates(commands.Bot):
     teamInquiriesChannel = None
     findEsportChannel = None
     i = 0
-    while (not currentMapsChannel or not nextMapsChannel or not findEsportChannel) and i < len(mapRotaCategory.text_channels):
-      if "find-mates" in mapRotaCategory.text_channels[i].name.lower():
-        findMatesChannel = mapRotaCategory.text_channels[i]
-      elif "team-inquiries" in mapRotaCategory.text_channels[i].name.lower():
-        teamInquiriesChannel = mapRotaCategory.text_channels[i]
-      elif "find-esport" in mapRotaCategory.text_channels[i].name.lower():
-        findEsportChannel = mapRotaCategory.text_channels[i]
+    while (not findMatesChannel or not teamInquiriesChannel or not findEsportChannel) and i < len(findMatesCategory.text_channels):
+      if "find-mates" in findMatesCategory.text_channels[i].name.lower():
+        findMatesChannel = findMatesCategory.text_channels[i]
+      elif "team-inquiries" in findMatesCategory.text_channels[i].name.lower():
+        teamInquiriesChannel = findMatesCategory.text_channels[i]
+      elif "find-esport" in findMatesCategory.text_channels[i].name.lower():
+        findEsportChannel = findMatesCategory.text_channels[i]
       i += 1
 
     if not findMatesChannel:
