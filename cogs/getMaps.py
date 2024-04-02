@@ -64,7 +64,7 @@ class getMaps(commands.Cog):
         if len(embeds["upcoming"][language]) == 10:
           break
 
-    embed.set_footer(text=mapsTexts["footer"][language].format(lastUpdate=datetime.datetime.now().strftime(format)))
+      embed.set_footer(text=mapsTexts["footer"][language].format(lastUpdate=datetime.datetime.now().strftime(format)))
 
 
     for guild in self.bot.guilds:
