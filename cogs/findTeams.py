@@ -238,7 +238,7 @@ class findTeams(commands.Cog):
 
       for channel in [findMatesChannel, findEsportChannel]:
         if channel:
-          messages = [message async for message in channel.history(limit=50)]
+          messages = [message async for message in channel.history(limit=25)]
           for msg in messages:
             if msg.embeds[0].author.icon_url == interaction.user.display_avatar.url:
               await msg.delete()
