@@ -117,7 +117,7 @@ class findEsportModal(discord.ui.Modal):
     searchPost = f"## <a:Announcement:1216306085565042710> `{interaction.user}`\n"
     # Gesuchtes Objekt anheften
     if self.playerAmount.value:
-      if self.playerAmount.value in ["1", "2", "3"]:
+      if self.playerAmount.value in ["1", "2", "3"] and not "team" in self.lookingFor.value:
         searchPost += f"🔎 **{self.lookingFor.value.upper()}: {self.playerAmount.value}**\n"
     else:
       searchPost += f"🔎 **{self.lookingFor.value.upper()}**\n"
