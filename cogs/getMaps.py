@@ -1,9 +1,13 @@
 from discord.ext import commands, tasks
-import discord, requests, datetime, json, pytz
+import discord, requests, datetime, json
+import mongodb
 
 icons = requests.get("https://api.brawlapi.com/v1/icons").json()
 
 format = "%d.%m.%Y, %H:%M"
+
+with open("jsons/mapsTexts.json", "r", encoding="UTF-8") as f:
+   mapsTexts = json.load(f)
 
 class getMaps(commands.Cog):
   
@@ -16,50 +20,58 @@ class getMaps(commands.Cog):
   async def mapRota(self):
     mapRota = requests.get("https://api.brawlapi.com/v1/events").json()
     
-    ActiveEmbeds = []
-    for event in mapRota["active"]:
-      if event["slot"]["name"] == "Challenge":
-        continue
-      if event["map"]["gameMode"]["name"] == "Solo Showdown":
-        continue
-      if event["map"]["gameMode"]["name"] == "Duo Showdown":
-        eventName = "Showdown"
-      else:
-        eventName = event["map"]["gameMode"]["name"]
-      embed=discord.Embed(title=event["map"]["name"], description=eventName)
-      endDate = datetime.datetime.fromisoformat(event["endTime"].replace("Z", "+00:00"))
-      embed.description += f"\nEnds: {endDate.strftime(format)} UTC"
-      embed.set_image(url=event["map"]["imageUrl"])
-      embed.set_thumbnail(url=event["map"]["gameMode"]["imageUrl"])
-      ActiveEmbeds.append(embed)
-      if len(ActiveEmbeds) == 10:
-        break
-    
-    embed.set_footer(text=f'Last Update: {datetime.datetime.now().strftime(format)} UTC\nCredits to: Brawlify.com')
+    languageEmbeds = {"german" : [], "english" : [], "french" : [], "spanish" : [], "russian" : []}
+    embeds = {"active" : languageEmbeds, "upcoming" : languageEmbeds}
 
-    UpcomingEmbeds = []
-    for event in mapRota["upcoming"]:
-      if event["slot"]["name"] == "Challenge":
-        continue
-      if event["map"]["gameMode"]["name"] == "Solo Showdown":
-        continue
-      if event["map"]["gameMode"]["name"] == "Duo Showdown":
-        eventName = "Showdown"
-      else:
-        eventName = event["map"]["gameMode"]["name"]
-      embed=discord.Embed(title=event["map"]["name"], description=eventName)
-      startDate = datetime.datetime.fromisoformat(event["startTime"].replace("Z", "+00:00"))
-      embed.description += f"\nStart: {startDate.strftime(format)} UTC"
-      embed.set_image(url=event["map"]["imageUrl"])
-      embed.set_thumbnail(url=event["map"]["gameMode"]["imageUrl"])
-      UpcomingEmbeds.append(embed)
-      if len(UpcomingEmbeds) == 10:
-        break
+    for language in languageEmbeds:
+      for event in mapRota["active"]:
+        if event["slot"]["name"] == "Challenge":
+          continue
+        if event["map"]["gameMode"]["name"] == "Solo Showdown":
+          continue
+        if event["map"]["gameMode"]["name"] == "Duo Showdown":
+          eventName = "Showdown"
+        else:
+          eventName = event["map"]["gameMode"]["name"]
+        embed=discord.Embed(title=event["map"]["name"], description=eventName)
+        endDate = datetime.datetime.fromisoformat(event["endTime"].replace("Z", "+00:00"))
+        embed.description += f"\nEnds: {endDate.strftime(format)} UTC"
+        embed.set_image(url=event["map"]["imageUrl"])
+        embed.set_thumbnail(url=event["map"]["gameMode"]["imageUrl"])
+        embeds["active"][language].append(embed)
+        if len(embeds["active"][language]) == 10:
+          break
+      
+      embed.set_footer(text=f'Last Update: {datetime.datetime.now().strftime(format)} UTC\nCredits to: Brawlify.com')
+
+
+    for language in languageEmbeds:
+      for event in mapRota["upcoming"]:
+        if event["slot"]["name"] == "Challenge":
+          continue
+        if event["map"]["gameMode"]["name"] == "Solo Showdown":
+          continue
+        if event["map"]["gameMode"]["name"] == "Duo Showdown":
+          eventName = "Showdown"
+        else:
+          eventName = event["map"]["gameMode"]["name"]
+        embed=discord.Embed(title=event["map"]["name"], description=eventName)
+        startDate = datetime.datetime.fromisoformat(event["startTime"].replace("Z", "+00:00"))
+        embed.description += f"\nStart: {startDate.strftime(format)} UTC"
+        embed.set_image(url=event["map"]["imageUrl"])
+        embed.set_thumbnail(url=event["map"]["gameMode"]["imageUrl"])
+        embeds["upcoming"][language].append(embed)
+        if len(embeds["upcoming"][language]) == 10:
+          break
 
     embed.set_footer(text=f'Last Update: {datetime.datetime.now().strftime(format)}  UTC\nCredits to: Brawlify.com')
 
 
     for guild in self.bot.guilds:
+      # Sprache suchen
+      options = mongodb.findGuildOptions(guild.id)
+      language = options["language"]
+
       # Kategorie suchen
       mapRotaCategory = None
       i = 0
@@ -86,22 +98,22 @@ class getMaps(commands.Cog):
     
       messages = [message async for message in currentMapsChannel.history()]
       if not messages:
-         await currentMapsChannel.send("# Active Maps", embeds=ActiveEmbeds)
+         await currentMapsChannel.send("# Active Maps", embeds=embeds["active"][language])
       for msg in messages:
           if msg.author != self.bot.user:
               await msg.delete()
           else:
-              await msg.edit(content="# Active Maps", embeds=ActiveEmbeds)
+              await msg.edit(content="# Active Maps", embeds=embeds["active"][language])
               break
 
       messages = [message async for message in nextMapsChannel.history()]
       if not messages:
-         await nextMapsChannel.send("# Upcoming Maps", embeds=UpcomingEmbeds)
+         await nextMapsChannel.send("# Upcoming Maps", embeds=embeds["upcoming"][language])
       for msg in messages:
           if msg.author != self.bot.user:
               await msg.delete()
           else:
-              await msg.edit(content="# Upcoming Maps", embeds=UpcomingEmbeds)
+              await msg.edit(content="# Upcoming Maps", embeds=embeds["upcoming"][language])
               break
 
 
