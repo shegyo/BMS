@@ -1,7 +1,7 @@
 import os, discord, json
 from discord.ext import commands
 from cogs.Utility import View, LinkButton
-
+import mongodb
 
 class BMates(commands.Bot):
   
@@ -18,6 +18,9 @@ class BMates(commands.Bot):
 
 
   async def on_guild_join(self, guild: discord.guild):
+    options = mongodb.findGuildOptions(guild.id)
+    language = options["language"]
+    
     # Only Read permission definieren
     onlyRead = {
       guild.default_role: discord.PermissionOverwrite(send_messages=False),
