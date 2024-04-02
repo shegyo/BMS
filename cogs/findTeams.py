@@ -58,11 +58,11 @@ class findMatesModal(discord.ui.Modal):
     if self.region.value:
       searchPost += f"<a:Global:1223361709729779896> **{self.region.value.upper()}**\n"
     # Team Code anheften
-    searchPost += f"<:right_arrow:1216305900961271859> **{self.teamCode.value.upper()}**"
+    searchPost += f"<:right_arrow:1216305900961271859> **{self.teamCode.value.upper()}**\n"
     # Notiz anheften
     if self.note.value:
-      searchPost += f"\n<:info:1216306156222287894> `{self.note.value}`"
-      
+      searchPost += f"<:info:1216306156222287894> `{self.note.value}`"
+
     # Embed erstellen
     embed = discord.Embed(title="", description=searchPost, color=int("ffffff", 16))
     embed.set_author(name="new inquiry",icon_url=interaction.user.display_avatar.url)
@@ -117,7 +117,8 @@ class findEsportModal(discord.ui.Modal):
     searchPost = f"## <a:Announcement:1216306085565042710> `{interaction.user}`\n"
     # Gesuchtes Objekt anheften
     if self.playerAmount.value:
-      searchPost += f"🔎 **{self.lookingFor.value.upper()}: {self.playerAmount.value}**\n"
+      if self.playerAmount.value in ["1", "2", "3"]:
+        searchPost += f"🔎 **{self.lookingFor.value.upper()}: {self.playerAmount.value}**\n"
     else:
       searchPost += f"🔎 **{self.lookingFor.value.upper()}**\n"
     # Region anheften
@@ -130,7 +131,7 @@ class findEsportModal(discord.ui.Modal):
         searchPost += f"{tierEmojis[tier]} **{tier}**\n"
     # Notiz anheften
     if self.note.value:
-      searchPost += f"\n<:info:1216306156222287894> `{self.note.value}`"
+      searchPost += f"<:info:1216306156222287894> `{self.note.value}`"
 
     # Embed bauen
     embed = discord.Embed(title="", description=searchPost, color=int("ffffff", 16))
