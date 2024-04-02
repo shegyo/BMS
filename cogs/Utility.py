@@ -89,7 +89,7 @@ class Utility(commands.Cog):
 
   # Help Command -> get Support
   @app_commands.command(description="bot help")
-  async def help(self, interaction: discord.Interaction, hey : str):
+  async def help(self, interaction: discord.Interaction):
     description = "For help and Support, please contact the System Administrators!\n\n"
     description += "<:discord:1216307276927733800> <@324607583841419276>\n"
     description += "<:discord:1216307276927733800> <@818879706350092298>\n"
