@@ -25,10 +25,10 @@ class findMatesModal(discord.ui.Modal):
     self.bot = bot
     self.trophies = trophies
 
-  trophyRange = discord.ui.TextInput(label="Desired trophy range", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="e.g. 600-750")
   gameMode = discord.ui.TextInput(label="Game Mode", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="e.g. knockout")
-  region = discord.ui.TextInput(label="Region", style=discord.TextStyle.short, min_length=2, max_length=25, placeholder="EMEA/NA/SA/APAC")
   teamCode = discord.ui.TextInput(label="Team Code", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="X??????")
+  trophyRange = discord.ui.TextInput(label="Desired trophy range", style=discord.TextStyle.short, max_length=11, required=False, placeholder="e.g. 600-750")
+  region = discord.ui.TextInput(label="Region", style=discord.TextStyle.short, max_length=5, required=False, placeholder="EMEA/NA/SA/APAC")
   note = discord.ui.TextInput(label="Add whatever info", style=discord.TextStyle.short, max_length=200, required=False, placeholder="only people with brain pls. Ill be offline at 12:00")
 
   async def on_submit(self, interaction: discord.Interaction):
@@ -46,15 +46,24 @@ class findMatesModal(discord.ui.Modal):
       return await interaction.response.send_message("Could not find desired gamemode.")
     
     
-
+    # Titel mit user name darunter die trophäen des users
     searchPost = f"## <a:Announcement:1216306085565042710> `{interaction.user}`\n"
     searchPost += f"<:Trophy:1223277455821902046> **{self.trophies}**\n"
-    searchPost += f"<:list:1216305645083689111> **{self.trophyRange.value}**\n"
+    # Gamemode anheften
     searchPost += f"{modeEmojis[desiredMode]} **{desiredMode}**\n"
-    searchPost += f"<a:Global:1223361709729779896> **{self.region.value.upper()}**\n"
+    # Trophy Range anheften
+    if self.trophyRange.value:
+      searchPost += f"<:list:1216305645083689111> **{self.trophyRange.value}**\n"
+    # Region anheften
+    if self.region.value:
+      searchPost += f"<a:Global:1223361709729779896> **{self.region.value.upper()}**\n"
+    # Team Code anheften
     searchPost += f"<:right_arrow:1216305900961271859> **{self.teamCode.value.upper()}**"
+    # Notiz anheften
     if self.note.value:
       searchPost += f"\n<:info:1216306156222287894> `{self.note.value}`"
+      
+    # Embed erstellen
     embed = discord.Embed(title="", description=searchPost, color=int("ffffff", 16))
     embed.set_author(name="new inquiry",icon_url=interaction.user.display_avatar.url)
     embed.set_footer(text=f"sent from: {interaction.guild}", icon_url=interaction.guild.icon.url)
@@ -111,15 +120,14 @@ class findEsportModal(discord.ui.Modal):
       searchPost += f"🔎 **{self.lookingFor.value.upper()}: {self.playerAmount.value}**\n"
     else:
       searchPost += f"🔎 **{self.lookingFor.value.upper()}**\n"
-    searchPost += f"<:list:1216305645083689111> **{self.trophyRange.value}**\n"
+    # Region anheften
+    if self.region.value:
+      searchPost += f"<a:Global:1223361709729779896> **{self.region.value.upper()}**\n"
     # Tier anheften
     tier = self.tier.value
     if tier:
       if tier.upper() in ["D", "C", "B", "A", "S", "SS+"]:
         searchPost += f"{tierEmojis[tier]} **{tier}**\n"
-    # Region anheften
-    if self.region.value:
-      searchPost += f"<a:Global:1223361709729779896> **{self.region.value.upper()}**\n"
     # Notiz anheften
     if self.note.value:
       searchPost += f"\n<:info:1216306156222287894> `{self.note.value}`"
@@ -190,7 +198,7 @@ class findTeams(commands.Cog):
   # Esport Team Suche Command
   @app_commands.command(description="post a new inquiry")
   @app_commands.checks.cooldown(1, 60*5, key=lambda i: (i.user.id))
-  async def find_esport(self, interaction: discord.Interaction, bs_id: str):
+  async def find_esport(self, interaction: discord.Interaction):
     await interaction.response.send_modal(findEsportModal(self.bot))
 
   @find_esport.error
