@@ -35,7 +35,7 @@ class getMaps(commands.Cog):
           eventName = event["map"]["gameMode"]["name"]
         embed=discord.Embed(title=event["map"]["name"], description=eventName)
         endDate = datetime.datetime.fromisoformat(event["endTime"].replace("Z", "+00:00"))
-        embed.description += f"\n{mapsTexts["ends"][language]}: {endDate.strftime(format)} UTC"
+        embed.description += f'\n{mapsTexts["ends"][language]}: {endDate.strftime(format)} UTC'
         embed.set_image(url=event["map"]["imageUrl"])
         embed.set_thumbnail(url=event["map"]["gameMode"]["imageUrl"])
         embeds["active"][language].append(embed)
@@ -57,7 +57,7 @@ class getMaps(commands.Cog):
           eventName = event["map"]["gameMode"]["name"]
         embed=discord.Embed(title=event["map"]["name"], description=eventName)
         startDate = datetime.datetime.fromisoformat(event["startTime"].replace("Z", "+00:00"))
-        embed.description += f"\n{mapsTexts["starts"][language]}: {startDate.strftime(format)} UTC"
+        embed.description += f'\n{mapsTexts["starts"][language]}: {startDate.strftime(format)} UTC'
         embed.set_image(url=event["map"]["imageUrl"])
         embed.set_thumbnail(url=event["map"]["gameMode"]["imageUrl"])
         embeds["upcoming"][language].append(embed)
