@@ -20,10 +20,10 @@ class getMaps(commands.Cog):
   async def mapRota(self):
     mapRota = requests.get("https://api.brawlapi.com/v1/events").json()
     
-    languageEmbeds = {"german" : [], "english" : [], "french" : [], "spanish" : [], "russian" : []}
-    embeds = {"active" : languageEmbeds, "upcoming" : languageEmbeds}
+    embeds = {"active" : {"german" : [], "english" : [], "french" : [], "spanish" : [], "russian" : []},
+               "upcoming" : {"german" : [], "english" : [], "french" : [], "spanish" : [], "russian" : []}}
 
-    for language in languageEmbeds:
+    for language in embeds["active"]:
       for event in mapRota["active"]:
         if event["slot"]["name"] == "Challenge":
           continue
@@ -45,7 +45,7 @@ class getMaps(commands.Cog):
       embed.set_footer(text=mapsTexts["footer"][language].format(lastUpdate=datetime.datetime.now().strftime(format)))
 
 
-    for language in languageEmbeds:
+    for language in embeds["upcoming"]:
       for event in mapRota["upcoming"]:
         if event["slot"]["name"] == "Challenge":
           continue
