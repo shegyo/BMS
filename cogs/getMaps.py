@@ -98,22 +98,22 @@ class getMaps(commands.Cog):
     
       messages = [message async for message in currentMapsChannel.history()]
       if not messages:
-         await currentMapsChannel.send("# Active Maps", embeds=embeds["active"][language])
+         await currentMapsChannel.send(f'# {mapsTexts["activeMapsTitle"][language]}', embeds=embeds["active"][language])
       for msg in messages:
           if msg.author != self.bot.user:
               await msg.delete()
           else:
-              await msg.edit(content="# Active Maps", embeds=embeds["active"][language])
+              await msg.edit(content=f'# {mapsTexts["activeMapsTitle"][language]}', embeds=embeds["active"][language])
               break
 
       messages = [message async for message in nextMapsChannel.history()]
       if not messages:
-         await nextMapsChannel.send("# Upcoming Maps", embeds=embeds["upcoming"][language])
+         await nextMapsChannel.send(f'# {mapsTexts["upcomingMapsTitle"][language]}', embeds=embeds["upcoming"][language])
       for msg in messages:
           if msg.author != self.bot.user:
               await msg.delete()
           else:
-              await msg.edit(content="# Upcoming Maps", embeds=embeds["upcoming"][language])
+              await msg.edit(content=f'# {mapsTexts["upcomingMapsTitle"][language]}', embeds=embeds["upcoming"][language])
               break
 
 
