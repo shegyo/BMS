@@ -18,7 +18,7 @@ with open("jsons/modeEmojis.json", "r", encoding="UTF-8") as f:
 # Formular to fill out, creates the Search post
 class TicketModal(discord.ui.Modal):
   def __init__(self, bot, trophies):
-    super().__init__(title="Create Ticket")
+    super().__init__(title="Post New Inquiry")
     self.bot = bot
     self.trophies = trophies
 
@@ -95,7 +95,7 @@ class findTeams(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
 
-  @app_commands.command(description="Creates a Support Ticket")
+  @app_commands.command(description="post a new inquiry")
   @app_commands.checks.cooldown(1, 60*5, key=lambda i: (i.user.id))
   async def find_mates(self, interaction: discord.Interaction, bs_id: str):
     bs_id = bs_id.upper().replace(" ", "").replace("#", "")
