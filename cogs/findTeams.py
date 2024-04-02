@@ -128,7 +128,7 @@ class findEsportModal(discord.ui.Modal):
     tier = self.tier.value
     if tier:
       if tier.upper() in ["D", "C", "B", "A", "S", "SS+"]:
-        searchPost += f"{tierEmojis[tier]} **{tier}**\n"
+        searchPost += f"{tierEmojis[tier]} **TIER**\n"
     # Notiz anheften
     if self.note.value:
       searchPost += f"<:info:1216306156222287894> `{self.note.value}`"
