@@ -178,7 +178,7 @@ class findTeams(commands.Cog):
   # allgemeine Team Suche
   @app_commands.command(description="post a new inquiry")
   @app_commands.checks.cooldown(1, 60*5, key=lambda i: (i.user.id))
-  async def find_mates(self, interaction: discord.Interaction, bs_id: str, hey: int):
+  async def find_mates(self, interaction: discord.Interaction, bs_id: str):
     bs_id = bs_id.upper().replace(" ", "").replace("#", "")
     url = f"https://api.brawlstars.com/v1/players/%23{bs_id}"
     headers = {
