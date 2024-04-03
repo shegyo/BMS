@@ -33,7 +33,7 @@ class FindMatesModalGerman(discord.ui.Modal):
     self.trophies = trophies
     self.language = language
 
-  gameMode = discord.ui.TextInput(label="Spielmodus", placeholder="z.B. Ausschalten", style=discord.TextStyle.short, min_length=4, max_length=25)
+  gameMode = discord.ui.TextInput(label="Spielmodus", placeholder="z.B. Knockout", style=discord.TextStyle.short, min_length=4, max_length=25)
   teamCode = discord.ui.TextInput(label="Team-Code", placeholder="X??????", style=discord.TextStyle.short, min_length=4, max_length=25)
   trophyRange = discord.ui.TextInput(label="Gewünschter Trophäenbereich", placeholder="z.B. 600-750", style=discord.TextStyle.short, max_length=11, required=False)
   region = discord.ui.TextInput(label="Region", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, max_length=5, required=False)
@@ -50,7 +50,7 @@ class FindMatesModalSpanish(discord.ui.Modal):
     self.trophies = trophies
     self.language = language
 
-  gameMode = discord.ui.TextInput(label="Modo de juego", placeholder="p. ej. eliminación", style=discord.TextStyle.short, min_length=4, max_length=25)
+  gameMode = discord.ui.TextInput(label="Modo de juego", placeholder="p. ej. Knockout", style=discord.TextStyle.short, min_length=4, max_length=25)
   teamCode = discord.ui.TextInput(label="Código de equipo", placeholder="X??????", style=discord.TextStyle.short, min_length=4, max_length=25)
   trophyRange = discord.ui.TextInput(label="Rango de trofeos deseado", placeholder="p. ej. 600-750", style=discord.TextStyle.short, max_length=11, required=False)
   region = discord.ui.TextInput(label="Región", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, max_length=5, required=False)
@@ -67,7 +67,7 @@ class FindMatesModalFrench(discord.ui.Modal):
     self.trophies = trophies
     self.language = language
 
-  gameMode = discord.ui.TextInput(label="Mode de jeu", placeholder="par exemple, élimination", style=discord.TextStyle.short, min_length=4, max_length=25)
+  gameMode = discord.ui.TextInput(label="Mode de jeu", placeholder="par exemple, Knockout", style=discord.TextStyle.short, min_length=4, max_length=25)
   teamCode = discord.ui.TextInput(label="Code d'équipe", placeholder="X??????", style=discord.TextStyle.short, min_length=4, max_length=25)
   trophyRange = discord.ui.TextInput(label="Plage de trophées souhaitée", placeholder="par exemple, 600-750", style=discord.TextStyle.short, max_length=11, required=False)
   region = discord.ui.TextInput(label="Région", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, max_length=5, required=False)
@@ -84,7 +84,7 @@ class FindMatesModalRussian(discord.ui.Modal):
     self.trophies = trophies
     self.language = language
 
-  gameMode = discord.ui.TextInput(label="Режим игры", placeholder="например, выключение", style=discord.TextStyle.short, min_length=4, max_length=25)
+  gameMode = discord.ui.TextInput(label="Режим игры", placeholder="например, Knockout", style=discord.TextStyle.short, min_length=4, max_length=25)
   teamCode = discord.ui.TextInput(label="Код команды", placeholder="X??????", style=discord.TextStyle.short, min_length=4, max_length=25)
   trophyRange = discord.ui.TextInput(label="Желаемый диапазон трофеев", placeholder="например, 600-750", style=discord.TextStyle.short, max_length=11, required=False)
   region = discord.ui.TextInput(label="Регион", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, max_length=5, required=False)
@@ -124,34 +124,42 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
     if not desiredMode:
       return await interaction.response.send_message(findTeamsTexts["gameModeNotFound"][language])
     
+    embeds = {"german" : [], "english" : [], "french" : [], "spanish" : [], "russian" : []}
     
-    # Titel mit user name darunter die trophäen des users
-    searchPost = f"## <a:Announcement:1216306085565042710> `{interaction.user}`\n"
-    searchPost += f"<:Trophy:1223277455821902046> **{trophies}**\n"
-    # Gamemode anheften
-    searchPost += f"{modeEmojis[desiredMode]} **{desiredMode}**\n"
-    # Trophy Range anheften
-    if trophyRange:
-      searchPost += f"<:list:1216305645083689111> **{trophyRange}**\n"
-    # Region anheften
-    if region:
-      searchPost += f"<a:Global:1223361709729779896> **{region.upper()}**\n"
-    # Team Code anheften
-    searchPost += f"<:right_arrow:1216305900961271859> **{teamCode.upper()}**\n"
-    # Notiz anheften
-    if note:
-      searchPost += f"<:info:1216306156222287894> `{note}`"
+    for language in embeds:
+      # Titel mit user name darunter die trophäen des users
+      searchPost = f"## <a:Announcement:1216306085565042710> `{interaction.user}`\n"
+      searchPost += f"<:Trophy:1223277455821902046> **{trophies}**\n"
+      # Gamemode anheften
+      searchPost += f"{modeEmojis[desiredMode]} **{desiredMode}**\n"
+      # Trophy Range anheften
+      if trophyRange:
+        searchPost += f"<:list:1216305645083689111> **{trophyRange}**\n"
+      # Region anheften
+      if region:
+        searchPost += f"<a:Global:1223361709729779896> **{region.upper()}**\n"
+      # Team Code anheften
+      searchPost += f"<:right_arrow:1216305900961271859> **{teamCode.upper()}**\n"
+      # Notiz anheften
+      if note:
+        searchPost += f"<:info:1216306156222287894> `{note}`"
 
-    # Embed erstellen
-    embed = discord.Embed(title="", description=searchPost, color=int("ffffff", 16))
-    embed.set_author(name=findTeamsTexts["newInquiry"][language], icon_url=interaction.user.display_avatar.url)
-    embed.set_footer(text=findTeamsTexts["sentFrom"][language].format(guild=interaction.guild), icon_url=interaction.guild.icon.url)
+      # Embed erstellen
+      embed = discord.Embed(title="", description=searchPost, color=int("ffffff", 16))
+      embed.set_author(name=findTeamsTexts["newInquiry"][language], icon_url=interaction.user.display_avatar.url)
+      embed.set_footer(text=findTeamsTexts["sentFrom"][language].format(guild=interaction.guild), icon_url=interaction.guild.icon.url)
+
+      embeds[language].append(embed)
 
     JoinButton = LinkButton(findTeamsTexts["joinTeam"][language], f"https://link.brawlstars.com/invite/gameroom/en?tag={teamCode}")
 
     await interaction.response.send_message(findTeamsTexts["sendingPosts"][language], ephemeral=True, delete_after=10)
 
     for guild in bot.guilds:
+      # Sprache suchen
+      options = mongodb.findGuildOptions(guild.id)
+      language = options["language"]
+
       # Kategorie suchen
       findMatesCategory = None
       i = 0
@@ -174,7 +182,7 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
       
       # Nachricht posten wenn Kanal gefunden wurde
       if findMatesChannel:
-        await findMatesChannel.send(embed=embed, view=View([JoinButton]))
+        await findMatesChannel.send(embeds=embeds[language], view=View([JoinButton]))
 
     await interaction.edit_original_response(content=findTeamsTexts["postSent"][language])
     
