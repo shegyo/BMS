@@ -28,7 +28,7 @@ with open("jsons/findTeamsTexts.json", "r", encoding="UTF-8") as f:
 # Formular zum Ausfüllen, erstellt den Suchbeitrag
 class FindMatesModalGerman(discord.ui.Modal):
   def __init__(self, bot, trophies, language):
-    super().__init__(title="Neue Anfrage erstellen")
+    super().__init__(title="Neue Team Suche erstellen")
     self.bot = bot
     self.trophies = trophies
     self.language = language
@@ -94,7 +94,7 @@ class FindMatesModalRussian(discord.ui.Modal):
     await handleFindMatesSubmit(interaction, self.bot, self.gameMode.value, self.teamCode.value, self.trophyRange.value, self.region.value, self.note.value, self.trophies, self.language)
 
 # Formular to fill out, creates the Search post
-class findMatesModalEnglish(discord.ui.Modal):
+class FindMatesModalEnglish(discord.ui.Modal):
   def __init__(self, bot, trophies, language):
     super().__init__(title="Post New Inquiry")
     self.bot = bot
@@ -122,7 +122,7 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
           desiredMode = mode["name"]
     
     if not desiredMode:
-      return await interaction.response.send_message("Could not find desired gamemode.")
+      return await interaction.response.send_message(findTeamsTexts["gameModeNotFound"][language])
     
     
     # Titel mit user name darunter die trophäen des users
@@ -144,12 +144,12 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
 
     # Embed erstellen
     embed = discord.Embed(title="", description=searchPost, color=int("ffffff", 16))
-    embed.set_author(name="new inquiry",icon_url=interaction.user.display_avatar.url)
-    embed.set_footer(text=f"sent from: {interaction.guild}", icon_url=interaction.guild.icon.url)
+    embed.set_author(name=findTeamsTexts["newInquiry"][language], icon_url=interaction.user.display_avatar.url)
+    embed.set_footer(text=findTeamsTexts["sentFrom"][language].format(guild=interaction.guild), icon_url=interaction.guild.icon.url)
 
-    JoinButton = LinkButton("Join Team", f"https://link.brawlstars.com/invite/gameroom/en?tag={teamCode}")
+    JoinButton = LinkButton(findTeamsTexts["joinTeam"][language], f"https://link.brawlstars.com/invite/gameroom/en?tag={teamCode}")
 
-    await interaction.response.send_message("sending Search post on all servers...", ephemeral=True, delete_after=5)
+    await interaction.response.send_message(findTeamsTexts["sendingPosts"][language], ephemeral=True, delete_after=10)
 
     for guild in bot.guilds:
       # Kategorie suchen
@@ -176,7 +176,7 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
       if findMatesChannel:
         await findMatesChannel.send(embed=embed, view=View([JoinButton]))
 
-    await interaction.edit_original_response(content="Search post sent successfully on all servers <a:verifyblack:1216302923441504287>")
+    await interaction.edit_original_response(content=findTeamsTexts["postSent"][language])
     
     
 
@@ -261,7 +261,7 @@ async def handleFindEsportSubmit(interaction, bot, position, region, tier, note,
 
     # Positions Validität prüfen
     if not position.lower() in ["manager", "coach", "analyst" ,"player"]:
-      return await interaction.response.send_message(f"Unknown position: {position.lower().capitalize()}", ephemeral=True, delete_after=3)
+      return await interaction.response.send_message(findTeamsTexts["unknownPosition"][language].format(pos=position.capitalize()), ephemeral=True, delete_after=3)
     
     # Gesuchtes Position anheften
     searchPost += f"🔎 **{position.upper()}**\n"
@@ -280,10 +280,10 @@ async def handleFindEsportSubmit(interaction, bot, position, region, tier, note,
 
     # Embed bauen
     embed = discord.Embed(title="", description=searchPost, color=int("ffffff", 16))
-    embed.set_author(name="new esport inquiry",icon_url=interaction.user.display_avatar.url)
-    embed.set_footer(text=f"sent from: {interaction.guild}", icon_url=interaction.guild.icon.url)
+    embed.set_author(name=findTeamsTexts["newEsportInquiry"][language], icon_url=interaction.user.display_avatar.url)
+    embed.set_footer(text=findTeamsTexts["sentFrom"][language].format(guild=interaction.guild), icon_url=interaction.guild.icon.url)
 
-    await interaction.response.send_message(findTeamsTexts["sendingPosts"][language], ephemeral=True, delete_after=5)
+    await interaction.response.send_message(findTeamsTexts["sendingPosts"][language], ephemeral=True, delete_after=10)
 
     for guild in bot.guilds:
       # Kategorie suchen
@@ -339,7 +339,7 @@ class findTeams(commands.Cog):
       if language == "german":
         await interaction.response.send_modal(FindMatesModalGerman(self.bot, profileData["trophies"], language))
       elif language == "english":
-        await interaction.response.send_modal(findMatesModalEnglish(self.bot, profileData["trophies"], language))
+        await interaction.response.send_modal(FindMatesModalEnglish(self.bot, profileData["trophies"], language))
       elif language == "spanish":
         await interaction.response.send_modal(FindMatesModalSpanish(self.bot, profileData["trophies"], language))
       elif language == "russian":
@@ -363,13 +363,13 @@ class findTeams(commands.Cog):
     options = mongodb.findGuildOptions(interaction.guild.id)
     language = options["language"]
     if language == "german":
-      await interaction.response.send_modal(findEsportModalGerman(self.bot, language))
+      await interaction.response.send_modal(FindEsportModalGerman(self.bot, language))
     elif language == "english":
       await interaction.response.send_modal(findEsportModalEnglish(self.bot, language))
     elif language == "spanish":
-      await interaction.response.send_modal(findEsportModalSpanish(self.bot, language))
+      await interaction.response.send_modal(FindEsportModalSpanish(self.bot, language))
     elif language == "russian":
-      await interaction.response.send_modal(findEsportModalRussian(self.bot, language))
+      await interaction.response.send_modal(FindEsportModalRussian(self.bot, language))
     else:
       await interaction.response.send_modal(FindEsportModalFrench(self.bot, language))
 

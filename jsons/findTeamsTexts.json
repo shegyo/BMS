@@ -33,8 +33,47 @@
         "french": "Message de recherche envoyé avec succès sur tous les serveurs <a:verifyblack:1216302923441504287>",
         "spanish": "Publicación de búsqueda enviada correctamente en todos los servidores <a:verifyblack:1216302923441504287>",
         "russian": "Сообщение о поиске успешно отправлено на всех серверах <a:verifyblack:1216302923441504287>"
+    },
+    "unknownPosition" : {
+        "english": "Unknown position: {pos}",
+        "german": "Unbekannte Position: {pos}",
+        "french": "Position inconnue : {pos}",
+        "spanish": "Posición desconocida: {pos}",
+        "russian": "Неизвестная позиция: {pos}"
+    },
+    "newEsportInquiry" : {
+        "english": "New Esport Inquiry",
+        "german": "Neue Esport-Anfrage",
+        "french": "Nouvelle demande d'esport",
+        "spanish": "Nueva consulta de esport",
+        "russian": "Новый запрос о киберспорте"
+    },
+    "newInquiry" : {
+        "english": "New Inquiry",
+        "german": "Neue Anfrage",
+        "french": "Nouvelle demande",
+        "spanish": "Nueva consulta",
+        "russian": "Новый запрос"
+    },
+    "sentFrom" : {
+        "english": "sent from: {guild}",
+        "german": "gesendet von: {guild}",
+        "french": "envoyé depuis: {guild}",
+        "spanish": "enviado desde: {guild}",
+        "russian": "отправлено из: {guild}"
+    },
+    "joinTeam" : {
+        "english": "Join Team",
+        "german": "Team beitreten",
+        "french": "Rejoindre l'équipe",
+        "spanish": "Unirse al equipo",
+        "russian": "Присоединиться к команде"
+    },
+    "gameModeNotFound" : {
+        "english": "Could not find desired gamemode.",
+        "german": "Gewünschten Spielmodus nicht gefunden.",
+        "french": "Impossible de trouver le mode de jeu désiré.",
+        "spanish": "No se pudo encontrar el modo de juego deseado.",
+        "russian": "Не удалось найти желаемый режим игры."
     }
-    
-    
-    
 }
