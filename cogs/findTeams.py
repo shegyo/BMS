@@ -159,7 +159,7 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
     for guild in bot.guilds:
       # Sprache suchen
       options = mongodb.findGuildOptions(guild.id)
-      language = options["language"]
+      guildLanguage = options["language"]
 
       # Kategorie suchen
       findMatesCategory = None
@@ -183,7 +183,7 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
       
       # Nachricht posten wenn Kanal gefunden wurde
       if findMatesChannel:
-        await findMatesChannel.send(embeds=embeds[language], view=View([JoinButton]))
+        await findMatesChannel.send(embeds=embeds[guildLanguage], view=View([JoinButton]))
 
     await interaction.edit_original_response(content=findTeamsTexts["postSent"][language])
     
@@ -301,6 +301,10 @@ async def handleFindEsportSubmit(interaction, bot, position, region, tier, note,
 
 
     for guild in bot.guilds:
+      # Sprache suchen
+      options = mongodb.findGuildOptions(guild.id)
+      guildLanguage = options["language"]
+
       # Kategorie suchen
       findMatesCategory = None
       i = 0
@@ -323,7 +327,7 @@ async def handleFindEsportSubmit(interaction, bot, position, region, tier, note,
       
       # Nachricht posten wenn Kanal gefunden wurde
       if findEsportChannel:
-        await findEsportChannel.send(embeds=embeds[language])
+        await findEsportChannel.send(embeds=embeds[guildLanguage])
 
     await interaction.edit_original_response(content=findTeamsTexts["postSent"][language])
 
