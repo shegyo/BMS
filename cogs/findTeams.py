@@ -261,9 +261,13 @@ class findTeams(commands.Cog):
       for channel in [findMatesChannel, findEsportChannel]:
         if channel:
           messages = [message async for message in channel.history(limit=25)]
-          for msg in messages:
-            if msg.embeds[0].author.icon_url == interaction.user.display_avatar.url:
-              await msg.delete()
+          # Iteriere über letzte 25 Nachrichten und suche User Post
+          msgdeleted = False
+          i = 0
+          while i < len(messages) and not msgdeleted:
+            if messages[i].embeds[0].author.icon_url == interaction.user.display_avatar.url:
+              await messages[i].delete()
+
 
     await interaction.edit_original_response(content=findTeamsTexts["cancelSuccessful"][language])
 
