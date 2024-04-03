@@ -135,9 +135,9 @@ class findEsportModal(discord.ui.Modal):
     if self.region.value:
       searchPost += f"<a:Global:1223361709729779896> **{self.region.value.upper()}**\n"
     # Tier anheften
-    tier = self.tier.value
+    tier = self.tier.value.upper()
     if tier:
-      if tier.upper() in ["D", "C", "B", "A", "S", "SS+"]:
+      if tier in ["D", "C", "B", "A", "S", "SS+"]:
         searchPost += f"{esportEmojis[tier]} **TIER**\n"
     # Notiz anheften
     if self.note.value:
@@ -267,6 +267,7 @@ class findTeams(commands.Cog):
           while i < len(messages) and not msgdeleted:
             if messages[i].embeds[0].author.icon_url == interaction.user.display_avatar.url:
               await messages[i].delete()
+            i += 1
 
 
     await interaction.edit_original_response(content=findTeamsTexts["cancelSuccessful"][language])
