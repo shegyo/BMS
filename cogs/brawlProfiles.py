@@ -62,7 +62,7 @@ class brawlProfiles(commands.Cog):
   # Get your Profile Ranks Image
   @app_commands.command(description="get your brawl stars profile")
   async def brawl_ranks(self, interaction: discord.Interaction, bs_id: str):
-      await interaction.response.send_message("🔎 ...")
+      await interaction.response.defer()
       profileImg, bs_id, player_name = getBsProfile(bs_id, "https://brawlbot.xyz/api/image/")
       if not (profileImg and player_name):
         embed = discord.Embed(title=player_name, description=f"### <:info:1216306156222287894> ID: #{bs_id}", color=int("000000", 16))
