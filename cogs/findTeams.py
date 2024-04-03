@@ -40,14 +40,17 @@ class findMatesModal(discord.ui.Modal):
   note = discord.ui.TextInput(label="Add whatever info", placeholder="only people with brain pls. Ill be offline at 12:00", style=discord.TextStyle.long, max_length=2000, required=False)
 
   async def on_submit(self, interaction: discord.Interaction):
+    await handleFindEsportSubmit(interaction, self.bot, self.gameMode.value, self.teamCode.value, self.trophyRange.value, self.region.value, self.note.value, self.trophies, self.language)
+
+async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRange, region, note, trophies, language):
     desiredMode = None
-    if self.gameMode.value.lower().replace(" ", "") in ["friendlyfight", "friendlymatch", "testmatch", "friendlybattle"]:
+    if gameMode.lower().replace(" ", "") in ["friendlyfight", "friendlymatch", "testmatch", "friendlybattle"]:
       desiredMode = "Friendly Battle"
-    elif self.gameMode.value.lower().replace(" ", "") in ["duoshowdown", "duos", "sd", "duosd", "duo"]:
+    elif gameMode.lower().replace(" ", "") in ["duoshowdown", "duos", "sd", "duosd", "duo"]:
       desiredMode = "Duo Showdown"
     else:
       for mode in gamemodes:
-        if mode["name"].lower().replace(" ", "") == self.gameMode.value.lower().replace(" ", ""):
+        if mode["name"].lower().replace(" ", "") == gameMode.lower().replace(" ", ""):
           desiredMode = mode["name"]
     
     if not desiredMode:
@@ -56,31 +59,31 @@ class findMatesModal(discord.ui.Modal):
     
     # Titel mit user name darunter die trophäen des users
     searchPost = f"## <a:Announcement:1216306085565042710> `{interaction.user}`\n"
-    searchPost += f"<:Trophy:1223277455821902046> **{self.trophies}**\n"
+    searchPost += f"<:Trophy:1223277455821902046> **{trophies}**\n"
     # Gamemode anheften
     searchPost += f"{modeEmojis[desiredMode]} **{desiredMode}**\n"
     # Trophy Range anheften
-    if self.trophyRange.value:
-      searchPost += f"<:list:1216305645083689111> **{self.trophyRange.value}**\n"
+    if trophyRange.value:
+      searchPost += f"<:list:1216305645083689111> **{trophyRange.value}**\n"
     # Region anheften
-    if self.region.value:
-      searchPost += f"<a:Global:1223361709729779896> **{self.region.value.upper()}**\n"
+    if region.value:
+      searchPost += f"<a:Global:1223361709729779896> **{region.value.upper()}**\n"
     # Team Code anheften
-    searchPost += f"<:right_arrow:1216305900961271859> **{self.teamCode.value.upper()}**\n"
+    searchPost += f"<:right_arrow:1216305900961271859> **{teamCode.value.upper()}**\n"
     # Notiz anheften
-    if self.note.value:
-      searchPost += f"<:info:1216306156222287894> `{self.note.value}`"
+    if note.value:
+      searchPost += f"<:info:1216306156222287894> `{note.value}`"
 
     # Embed erstellen
     embed = discord.Embed(title="", description=searchPost, color=int("ffffff", 16))
     embed.set_author(name="new inquiry",icon_url=interaction.user.display_avatar.url)
     embed.set_footer(text=f"sent from: {interaction.guild}", icon_url=interaction.guild.icon.url)
 
-    JoinButton = LinkButton("Join Team", f"https://link.brawlstars.com/invite/gameroom/en?tag={self.teamCode.value}")
+    JoinButton = LinkButton("Join Team", f"https://link.brawlstars.com/invite/gameroom/en?tag={teamCode.value}")
 
     await interaction.response.send_message("sending Search post on all servers...", ephemeral=True, delete_after=5)
 
-    for guild in self.bot.guilds:
+    for guild in bot.guilds:
       # Kategorie suchen
       findMatesCategory = None
       i = 0
@@ -121,27 +124,30 @@ class findEsportModal(discord.ui.Modal):
   note = discord.ui.TextInput(label="Additional Info", placeholder="must speak english/should have x earnings", style=discord.TextStyle.paragraph, max_length=999, required=False)
 
   async def on_submit(self, interaction: discord.Interaction):
-    # Titel mit user name
+    await handleFindEsportSubmit(interaction, self.bot, self.position.value, self.region.value, self.tier.value, self.note.value, self.language)
+
+async def handleFindEsportSubmit(interaction, bot, position, region, tier, note, language):
+  # Titel mit user name
     searchPost = f"## <a:Announcement:1216306085565042710> `{interaction.user}`\n"
 
     # Positions Validität prüfen
-    if not self.position.value.lower() in ["manager", "coach", "analyst" ,"player"]:
-      return await interaction.response.send_message(f"Unknown position: {self.position.value.lower().capitalize()}", ephemeral=True, delete_after=3)
+    if not position.lower() in ["manager", "coach", "analyst" ,"player"]:
+      return await interaction.response.send_message(f"Unknown position: {position.lower().capitalize()}", ephemeral=True, delete_after=3)
     
     # Gesuchtes Position anheften
-    searchPost += f"🔎 **{self.position.value.upper()}**\n"
+    searchPost += f"🔎 **{position.upper()}**\n"
     
     # Region anheften
-    if self.region.value:
-      searchPost += f"<a:Global:1223361709729779896> **{self.region.value.upper()}**\n"
+    if region:
+      searchPost += f"<a:Global:1223361709729779896> **{region.upper()}**\n"
     # Tier anheften
-    tier = self.tier.value.upper()
+    tier = tier.upper()
     if tier:
       if tier in ["D", "C", "B", "A", "S", "SS+"]:
         searchPost += f"{esportEmojis[tier]} **TIER**\n"
     # Notiz anheften
-    if self.note.value:
-      searchPost += f"<:info:1216306156222287894> `{self.note.value}`"
+    if note:
+      searchPost += f"<:info:1216306156222287894> `{note}`"
 
     # Embed bauen
     embed = discord.Embed(title="", description=searchPost, color=int("ffffff", 16))
@@ -150,7 +156,7 @@ class findEsportModal(discord.ui.Modal):
 
     await interaction.response.send_message("sending Search post on all servers...", ephemeral=True, delete_after=5)
 
-    for guild in self.bot.guilds:
+    for guild in bot.guilds:
       # Kategorie suchen
       findMatesCategory = None
       i = 0
@@ -178,6 +184,7 @@ class findEsportModal(discord.ui.Modal):
     await interaction.edit_original_response(content="Search post sent successfully on all servers <a:verifyblack:1216302923441504287>")
 
 
+
 # The Commands
 class findTeams(commands.Cog):
 
@@ -200,6 +207,15 @@ class findTeams(commands.Cog):
     }
     profileData = requests.get(url, headers=headers).json()
     if "trophies" in profileData:
+      if language == "german":
+        await interaction.response.send_modal(findMatesModal(self.bot, profileData["trophies"], language))
+      elif language == "english":
+        await interaction.response.send_modal(findMatesModal(self.bot, profileData["trophies"], language))
+      elif language == "spanish":
+        await interaction.response.send_modal(findMatesModal(self.bot, profileData["trophies"], language))
+      elif language == "russian":
+        await interaction.response.send_modal(findMatesModal(self.bot, profileData["trophies"], language))
+      else:
         await interaction.response.send_modal(findMatesModal(self.bot, profileData["trophies"], language))
     else:
       await interaction.response.send_message(findTeamsTexts["noProfileFound"][language].format(bs_id = bs_id), ephemeral=True, delete_after=3)
@@ -217,8 +233,16 @@ class findTeams(commands.Cog):
     # Ausgewählte Sprache fetchen
     options = mongodb.findGuildOptions(interaction.guild.id)
     language = options["language"]
-
-    await interaction.response.send_modal(findEsportModal(self.bot, language))
+    if language == "german":
+      await interaction.response.send_modal(findEsportModal(self.bot, language))
+    elif language == "english":
+      await interaction.response.send_modal(findEsportModal(self.bot, language))
+    elif language == "spanish":
+      await interaction.response.send_modal(findEsportModal(self.bot, language))
+    elif language == "russian":
+      await interaction.response.send_modal(findEsportModal(self.bot, language))
+    else:
+      await interaction.response.send_modal(findEsportModal(self.bot, language))
 
   @find_esport.error
   async def find_esport_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
