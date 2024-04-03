@@ -1,5 +1,5 @@
 {
     "findTeamsAnnouncement" : {
-        "english" : "Announcement"
+        "english" : "# <a:Announcement:1216306085565042710> Welcome to the BMS <:BMSlogo:1223389796450308197>\n\n<:right_arrow:1216305900961271859> Use the command `/find_mates` to create a request if you are looking for ladder/ranked players\n<:right_arrow:1216305900961271859> Use the command `/find_esport` to create a request if you are looking for a Competitive Team or Team Member\n\n<:info:1216306156222287894> You can use the command `/cancel_search` to delete your request"
     }
 }

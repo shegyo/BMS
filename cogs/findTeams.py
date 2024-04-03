@@ -115,10 +115,10 @@ class findEsportModal(discord.ui.Modal):
     self.bot = bot
     self.language = language
 
-  position = discord.ui.TextInput(label="Position looked for", placeholder="player/team/manager/analyst", style=discord.TextStyle.short, min_length=4, max_length=10)
+  position = discord.ui.TextInput(label="Searching for", placeholder="player/team/manager/analyst", style=discord.TextStyle.short, min_length=4, max_length=10)
   region = discord.ui.TextInput(label="Region", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, min_length=2, max_length=5, required=False)
   tier = discord.ui.TextInput(label="Tier", placeholder="D/C/B/A/S/SS+", style=discord.TextStyle.short, min_length=1, max_length=3, required=False)
-  note = discord.ui.TextInput(label="Additional Info", placeholder="must speak english/should have x earnings", style=discord.TextStyle.paragraph, max_length=2000, required=False)
+  note = discord.ui.TextInput(label="Additional Info", placeholder="must speak english/should have x earnings", style=discord.TextStyle.paragraph, max_length=999, required=False)
 
   async def on_submit(self, interaction: discord.Interaction):
     # Titel mit user name

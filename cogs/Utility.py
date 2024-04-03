@@ -2,8 +2,13 @@ from discord.ext import commands
 import discord
 from discord import app_commands
 import mongodb
+import json
 
 format = "%a, %d %b %Y, %H:%M"
+
+# Texte laden
+with open("jsons/generalTexts.json", "r", encoding="UTF-8") as f:
+  texts = json.load(f)
 
 # LinkButton Klasse
 class LinkButton(discord.ui.Button):
@@ -35,16 +40,38 @@ class SelectLanguage(discord.ui.Select):
         self.originalInteraction = originalInteraction
 
     async def callback(self, interaction: discord.Interaction):
+        await interaction.response.defer()
         guild_options = mongodb.findGuildOptions(interaction.guild.id)
-
-        guild_options["language"] = self.values[0].lower().split(" ")[0]
+        language = self.values[0].lower().split(" ")[0]
+        guild_options["language"] = language
         mongodb.saveGuild(guild_options)
         await self.originalInteraction.edit_original_response(embed=currentSettingEmbed(interaction.guild.id))
-        await interaction.response.defer()
-
-        # Channel Names umbenennen
 
         # Text in Team Inquiry Channel umändern
+        findMatesCategory = None
+        i = 0
+        while not findMatesCategory and i < len(interaction.guild.categories):
+          if "findmates" in interaction.guild.categories[i].name.lower().replace(" ", ""):
+            findMatesCategory = interaction.guild.categories[i]
+          i += 1
+
+        # Erstellen falls nicht da
+        if not findMatesCategory:
+          return
+
+        teamInquiriesChannel = None
+        i = 0
+        while not teamInquiriesChannel and i < len(findMatesCategory.text_channels):
+          if "team-inquiries" in findMatesCategory.text_channels[i].name.lower():
+            teamInquiriesChannel = findMatesCategory.text_channels[i]
+          i += 1
+
+        if teamInquiriesChannel:
+          newInquiryChannel = await teamInquiriesChannel.clone()
+          await teamInquiriesChannel.delete(reason="language change")
+          # Hier neue Nachricht schicken
+          await newInquiryChannel.send(texts["findTeamsAnnouncement"][language])
+          
 
 def getNiceFormatLanguage(language):
     if language == "german":

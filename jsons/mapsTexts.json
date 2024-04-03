@@ -14,24 +14,24 @@
         "russian" : "Предстоящие карты"
     },
     "starts" : {
-        "german" : "Start :",
-        "english" : "Start :",
-        "french" : "Début :",
-        "spanish" : "Inicio :",
-        "russian" : "Начало :"
+        "german" : "Start:",
+        "english" : "Start:",
+        "french" : "Début:",
+        "spanish" : "Inicio:",
+        "russian" : "Начало:"
     },
     "ends" : {
-        "german" : "Ende :",
-        "english" : "Ends :",
-        "french" : "Fin :",
-        "spanish" : "Fin :",
-        "russian" : "Конец :"
+        "german" : "Ende:",
+        "english" : "Ends:",
+        "french" : "Fin:",
+        "spanish" : "Fin:",
+        "russian" : "Конец:"
     },
     "footer" : {
         "german" : "Letztes Update: {lastUpdate}\nCredits an: Brawlify.com",
-        "english" : "Last Update: {lastUpdate}\nCredits to : Brawlify.com",
-        "french" : "Dernière mise à jour : {lastUpdate}\nCrédits à : Brawlify.com",
-        "spanish" : "Última actualización : {lastUpdate}\nCréditos a : Brawlify.com",
-        "russian" : "Последнее обновление : {lastUpdate}\nАвторство : Brawlify.com"
+        "english" : "Last Update: {lastUpdate}\nCredits to: Brawlify.com",
+        "french" : "Dernière mise à jour: {lastUpdate}\nCrédits à: Brawlify.com",
+        "spanish" : "Última actualización: {lastUpdate}\nCréditos a: Brawlify.com",
+        "russian" : "Последнее обновление: {lastUpdate}\nАвторство: Brawlify.com"
     }
 }
