@@ -19,6 +19,20 @@
         "french": "Aucun profil trouvé pour l'ID : {bs_id}",
         "spanish": "No se encontró ningún perfil para el ID: {bs_id}",
         "russian": "Профиль не найден по ID: {bs_id}"
+    },
+    "sendingPosts" : {
+        "english": "Sending search post on all servers...",
+        "german": "Sende Suchbeitrag auf allen Servern...",
+        "french": "Envoi du message de recherche sur tous les serveurs...",
+        "spanish": "Enviando publicación de búsqueda en todos los servidores...",
+        "russian": "Отправка сообщения о поиске на всех серверах..."
+    },
+    "postSent" : {
+        "english": "Search post sent successfully on all servers <a:verifyblack:1216302923441504287>",
+        "german": "Suchbeitrag erfolgreich auf allen Servern gesendet <a:verifyblack:1216302923441504287>",
+        "french": "Message de recherche envoyé avec succès sur tous les serveurs <a:verifyblack:1216302923441504287>",
+        "spanish": "Publicación de búsqueda enviada correctamente en todos los servidores <a:verifyblack:1216302923441504287>",
+        "russian": "Сообщение о поиске успешно отправлено на всех серверах <a:verifyblack:1216302923441504287>"
     }
     
     

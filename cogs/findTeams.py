@@ -25,8 +25,76 @@ with open("jsons/esportEmojis.json", "r", encoding="UTF-8") as f:
 with open("jsons/findTeamsTexts.json", "r", encoding="UTF-8") as f:
   findTeamsTexts = json.load(f)
 
+# Formular zum Ausfüllen, erstellt den Suchbeitrag
+class FindMatesModalGerman(discord.ui.Modal):
+  def __init__(self, bot, trophies, language):
+    super().__init__(title="Neue Anfrage erstellen")
+    self.bot = bot
+    self.trophies = trophies
+    self.language = language
+
+  gameMode = discord.ui.TextInput(label="Spielmodus", placeholder="z.B. Ausschalten", style=discord.TextStyle.short, min_length=4, max_length=25)
+  teamCode = discord.ui.TextInput(label="Team-Code", placeholder="X??????", style=discord.TextStyle.short, min_length=4, max_length=25)
+  trophyRange = discord.ui.TextInput(label="Gewünschter Trophäenbereich", placeholder="z.B. 600-750", style=discord.TextStyle.short, max_length=11, required=False)
+  region = discord.ui.TextInput(label="Region", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, max_length=5, required=False)
+  note = discord.ui.TextInput(label="Zusätzliche Informationen", placeholder="nur Leute mit Verstand bitte. Ich bin um 12:00 Uhr offline", style=discord.TextStyle.long, max_length=999, required=False)
+
+  async def on_submit(self, interaction: discord.Interaction):
+    await handleFindMatesSubmit(interaction, self.bot, self.gameMode.value, self.teamCode.value, self.trophyRange.value, self.region.value, self.note.value, self.trophies, self.language)
+
+# Formulario para completar, crea la publicación de búsqueda
+class FindMatesModalSpanish(discord.ui.Modal):
+  def __init__(self, bot, trophies, language):
+    super().__init__(title="Publicar nueva consulta")
+    self.bot = bot
+    self.trophies = trophies
+    self.language = language
+
+  gameMode = discord.ui.TextInput(label="Modo de juego", placeholder="p. ej. eliminación", style=discord.TextStyle.short, min_length=4, max_length=25)
+  teamCode = discord.ui.TextInput(label="Código de equipo", placeholder="X??????", style=discord.TextStyle.short, min_length=4, max_length=25)
+  trophyRange = discord.ui.TextInput(label="Rango de trofeos deseado", placeholder="p. ej. 600-750", style=discord.TextStyle.short, max_length=11, required=False)
+  region = discord.ui.TextInput(label="Región", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, max_length=5, required=False)
+  note = discord.ui.TextInput(label="Información adicional", placeholder="solo personas con cerebro por favor. Estaré fuera de línea a las 12:00", style=discord.TextStyle.long, max_length=999, required=False)
+
+  async def on_submit(self, interaction: discord.Interaction):
+    await handleFindMatesSubmit(interaction, self.bot, self.gameMode.value, self.teamCode.value, self.trophyRange.value, self.region.value, self.note.value, self.trophies, self.language)
+
+# Formulaire à remplir, crée la publication de recherche
+class FindMatesModalFrench(discord.ui.Modal):
+  def __init__(self, bot, trophies, language):
+    super().__init__(title="Poster une nouvelle demande")
+    self.bot = bot
+    self.trophies = trophies
+    self.language = language
+
+  gameMode = discord.ui.TextInput(label="Mode de jeu", placeholder="par exemple, élimination", style=discord.TextStyle.short, min_length=4, max_length=25)
+  teamCode = discord.ui.TextInput(label="Code d'équipe", placeholder="X??????", style=discord.TextStyle.short, min_length=4, max_length=25)
+  trophyRange = discord.ui.TextInput(label="Plage de trophées souhaitée", placeholder="par exemple, 600-750", style=discord.TextStyle.short, max_length=11, required=False)
+  region = discord.ui.TextInput(label="Région", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, max_length=5, required=False)
+  note = discord.ui.TextInput(label="Informations supplémentaires", placeholder="seulement les personnes ayant un cerveau s'il vous plaît. Je serai hors ligne à 12h00", style=discord.TextStyle.long, max_length=999, required=False)
+
+  async def on_submit(self, interaction: discord.Interaction):
+    await handleFindMatesSubmit(interaction, self.bot, self.gameMode.value, self.teamCode.value, self.trophyRange.value, self.region.value, self.note.value, self.trophies, self.language)
+
+# Форма для заполнения, создающая поиск
+class FindMatesModalRussian(discord.ui.Modal):
+  def __init__(self, bot, trophies, language):
+    super().__init__(title="Опубликовать новый запрос")
+    self.bot = bot
+    self.trophies = trophies
+    self.language = language
+
+  gameMode = discord.ui.TextInput(label="Режим игры", placeholder="например, выключение", style=discord.TextStyle.short, min_length=4, max_length=25)
+  teamCode = discord.ui.TextInput(label="Код команды", placeholder="X??????", style=discord.TextStyle.short, min_length=4, max_length=25)
+  trophyRange = discord.ui.TextInput(label="Желаемый диапазон трофеев", placeholder="например, 600-750", style=discord.TextStyle.short, max_length=11, required=False)
+  region = discord.ui.TextInput(label="Регион", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, max_length=5, required=False)
+  note = discord.ui.TextInput(label="Дополнительная информация", placeholder="только люди с умом, пожалуйста. Я буду оффлайн в 12:00", style=discord.TextStyle.long, max_length=999, required=False)
+
+  async def on_submit(self, interaction: discord.Interaction):
+    await handleFindMatesSubmit(interaction, self.bot, self.gameMode.value, self.teamCode.value, self.trophyRange.value, self.region.value, self.note.value, self.trophies, self.language)
+
 # Formular to fill out, creates the Search post
-class findMatesModal(discord.ui.Modal):
+class findMatesModalEnglish(discord.ui.Modal):
   def __init__(self, bot, trophies, language):
     super().__init__(title="Post New Inquiry")
     self.bot = bot
@@ -37,7 +105,7 @@ class findMatesModal(discord.ui.Modal):
   teamCode = discord.ui.TextInput(label="Team Code", placeholder="X??????", style=discord.TextStyle.short, min_length=4, max_length=25)
   trophyRange = discord.ui.TextInput(label="Desired trophy range", placeholder="e.g. 600-750", style=discord.TextStyle.short, max_length=11, required=False)
   region = discord.ui.TextInput(label="Region", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, max_length=5, required=False)
-  note = discord.ui.TextInput(label="Add whatever info", placeholder="only people with brain pls. Ill be offline at 12:00", style=discord.TextStyle.long, max_length=2000, required=False)
+  note = discord.ui.TextInput(label="Additional Info", placeholder="only people with brain pls. Ill be offline at 12:00", style=discord.TextStyle.long, max_length=999, required=False)
 
   async def on_submit(self, interaction: discord.Interaction):
     await handleFindMatesSubmit(interaction, self.bot, self.gameMode.value, self.teamCode.value, self.trophyRange.value, self.region.value, self.note.value, self.trophies, self.language)
@@ -63,23 +131,23 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
     # Gamemode anheften
     searchPost += f"{modeEmojis[desiredMode]} **{desiredMode}**\n"
     # Trophy Range anheften
-    if trophyRange.value:
-      searchPost += f"<:list:1216305645083689111> **{trophyRange.value}**\n"
+    if trophyRange:
+      searchPost += f"<:list:1216305645083689111> **{trophyRange}**\n"
     # Region anheften
-    if region.value:
-      searchPost += f"<a:Global:1223361709729779896> **{region.value.upper()}**\n"
+    if region:
+      searchPost += f"<a:Global:1223361709729779896> **{region.upper()}**\n"
     # Team Code anheften
-    searchPost += f"<:right_arrow:1216305900961271859> **{teamCode.value.upper()}**\n"
+    searchPost += f"<:right_arrow:1216305900961271859> **{teamCode.upper()}**\n"
     # Notiz anheften
-    if note.value:
-      searchPost += f"<:info:1216306156222287894> `{note.value}`"
+    if note:
+      searchPost += f"<:info:1216306156222287894> `{note}`"
 
     # Embed erstellen
     embed = discord.Embed(title="", description=searchPost, color=int("ffffff", 16))
     embed.set_author(name="new inquiry",icon_url=interaction.user.display_avatar.url)
     embed.set_footer(text=f"sent from: {interaction.guild}", icon_url=interaction.guild.icon.url)
 
-    JoinButton = LinkButton("Join Team", f"https://link.brawlstars.com/invite/gameroom/en?tag={teamCode.value}")
+    JoinButton = LinkButton("Join Team", f"https://link.brawlstars.com/invite/gameroom/en?tag={teamCode}")
 
     await interaction.response.send_message("sending Search post on all servers...", ephemeral=True, delete_after=5)
 
@@ -111,8 +179,69 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
     await interaction.edit_original_response(content="Search post sent successfully on all servers <a:verifyblack:1216302923441504287>")
     
     
+
+# Formulaire à remplir, crée la publication de recherche esport
+class FindEsportModalFrench(discord.ui.Modal):
+  def __init__(self, bot, language):
+    super().__init__(title="Poster une nouvelle demande esport")
+    self.bot = bot
+    self.language = language
+
+  position = discord.ui.TextInput(label="Recherche", placeholder="player/team/manager/analyst", style=discord.TextStyle.short, min_length=4, max_length=10)
+  region = discord.ui.TextInput(label="Région", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, min_length=2, max_length=5, required=False)
+  tier = discord.ui.TextInput(label="Niveau", placeholder="D/C/B/A/S/SS+", style=discord.TextStyle.short, min_length=1, max_length=3, required=False)
+  note = discord.ui.TextInput(label="Informations supplémentaires", placeholder="doit parler anglais/devrait avoir x revenus", style=discord.TextStyle.paragraph, max_length=999, required=False)
+
+  async def on_submit(self, interaction: discord.Interaction):
+    await handleFindEsportSubmit(interaction, self.bot, self.position.value, self.region.value, self.tier.value, self.note.value, self.language)
+
+# Форма для заполнения, создающая пост поиска электронного спорта
+class FindEsportModalRussian(discord.ui.Modal):
+  def __init__(self, bot, language):
+    super().__init__(title="Создать новый запрос по электронному спорту")
+    self.bot = bot
+    self.language = language
+
+  position = discord.ui.TextInput(label="Ищу", placeholder="player/team/manager/analyst", style=discord.TextStyle.short, min_length=4, max_length=10)
+  region = discord.ui.TextInput(label="Регион", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, min_length=2, max_length=5, required=False)
+  tier = discord.ui.TextInput(label="Уровень", placeholder="D/C/B/A/S/SS+", style=discord.TextStyle.short, min_length=1, max_length=3, required=False)
+  note = discord.ui.TextInput(label="Дополнительная информация", placeholder="должен говорить по-английски/должен иметь доход x", style=discord.TextStyle.paragraph, max_length=999, required=False)
+
+  async def on_submit(self, interaction: discord.Interaction):
+    await handleFindEsportSubmit(interaction, self.bot, self.position.value, self.region.value, self.tier.value, self.note.value, self.language)
+
+# Formulario para completar, crea la publicación de búsqueda de Esport
+class FindEsportModalSpanish(discord.ui.Modal):
+  def __init__(self, bot, language):
+    super().__init__(title="Publicar nueva consulta de Esport")
+    self.bot = bot
+    self.language = language
+
+  position = discord.ui.TextInput(label="Buscando", placeholder="player/team/manager/analyst", style=discord.TextStyle.short, min_length=4, max_length=10)
+  region = discord.ui.TextInput(label="Región", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, min_length=2, max_length=5, required=False)
+  tier = discord.ui.TextInput(label="Nivel", placeholder="D/C/B/A/S/SS+", style=discord.TextStyle.short, min_length=1, max_length=3, required=False)
+  note = discord.ui.TextInput(label="Información adicional", placeholder="debe hablar inglés/debería tener x ingresos", style=discord.TextStyle.paragraph, max_length=999, required=False)
+
+  async def on_submit(self, interaction: discord.Interaction):
+    await handleFindEsportSubmit(interaction, self.bot, self.position.value, self.region.value, self.tier.value, self.note.value, self.language)
+
+# Formular zum Ausfüllen, erstellt den Suchbeitrag für Esport
+class FindEsportModalGerman(discord.ui.Modal):
+  def __init__(self, bot, language):
+    super().__init__(title="Neue Esport-Suche veröffentlichen")
+    self.bot = bot
+    self.language = language
+
+  position = discord.ui.TextInput(label="Suche nach", placeholder="player/team/manager/analyst", style=discord.TextStyle.short, min_length=4, max_length=10)
+  region = discord.ui.TextInput(label="Region", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, min_length=2, max_length=5, required=False)
+  tier = discord.ui.TextInput(label="Tier", placeholder="D/C/B/A/S/SS+", style=discord.TextStyle.short, min_length=1, max_length=3, required=False)
+  note = discord.ui.TextInput(label="Zusätzliche Informationen", placeholder="muss Englisch sprechen/sollte x Einnahmen haben", style=discord.TextStyle.paragraph, max_length=999, required=False)
+
+  async def on_submit(self, interaction: discord.Interaction):
+    await handleFindEsportSubmit(interaction, self.bot, self.position.value, self.region.value, self.tier.value, self.note.value, self.language)
+
 # Formular to fill out, creates the Search post
-class findEsportModal(discord.ui.Modal):
+class findEsportModalEnglish(discord.ui.Modal):
   def __init__(self, bot, language):
     super().__init__(title="Post New Esport Inquiry")
     self.bot = bot
@@ -154,7 +283,7 @@ async def handleFindEsportSubmit(interaction, bot, position, region, tier, note,
     embed.set_author(name="new esport inquiry",icon_url=interaction.user.display_avatar.url)
     embed.set_footer(text=f"sent from: {interaction.guild}", icon_url=interaction.guild.icon.url)
 
-    await interaction.response.send_message("sending Search post on all servers...", ephemeral=True, delete_after=5)
+    await interaction.response.send_message(findTeamsTexts["sendingPosts"][language], ephemeral=True, delete_after=5)
 
     for guild in bot.guilds:
       # Kategorie suchen
@@ -181,7 +310,7 @@ async def handleFindEsportSubmit(interaction, bot, position, region, tier, note,
       if findEsportChannel:
         await findEsportChannel.send(embed=embed)
 
-    await interaction.edit_original_response(content="Search post sent successfully on all servers <a:verifyblack:1216302923441504287>")
+    await interaction.edit_original_response(content=findTeamsTexts["postSent"][language])
 
 
 
@@ -208,15 +337,15 @@ class findTeams(commands.Cog):
     profileData = requests.get(url, headers=headers).json()
     if "trophies" in profileData:
       if language == "german":
-        await interaction.response.send_modal(findMatesModal(self.bot, profileData["trophies"], language))
+        await interaction.response.send_modal(FindMatesModalGerman(self.bot, profileData["trophies"], language))
       elif language == "english":
-        await interaction.response.send_modal(findMatesModal(self.bot, profileData["trophies"], language))
+        await interaction.response.send_modal(findMatesModalEnglish(self.bot, profileData["trophies"], language))
       elif language == "spanish":
-        await interaction.response.send_modal(findMatesModal(self.bot, profileData["trophies"], language))
+        await interaction.response.send_modal(FindMatesModalSpanish(self.bot, profileData["trophies"], language))
       elif language == "russian":
-        await interaction.response.send_modal(findMatesModal(self.bot, profileData["trophies"], language))
+        await interaction.response.send_modal(FindMatesModalRussian(self.bot, profileData["trophies"], language))
       else:
-        await interaction.response.send_modal(findMatesModal(self.bot, profileData["trophies"], language))
+        await interaction.response.send_modal(FindMatesModalFrench(self.bot, profileData["trophies"], language))
     else:
       await interaction.response.send_message(findTeamsTexts["noProfileFound"][language].format(bs_id = bs_id), ephemeral=True, delete_after=3)
 
@@ -234,15 +363,15 @@ class findTeams(commands.Cog):
     options = mongodb.findGuildOptions(interaction.guild.id)
     language = options["language"]
     if language == "german":
-      await interaction.response.send_modal(findEsportModal(self.bot, language))
+      await interaction.response.send_modal(findEsportModalGerman(self.bot, language))
     elif language == "english":
-      await interaction.response.send_modal(findEsportModal(self.bot, language))
+      await interaction.response.send_modal(findEsportModalEnglish(self.bot, language))
     elif language == "spanish":
-      await interaction.response.send_modal(findEsportModal(self.bot, language))
+      await interaction.response.send_modal(findEsportModalSpanish(self.bot, language))
     elif language == "russian":
-      await interaction.response.send_modal(findEsportModal(self.bot, language))
+      await interaction.response.send_modal(findEsportModalRussian(self.bot, language))
     else:
-      await interaction.response.send_modal(findEsportModal(self.bot, language))
+      await interaction.response.send_modal(FindEsportModalFrench(self.bot, language))
 
   @find_esport.error
   async def find_esport_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
