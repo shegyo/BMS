@@ -124,6 +124,9 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
     if not desiredMode:
       return await interaction.response.send_message(findTeamsTexts["gameModeNotFound"][language])
     
+    
+    await interaction.response.send_message(findTeamsTexts["sendingPosts"][language], ephemeral=True, delete_after=10)
+    
     embeds = {"german" : [], "english" : [], "french" : [], "spanish" : [], "russian" : []}
     
     for language in embeds:
@@ -152,8 +155,6 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
       embeds[language].append(embed)
 
     JoinButton = LinkButton(findTeamsTexts["joinTeam"][language], f"https://link.brawlstars.com/invite/gameroom/en?tag={teamCode}")
-
-    await interaction.response.send_message(findTeamsTexts["sendingPosts"][language], ephemeral=True, delete_after=10)
 
     for guild in bot.guilds:
       # Sprache suchen
@@ -264,34 +265,40 @@ class findEsportModalEnglish(discord.ui.Modal):
     await handleFindEsportSubmit(interaction, self.bot, self.position.value, self.region.value, self.tier.value, self.note.value, self.language)
 
 async def handleFindEsportSubmit(interaction, bot, position, region, tier, note, language):
-  # Titel mit user name
-    searchPost = f"## <a:Announcement:1216306085565042710> `{interaction.user}`\n"
-
-    # Positions Validität prüfen
-    if not position.lower() in ["manager", "coach", "analyst" ,"player"]:
-      return await interaction.response.send_message(findTeamsTexts["unknownPosition"][language].format(pos=position.capitalize()), ephemeral=True, delete_after=3)
-    
-    # Gesuchtes Position anheften
-    searchPost += f"🔎 **{position.upper()}**\n"
-    
-    # Region anheften
-    if region:
-      searchPost += f"<a:Global:1223361709729779896> **{region.upper()}**\n"
-    # Tier anheften
-    tier = tier.upper()
-    if tier:
-      if tier in ["D", "C", "B", "A", "S", "SS+"]:
-        searchPost += f"{esportEmojis[tier]} **TIER**\n"
-    # Notiz anheften
-    if note:
-      searchPost += f"<:info:1216306156222287894> `{note}`"
-
-    # Embed bauen
-    embed = discord.Embed(title="", description=searchPost, color=int("ffffff", 16))
-    embed.set_author(name=findTeamsTexts["newEsportInquiry"][language], icon_url=interaction.user.display_avatar.url)
-    embed.set_footer(text=findTeamsTexts["sentFrom"][language].format(guild=interaction.guild), icon_url=interaction.guild.icon.url)
-
     await interaction.response.send_message(findTeamsTexts["sendingPosts"][language], ephemeral=True, delete_after=10)
+
+    embeds = {"german" : [], "english" : [], "french" : [], "spanish" : [], "russian" : []}
+
+    for language in embeds:
+      # Titel mit user name
+      searchPost = f"## <a:Announcement:1216306085565042710> `{interaction.user}`\n"
+
+      # Positions Validität prüfen
+      if not position.lower() in ["manager", "coach", "analyst" ,"player"]:
+        return await interaction.response.send_message(findTeamsTexts["unknownPosition"][language].format(pos=position.capitalize()), ephemeral=True, delete_after=3)
+      
+      # Gesuchtes Position anheften
+      searchPost += f"🔎 **{position.upper()}**\n"
+      
+      # Region anheften
+      if region:
+        searchPost += f"<a:Global:1223361709729779896> **{region.upper()}**\n"
+      # Tier anheften
+      tier = tier.upper()
+      if tier:
+        if tier in ["D", "C", "B", "A", "S", "SS+"]:
+          searchPost += f"{esportEmojis[tier]} **TIER**\n"
+      # Notiz anheften
+      if note:
+        searchPost += f"<:info:1216306156222287894> `{note}`"
+
+      # Embed bauen
+      embed = discord.Embed(title="", description=searchPost, color=int("ffffff", 16))
+      embed.set_author(name=findTeamsTexts["newEsportInquiry"][language], icon_url=interaction.user.display_avatar.url)
+      embed.set_footer(text=findTeamsTexts["sentFrom"][language].format(guild=interaction.guild), icon_url=interaction.guild.icon.url)
+
+      embeds[language].append(embed)
+
 
     for guild in bot.guilds:
       # Kategorie suchen
@@ -316,7 +323,7 @@ async def handleFindEsportSubmit(interaction, bot, position, region, tier, note,
       
       # Nachricht posten wenn Kanal gefunden wurde
       if findEsportChannel:
-        await findEsportChannel.send(embed=embed)
+        await findEsportChannel.send(embeds=embeds[language])
 
     await interaction.edit_original_response(content=findTeamsTexts["postSent"][language])
 
