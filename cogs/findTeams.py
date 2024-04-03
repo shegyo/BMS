@@ -33,7 +33,7 @@ class FindMatesModalGerman(discord.ui.Modal):
     self.trophies = trophies
     self.language = language
 
-  gameMode = discord.ui.TextInput(label="Spielmodus", placeholder="z.B. Knockout", style=discord.TextStyle.short, min_length=4, max_length=25)
+  gameMode = discord.ui.TextInput(label="Spielmodus", placeholder="z.B. Knockout", style=discord.TextStyle.short, min_length=2, max_length=25)
   teamCode = discord.ui.TextInput(label="Team-Code", placeholder="X??????", style=discord.TextStyle.short, min_length=4, max_length=25)
   trophyRange = discord.ui.TextInput(label="Gewünschter Trophäenbereich", placeholder="z.B. 600-750", style=discord.TextStyle.short, max_length=11, required=False)
   region = discord.ui.TextInput(label="Region", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, max_length=5, required=False)
@@ -50,7 +50,7 @@ class FindMatesModalSpanish(discord.ui.Modal):
     self.trophies = trophies
     self.language = language
 
-  gameMode = discord.ui.TextInput(label="Modo de juego", placeholder="p. ej. Knockout", style=discord.TextStyle.short, min_length=4, max_length=25)
+  gameMode = discord.ui.TextInput(label="Modo de juego", placeholder="p. ej. Knockout", style=discord.TextStyle.short, min_length=2, max_length=25)
   teamCode = discord.ui.TextInput(label="Código de equipo", placeholder="X??????", style=discord.TextStyle.short, min_length=4, max_length=25)
   trophyRange = discord.ui.TextInput(label="Rango de trofeos deseado", placeholder="p. ej. 600-750", style=discord.TextStyle.short, max_length=11, required=False)
   region = discord.ui.TextInput(label="Región", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, max_length=5, required=False)
@@ -67,7 +67,7 @@ class FindMatesModalFrench(discord.ui.Modal):
     self.trophies = trophies
     self.language = language
 
-  gameMode = discord.ui.TextInput(label="Mode de jeu", placeholder="par exemple, Knockout", style=discord.TextStyle.short, min_length=4, max_length=25)
+  gameMode = discord.ui.TextInput(label="Mode de jeu", placeholder="par exemple, Knockout", style=discord.TextStyle.short, min_length=2, max_length=25)
   teamCode = discord.ui.TextInput(label="Code d'équipe", placeholder="X??????", style=discord.TextStyle.short, min_length=4, max_length=25)
   trophyRange = discord.ui.TextInput(label="Plage de trophées souhaitée", placeholder="par exemple, 600-750", style=discord.TextStyle.short, max_length=11, required=False)
   region = discord.ui.TextInput(label="Région", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, max_length=5, required=False)
@@ -84,7 +84,7 @@ class FindMatesModalRussian(discord.ui.Modal):
     self.trophies = trophies
     self.language = language
 
-  gameMode = discord.ui.TextInput(label="Режим игры", placeholder="например, Knockout", style=discord.TextStyle.short, min_length=4, max_length=25)
+  gameMode = discord.ui.TextInput(label="Режим игры", placeholder="например, Knockout", style=discord.TextStyle.short, min_length=2, max_length=25)
   teamCode = discord.ui.TextInput(label="Код команды", placeholder="X??????", style=discord.TextStyle.short, min_length=4, max_length=25)
   trophyRange = discord.ui.TextInput(label="Желаемый диапазон трофеев", placeholder="например, 600-750", style=discord.TextStyle.short, max_length=11, required=False)
   region = discord.ui.TextInput(label="Регион", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, max_length=5, required=False)
@@ -101,7 +101,7 @@ class FindMatesModalEnglish(discord.ui.Modal):
     self.trophies = trophies
     self.language = language
 
-  gameMode = discord.ui.TextInput(label="Game Mode", placeholder="e.g. knockout", style=discord.TextStyle.short, min_length=4, max_length=25)
+  gameMode = discord.ui.TextInput(label="Game Mode", placeholder="e.g. knockout", style=discord.TextStyle.short, min_length=2, max_length=25)
   teamCode = discord.ui.TextInput(label="Team Code", placeholder="X??????", style=discord.TextStyle.short, min_length=4, max_length=25)
   trophyRange = discord.ui.TextInput(label="Desired trophy range", placeholder="e.g. 600-750", style=discord.TextStyle.short, max_length=11, required=False)
   region = discord.ui.TextInput(label="Region", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, max_length=5, required=False)
