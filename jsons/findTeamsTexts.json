@@ -7,11 +7,11 @@
         "russian": "Итерация по всем серверам..."
     },
     "cancelSuccessful" : {
-        "german": "Alle deine Auftritte in den letzten 50 Beiträgen gelöscht <a:verifyblack:1216302923441504287>",
-        "english": "Deleted all your appearances in last 50 posts <a:verifyblack:1216302923441504287>",
-        "french": "Supprimé toutes vos apparitions dans les 50 derniers messages <a:verifyblack:1216302923441504287>",
-        "spanish": "Eliminadas todas tus apariciones en los últimos 50 mensajes <a:verifyblack:1216302923441504287>",
-        "russian": "Удалены все ваши появления в последних 50 сообщениях <a:verifyblack:1216302923441504287>"
+        "german": "Alle deine neuesten Beiträge, die in den letzten 25 Nachrichten gefunden wurden, wurden gelöscht <a:verifyblack:1216302923441504287>",
+        "english": "Deleted all your latest posts found in last 25 messages <a:verifyblack:1216302923441504287>",
+        "french": "Tous vos derniers messages trouvés dans les 25 derniers messages ont été supprimés <a:verifyblack:1216302923441504287>",
+        "spanish": "Se eliminaron todos tus últimos mensajes encontrados en los últimos 25 mensajes <a:verifyblack:1216302923441504287>",
+        "russian": "Удалены все ваши последние сообщения, найденные в последних 25 сообщениях <a:verifyblack:1216302923441504287>"
     },
     "noProfileFound" : {
         "german": "Kein Profil gefunden für ID: {bs_id}",
