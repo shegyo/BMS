@@ -126,7 +126,7 @@ class findEsportModal(discord.ui.Modal):
 
     # Positions Validität prüfen
     if not self.position.value.lower() in ["manager", "coach", "analyst" ,"player"]:
-      return await interaction.response.send_message(f"Unknown position: {self.position.value.lower().capitalize()}")
+      return await interaction.response.send_message(f"Unknown position: {self.position.value.lower().capitalize()}", ephemeral=True, delete_after=3)
     
     # Gesuchtes Position anheften
     searchPost += f"🔎 **{self.position.value.upper()}**\n"
