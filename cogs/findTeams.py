@@ -18,8 +18,8 @@ with open("jsons/env.json", "r", encoding="UTF-8") as f:
 with open("jsons/modeEmojis.json", "r", encoding="UTF-8") as f:
   modeEmojis = json.load(f)
 
-with open("jsons/tierEmojis.json", "r", encoding="UTF-8") as f:
-  tierEmojis = json.load(f)
+with open("jsons/esportEmojis.json", "r", encoding="UTF-8") as f:
+  esportEmojis = json.load(f)
 
 # Texte laden
 with open("jsons/findTeamsTexts.json", "r", encoding="UTF-8") as f:
@@ -123,8 +123,14 @@ class findEsportModal(discord.ui.Modal):
   async def on_submit(self, interaction: discord.Interaction):
     # Titel mit user name
     searchPost = f"## <a:Announcement:1216306085565042710> `{interaction.user}`\n"
+
+    # Positions Validität prüfen
+    if not self.position.value.lower() in ["manager", "coach", "analyst" ,"player"]:
+      return await interaction.response.send_message(f"Unknown position: {self.position.value.lower().capitalize()}")
+    
     # Gesuchtes Position anheften
     searchPost += f"🔎 **{self.position.value.upper()}**\n"
+    
     # Region anheften
     if self.region.value:
       searchPost += f"<a:Global:1223361709729779896> **{self.region.value.upper()}**\n"
@@ -132,7 +138,7 @@ class findEsportModal(discord.ui.Modal):
     tier = self.tier.value
     if tier:
       if tier.upper() in ["D", "C", "B", "A", "S", "SS+"]:
-        searchPost += f"{tierEmojis[tier]} **TIER**\n"
+        searchPost += f"{esportEmojis[tier]} **TIER**\n"
     # Notiz anheften
     if self.note.value:
       searchPost += f"<:info:1216306156222287894> `{self.note.value}`"
