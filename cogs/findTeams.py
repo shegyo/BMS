@@ -33,11 +33,11 @@ class findMatesModal(discord.ui.Modal):
     self.trophies = trophies
     self.language = language
 
-  gameMode = discord.ui.TextInput(label="Game Mode", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="e.g. knockout")
-  teamCode = discord.ui.TextInput(label="Team Code", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="X??????")
-  trophyRange = discord.ui.TextInput(label="Desired trophy range", style=discord.TextStyle.short, max_length=11, required=False, placeholder="e.g. 600-750")
-  region = discord.ui.TextInput(label="Region", style=discord.TextStyle.short, max_length=5, required=False, placeholder="EMEA/NA/SA/APAC")
-  note = discord.ui.TextInput(label="Add whatever info", style=discord.TextStyle.short, max_length=200, required=False, placeholder="only people with brain pls. Ill be offline at 12:00")
+  gameMode = discord.ui.TextInput(label="Game Mode", placeholder="e.g. knockout", style=discord.TextStyle.short, min_length=4, max_length=25)
+  teamCode = discord.ui.TextInput(label="Team Code", placeholder="X??????", style=discord.TextStyle.short, min_length=4, max_length=25)
+  trophyRange = discord.ui.TextInput(label="Desired trophy range", placeholder="e.g. 600-750", style=discord.TextStyle.short, max_length=11, required=False)
+  region = discord.ui.TextInput(label="Region", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, max_length=5, required=False)
+  note = discord.ui.TextInput(label="Add whatever info", placeholder="only people with brain pls. Ill be offline at 12:00", style=discord.TextStyle.short, max_length=200, required=False)
 
   async def on_submit(self, interaction: discord.Interaction):
     desiredMode = None
@@ -115,21 +115,16 @@ class findEsportModal(discord.ui.Modal):
     self.bot = bot
     self.language = language
 
-  lookingFor = discord.ui.TextInput(label="Looking For", style=discord.TextStyle.short, min_length=4, max_length=25, placeholder="Team/Players")
-  playerAmount = discord.ui.TextInput(label="Player Amount (if players)", style=discord.TextStyle.short, required=False, max_length=1, placeholder="1/2/3")
-  region = discord.ui.TextInput(label="Region", style=discord.TextStyle.short, min_length=2, max_length=5, required=False, placeholder="EMEA/NA/SA/APAC")
-  tier = discord.ui.TextInput(label="Tier", style=discord.TextStyle.short, min_length=1, max_length=3, required=False, placeholder="D/C/B/A/S/SS+")
-  note = discord.ui.TextInput(label="Additional Info", style=discord.TextStyle.short, max_length=200, required=False, placeholder="must speak english/should have x earnings")
+  position = discord.ui.TextInput(label="Position looked for", placeholder="player/team/manager/analyst", style=discord.TextStyle.short, min_length=4, max_length=10)
+  region = discord.ui.TextInput(label="Region", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, min_length=2, max_length=5, required=False)
+  tier = discord.ui.TextInput(label="Tier", placeholder="D/C/B/A/S/SS+", style=discord.TextStyle.short, min_length=1, max_length=3, required=False)
+  note = discord.ui.TextInput(label="Additional Info", placeholder="must speak english/should have x earnings", style=discord.TextStyle.short, max_length=200, required=False)
 
   async def on_submit(self, interaction: discord.Interaction):
     # Titel mit user name
     searchPost = f"## <a:Announcement:1216306085565042710> `{interaction.user}`\n"
-    # Gesuchtes Objekt anheften
-    if self.playerAmount.value:
-      if self.playerAmount.value in ["1", "2", "3"] and not "team" in self.lookingFor.value:
-        searchPost += f"🔎 **{self.lookingFor.value.upper()}: {self.playerAmount.value}**\n"
-    else:
-      searchPost += f"🔎 **{self.lookingFor.value.upper()}**\n"
+    # Gesuchtes Position anheften
+    searchPost += f"🔎 **{self.position.value.upper()}**\n"
     # Region anheften
     if self.region.value:
       searchPost += f"<a:Global:1223361709729779896> **{self.region.value.upper()}**\n"
