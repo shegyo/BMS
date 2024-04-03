@@ -37,7 +37,7 @@ class findMatesModal(discord.ui.Modal):
   teamCode = discord.ui.TextInput(label="Team Code", placeholder="X??????", style=discord.TextStyle.short, min_length=4, max_length=25)
   trophyRange = discord.ui.TextInput(label="Desired trophy range", placeholder="e.g. 600-750", style=discord.TextStyle.short, max_length=11, required=False)
   region = discord.ui.TextInput(label="Region", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, max_length=5, required=False)
-  note = discord.ui.TextInput(label="Add whatever info", placeholder="only people with brain pls. Ill be offline at 12:00", style=discord.TextStyle.long, max_length=200, required=False)
+  note = discord.ui.TextInput(label="Add whatever info", placeholder="only people with brain pls. Ill be offline at 12:00", style=discord.TextStyle.long, max_length=2000, required=False)
 
   async def on_submit(self, interaction: discord.Interaction):
     desiredMode = None
@@ -118,7 +118,7 @@ class findEsportModal(discord.ui.Modal):
   position = discord.ui.TextInput(label="Position looked for", placeholder="player/team/manager/analyst", style=discord.TextStyle.short, min_length=4, max_length=10)
   region = discord.ui.TextInput(label="Region", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, min_length=2, max_length=5, required=False)
   tier = discord.ui.TextInput(label="Tier", placeholder="D/C/B/A/S/SS+", style=discord.TextStyle.short, min_length=1, max_length=3, required=False)
-  note = discord.ui.TextInput(label="Additional Info", placeholder="must speak english/should have x earnings", style=discord.TextStyle.paragraph, max_length=200, required=False)
+  note = discord.ui.TextInput(label="Additional Info", placeholder="must speak english/should have x earnings", style=discord.TextStyle.paragraph, max_length=2000, required=False)
 
   async def on_submit(self, interaction: discord.Interaction):
     # Titel mit user name
