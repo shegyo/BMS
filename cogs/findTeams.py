@@ -441,6 +441,7 @@ class findTeams(commands.Cog):
               if messages[i].embeds:
                 if messages[i].embeds[0].author.icon_url == interaction.user.display_avatar.url:
                   await messages[i].delete()
+                  msgdeleted = True
               i += 1
 
 
