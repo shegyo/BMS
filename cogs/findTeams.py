@@ -129,7 +129,7 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
     
     embeds = {"german" : [], "english" : [], "french" : [], "spanish" : [], "russian" : []}
     
-    for language in embeds:
+    for embedlanguage in embeds:
       # Titel mit user name darunter die trophäen des users
       searchPost = f"## <a:Announcement:1216306085565042710> `{interaction.user}`\n"
       searchPost += f"<:Trophy:1223277455821902046> **{trophies}**\n"
@@ -149,10 +149,10 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
 
       # Embed erstellen
       embed = discord.Embed(title="", description=searchPost, color=int("ffffff", 16))
-      embed.set_author(name=findTeamsTexts["newInquiry"][language], icon_url=interaction.user.display_avatar.url)
-      embed.set_footer(text=findTeamsTexts["sentFrom"][language].format(guild=interaction.guild), icon_url=interaction.guild.icon.url)
+      embed.set_author(name=findTeamsTexts["newInquiry"][embedlanguage], icon_url=interaction.user.display_avatar.url)
+      embed.set_footer(text=findTeamsTexts["sentFrom"][embedlanguage].format(guild=interaction.guild), icon_url=interaction.guild.icon.url)
 
-      embeds[language].append(embed)
+      embeds[embedlanguage].append(embed)
 
     JoinButton = LinkButton(findTeamsTexts["joinTeam"][language], f"https://link.brawlstars.com/invite/gameroom/en?tag={teamCode}")
 
