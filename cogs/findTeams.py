@@ -441,7 +441,7 @@ class findTeams(commands.Cog):
               if messages[i].embeds:
                 if messages[i].embeds[0].author.icon_url == interaction.user.display_avatar.url:
                   await messages[i].delete()
-                i += 1
+              i += 1
 
 
     await interaction.edit_original_response(content=findTeamsTexts["cancelSuccessful"][language])
