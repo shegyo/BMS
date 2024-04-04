@@ -2,7 +2,7 @@ from discord.ext import commands, tasks
 import discord, requests, datetime, pytz
 
 format = "%d.%m.%Y, %H:%M"
-germanTimeZone = pytz.timezone("Germany/Berlin")
+germanTimeZone = pytz.timezone("Europe/Berlin")
 
 class serverList(commands.Cog):
   
