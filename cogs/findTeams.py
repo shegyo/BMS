@@ -290,7 +290,7 @@ async def handleFindEsportSubmit(interaction, bot, position, region, tier, note,
           searchPost += f"{esportEmojis[tier]} **TIER**\n"
       # Notiz anheften
       if note:
-        searchPost += f"<:info:1216306156222287894> `{note}`"
+        searchPost += f"### <:info:1216306156222287894> `{note}`"
 
       # Embed bauen
       embed = discord.Embed(title="", description=searchPost, color=int("ffffff", 16))
