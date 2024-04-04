@@ -115,7 +115,7 @@ class BMates(commands.Bot):
         await systemChannel.send("<:Hi:1216304655861284974> I am the **Brawl Mates System!** <:BMSlogo:1223389796450308197>\n\n"
                                 +"Seems like I am missing permissions!\n"
                                 +"To get started, create the category `find mates` with the channels `#find-mates` and `#find-esport`\n"
-                                +"As well as the category `map rotation` with the channels `#current-maps` and `#next-maps`\n\n" 
+                                +"As well as the category `map rotation` with the channels `#current-maps` and `#next-maps`\nAlternatively, you could just ensure I have admin permission and reinvite me.\n" 
                                 +"If you still need help, please use the `/help` command <:settings:1223374255232651476>\n\n"
 
                                 +"To support me, check out our Social Media in the Linktree <:Linktree:1218980236260278292>\n"
