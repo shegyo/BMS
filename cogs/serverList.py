@@ -20,10 +20,10 @@ class serverList(commands.Cog):
             invites = await guild.invites()
             if not invites:
                 inviteLink = guild.id
+            else:
+                inviteLink = invites[0].url
         except:
             inviteLink = guild.id
-        else:
-            inviteLink = invites[0].url
         description += f"{guild.name} - {inviteLink}\n"
     serverListEmbed = discord.Embed(title="Server List", description=description, color=int("ffffff", 16))
     serverListEmbed.add_field(name="Server Count", value=len(self.bot.guilds))
