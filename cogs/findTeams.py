@@ -145,7 +145,7 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
       searchPost += f"<:right_arrow:1216305900961271859> **{teamCode.upper()}**\n"
       # Notiz anheften
       if note:
-        searchPost += f"<:info:1216306156222287894> `{note}` <:info:1216306156222287894>"
+        searchPost += f"### <:info:1216306156222287894> `{note}` <:info:1216306156222287894>"
 
       # Embed erstellen
       embed = discord.Embed(title="", description=searchPost, color=int("ffffff", 16))
