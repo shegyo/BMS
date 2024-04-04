@@ -145,7 +145,7 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
       searchPost += f"<:right_arrow:1216305900961271859> **{teamCode.upper()}**\n"
       # Notiz anheften
       if note:
-        searchPost += f"<:info:1216306156222287894> `{note}`"
+        searchPost += f"<:info:1216306156222287894> `{note}` <:info:1216306156222287894>"
 
       # Embed erstellen
       embed = discord.Embed(title="", description=searchPost, color=int("ffffff", 16))
@@ -273,7 +273,7 @@ async def handleFindEsportSubmit(interaction, bot, position, region, tier, note,
 
     embeds = {"german" : [], "english" : [], "french" : [], "spanish" : [], "russian" : []}
 
-    for language in embeds:
+    for embedlanguage in embeds:
       # Titel mit user name
       searchPost = f"## <a:Announcement:1216306085565042710> `{interaction.user}`\n"
       
@@ -290,14 +290,14 @@ async def handleFindEsportSubmit(interaction, bot, position, region, tier, note,
           searchPost += f"{esportEmojis[tier]} **TIER**\n"
       # Notiz anheften
       if note:
-        searchPost += f"### <:info:1216306156222287894> `{note}`"
+        searchPost += f"### <:info:1216306156222287894> `{note}` <:info:1216306156222287894>"
 
       # Embed bauen
       embed = discord.Embed(title="", description=searchPost, color=int("ffffff", 16))
-      embed.set_author(name=findTeamsTexts["newEsportInquiry"][language], icon_url=interaction.user.display_avatar.url)
-      embed.set_footer(text=findTeamsTexts["sentFrom"][language].format(guild=interaction.guild), icon_url=interaction.guild.icon.url)
+      embed.set_author(name=findTeamsTexts["newEsportInquiry"][embedlanguage], icon_url=interaction.user.display_avatar.url)
+      embed.set_footer(text=findTeamsTexts["sentFrom"][embedlanguage].format(guild=interaction.guild), icon_url=interaction.guild.icon.url)
 
-      embeds[language].append(embed)
+      embeds[embedlanguage].append(embed)
 
 
     for guild in bot.guilds:
