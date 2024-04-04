@@ -436,10 +436,12 @@ class findTeams(commands.Cog):
           # Iteriere über letzte 25 Nachrichten und suche User Post
           msgdeleted = False
           i = 0
-          while i < len(messages) and not msgdeleted:
-            if messages[i].embeds[0].author.icon_url == interaction.user.display_avatar.url:
-              await messages[i].delete()
-            i += 1
+          if messages:
+            while i < len(messages) and not msgdeleted:
+              if messages[i].embeds:
+                if messages[i].embeds[0].author.icon_url == interaction.user.display_avatar.url:
+                  await messages[i].delete()
+                i += 1
 
 
     await interaction.edit_original_response(content=findTeamsTexts["cancelSuccessful"][language])
