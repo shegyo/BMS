@@ -16,8 +16,11 @@ class serverList(commands.Cog):
     description = ""
     for guild in self.bot.guilds:
         inviteLink = ""
-        invites = await guild.invites()
-        if not invites:
+        try:
+            invites = await guild.invites()
+            if not invites:
+                inviteLink = guild.id
+        except:
             inviteLink = guild.id
         else:
             inviteLink = invites[0].url
