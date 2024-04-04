@@ -196,7 +196,7 @@ class FindEsportModalFrench(discord.ui.Modal):
     self.bot = bot
     self.language = language
 
-  position = discord.ui.TextInput(label="Recherche", placeholder="player/team/manager/analyst/coach", style=discord.TextStyle.short, min_length=4, max_length=10)
+  position = discord.ui.TextInput(label="Recherche", placeholder="player/team/scrim/manager/analyst/coach", style=discord.TextStyle.short, min_length=4, max_length=10)
   region = discord.ui.TextInput(label="Région", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, min_length=2, max_length=5, required=False)
   tier = discord.ui.TextInput(label="Niveau", placeholder="D/C/B/A/S/SS+", style=discord.TextStyle.short, min_length=1, max_length=3, required=False)
   note = discord.ui.TextInput(label="Informations supplémentaires", placeholder="doit parler anglais/devrait avoir x revenus", style=discord.TextStyle.paragraph, max_length=999, required=False)
@@ -211,7 +211,7 @@ class FindEsportModalRussian(discord.ui.Modal):
     self.bot = bot
     self.language = language
 
-  position = discord.ui.TextInput(label="Ищу", placeholder="player/team/manager/analyst/coach", style=discord.TextStyle.short, min_length=4, max_length=10)
+  position = discord.ui.TextInput(label="Ищу", placeholder="player/team/scrim/manager/analyst/coach", style=discord.TextStyle.short, min_length=4, max_length=10)
   region = discord.ui.TextInput(label="Регион", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, min_length=2, max_length=5, required=False)
   tier = discord.ui.TextInput(label="Уровень", placeholder="D/C/B/A/S/SS+", style=discord.TextStyle.short, min_length=1, max_length=3, required=False)
   note = discord.ui.TextInput(label="Дополнительная информация", placeholder="должен говорить по-английски/должен иметь доход x", style=discord.TextStyle.paragraph, max_length=999, required=False)
@@ -226,7 +226,7 @@ class FindEsportModalSpanish(discord.ui.Modal):
     self.bot = bot
     self.language = language
 
-  position = discord.ui.TextInput(label="Buscando", placeholder="player/team/manager/analyst/coach", style=discord.TextStyle.short, min_length=4, max_length=10)
+  position = discord.ui.TextInput(label="Buscando", placeholder="player/scrim/team/manager/analyst/coach", style=discord.TextStyle.short, min_length=4, max_length=10)
   region = discord.ui.TextInput(label="Región", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, min_length=2, max_length=5, required=False)
   tier = discord.ui.TextInput(label="Nivel", placeholder="D/C/B/A/S/SS+", style=discord.TextStyle.short, min_length=1, max_length=3, required=False)
   note = discord.ui.TextInput(label="Información adicional", placeholder="debe hablar inglés/debería tener x ingresos", style=discord.TextStyle.paragraph, max_length=999, required=False)
@@ -241,7 +241,7 @@ class FindEsportModalGerman(discord.ui.Modal):
     self.bot = bot
     self.language = language
 
-  position = discord.ui.TextInput(label="Suche nach", placeholder="player/team/manager/analyst/coach", style=discord.TextStyle.short, min_length=4, max_length=10)
+  position = discord.ui.TextInput(label="Suche nach", placeholder="player/scrim/team/manager/analyst/coach", style=discord.TextStyle.short, min_length=4, max_length=10)
   region = discord.ui.TextInput(label="Region", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, min_length=2, max_length=5, required=False)
   tier = discord.ui.TextInput(label="Tier", placeholder="D/C/B/A/S/SS+", style=discord.TextStyle.short, min_length=1, max_length=3, required=False)
   note = discord.ui.TextInput(label="Zusätzliche Informationen", placeholder="muss Englisch sprechen/sollte x Einnahmen haben", style=discord.TextStyle.paragraph, max_length=999, required=False)
@@ -256,7 +256,7 @@ class findEsportModalEnglish(discord.ui.Modal):
     self.bot = bot
     self.language = language
 
-  position = discord.ui.TextInput(label="Searching for", placeholder="player/team/manager/analyst/coach", style=discord.TextStyle.short, min_length=4, max_length=10)
+  position = discord.ui.TextInput(label="Searching for", placeholder="player/scrim/team/manager/analyst/coach", style=discord.TextStyle.short, min_length=4, max_length=10)
   region = discord.ui.TextInput(label="Region", placeholder="EMEA/NA/SA/APAC", style=discord.TextStyle.short, min_length=2, max_length=5, required=False)
   tier = discord.ui.TextInput(label="Tier", placeholder="D/C/B/A/S/SS+", style=discord.TextStyle.short, min_length=1, max_length=3, required=False)
   note = discord.ui.TextInput(label="Additional Info", placeholder="must speak english/should have x earnings", style=discord.TextStyle.paragraph, max_length=999, required=False)
@@ -266,7 +266,7 @@ class findEsportModalEnglish(discord.ui.Modal):
 
 async def handleFindEsportSubmit(interaction, bot, position, region, tier, note, language):
     # Positions Validität prüfen
-    if not position.lower() in ["manager", "coach", "analyst" ,"player", "team"]:
+    if not position.lower() in ["manager", "coach", "analyst" ,"player", "team", "scrim"]:
       return await interaction.response.send_message(findTeamsTexts["unknownPosition"][language].format(pos=position.capitalize()), ephemeral=True, delete_after=3)
       
     await interaction.response.send_message(findTeamsTexts["sendingPosts"][language], ephemeral=True, delete_after=10)
