@@ -321,33 +321,25 @@ class findTeams(commands.Cog):
   # Team Suche Quick
   @app_commands.command(description="post a new quick search")
   async def quick_mates(self, interaction: discord.Interaction, team_code: str, info: str=None, bs_id: str=None):
-    print(f"command invoked: {interaction.user}")
     # Ausgewählte Sprache fetchen
     options = mongodb.findGuildOptions(interaction.guild.id)
     language = options["language"]
     
-    print("guild options fetched")
-
     # Nutzer Id fetchen
     user_options = mongodb.findUserOptions(interaction.user.id)
     bs_id = user_options["bs_id"]
 
-
-    print("user options fetched")
-
     if not bs_id:
       return await interaction.response.send_message(generalTexts["noIdGiven"][language], ephemeral=True, delete_after=3)
     
-
     bs_id = bs_id.upper().replace(" ", "").replace("#", "")
     url = f"https://api.brawlstars.com/v1/players/%23{bs_id}"
     headers = {
         "Authorization": f"Bearer {envData['BsApi']}"
     }
     profileData = requests.get(url, headers=headers).json()
+    print(profileData)
 
-    print("api responded")
-    
     if "trophies" in profileData:
       await interaction.response.send_message(generalTexts["sendingPosts"][language], ephemeral=True, delete_after=10)
     
@@ -373,6 +365,7 @@ class findTeams(commands.Cog):
 
       JoinButton = LinkButton(findTeamsTexts["joinTeam"][language], f"https://link.brawlstars.com/invite/gameroom/en?tag={team_code}")
 
+      print("embeds generated")
       await sendToAllGuilds(self.bot, interaction, "findmates", "find-mates", embeds, View([JoinButton]), language)
     else:
       await interaction.response.send_message(findTeamsTexts["noProfileFound"][language].format(bs_id = bs_id), ephemeral=True, delete_after=3)
