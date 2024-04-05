@@ -28,7 +28,7 @@ with open("jsons/findTeamsTexts.json", "r", encoding="UTF-8") as f:
 with open("jsons/generalTexts.json", "r", encoding="UTF-8") as f:
    generalTexts = json.load(f)
 
-   
+
 # Formular zum Ausfüllen, erstellt den Suchbeitrag
 class FindMatesModalGerman(discord.ui.Modal):
   def __init__(self, bot, trophies, language):
@@ -350,7 +350,7 @@ class findTeams(commands.Cog):
       for embedlanguage in embeds:
         # Titel mit user name darunter die trophäen des users
         searchPost = f"## <a:Announcement:1216306085565042710> `{interaction.user}`\n"
-        searchPost += f"<:Trophy:1223277455821902046> **{profileData["trophies"]}**\n"
+        searchPost += f"<:Trophy:1223277455821902046> **{profileData['trophies']}**\n"
         
         # Team Code anheften
         searchPost += f"<:right_arrow:1216305900961271859> **{team_code.upper()}**\n"
