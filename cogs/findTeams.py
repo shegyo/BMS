@@ -330,7 +330,7 @@ class findTeams(commands.Cog):
     bs_id = user_options["bs_id"]
 
     if not bs_id:
-      return await interaction.response.send_message(generalTexts["noIdGiven"][language], ephemeral=True, delete_after=3)
+      return await interaction.response.send_message(generalTexts["noIdGiven"][language], ephemeral=True, delete_after=60)
     
     bs_id = bs_id.upper().replace(" ", "").replace("#", "")
     url = f"https://api.brawlstars.com/v1/players/%23{bs_id}"
@@ -387,7 +387,7 @@ class findTeams(commands.Cog):
     bs_id = user_options["bs_id"]
 
     if not bs_id:
-      return await interaction.response.send_message(generalTexts["noIdGiven"][language], ephemeral=True, delete_after=3)
+      return await interaction.response.send_message(generalTexts["noIdGiven"][language], ephemeral=True, delete_after=60)
     
 
     bs_id = bs_id.upper().replace(" ", "").replace("#", "")
