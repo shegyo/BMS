@@ -60,7 +60,7 @@ class brawlProfiles(commands.Cog):
       user_options["bs_id"] = bs_id
 
       if not bs_id:
-        await interaction.response.send_message(generalTexts["noIdGiven"][language], ephemeral=True, delete_after=3)
+        return await interaction.response.send_message(generalTexts["noIdGiven"][language], ephemeral=True, delete_after=3)
 
 
       await interaction.response.defer()
@@ -86,7 +86,7 @@ class brawlProfiles(commands.Cog):
       user_options["bs_id"] = bs_id
 
       if not bs_id:
-        await interaction.response.send_message(generalTexts["noIdGiven"][language], ephemeral=True, delete_after=3)
+        return await interaction.response.send_message(generalTexts["noIdGiven"][language], ephemeral=True, delete_after=3)
 
 
       await interaction.response.defer()
