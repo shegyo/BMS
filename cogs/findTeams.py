@@ -116,6 +116,8 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
       desiredMode = "Friendly Battle"
     elif gameMode.lower().replace(" ", "") in ["duoshowdown", "duos", "sd", "duosd", "duo"]:
       desiredMode = "Duo Showdown"
+    elif gameMode.lower().replace(" ", "") in ["championship", "championship challenge", "challenge", "bsc", "bsc24"]:
+      desiredMode = "Championship Challenge"
     else:
       for mode in gamemodes:
         if mode["name"].lower().replace(" ", "") == gameMode.lower().replace(" ", ""):

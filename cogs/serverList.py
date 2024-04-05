@@ -1,5 +1,5 @@
 from discord.ext import commands, tasks
-import discord, requests, datetime, pytz
+import discord, datetime, pytz
 
 format = "%d.%m.%Y, %H:%M"
 germanTimeZone = pytz.timezone("Europe/Berlin")
