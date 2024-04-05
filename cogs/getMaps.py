@@ -6,7 +6,7 @@ icons = requests.get("https://api.brawlapi.com/v1/icons").json()
 
 format = "%d.%m.%Y, %H:%M"
 
-with open("jsons/mapsTexts.json", "r", encoding="UTF-8") as f:
+with open("languages/mapsTexts.json", "r", encoding="UTF-8") as f:
    mapsTexts = json.load(f)
 
 class getMaps(commands.Cog):

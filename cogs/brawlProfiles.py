@@ -5,10 +5,10 @@ from cogs.Utility import View, LinkButton
 import mongodb
 
 # ENV Daten laden
-with open("jsons/env.json", "r", encoding="UTF-8") as f:
+with open("data/env.json", "r", encoding="UTF-8") as f:
   envData = json.load(f)
 
-with open("jsons/generalTexts.json", "r", encoding="UTF-8") as f:
+with open("languages/generalTexts.json", "r", encoding="UTF-8") as f:
    generalTexts = json.load(f)
 
 def getPlayerNameForId(bs_id):

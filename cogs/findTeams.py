@@ -11,21 +11,21 @@ gamemodes.append({"name" : "Present Plunder"})
 gamemodes.append({"name" : "Pumpkin Plunder"})
 
 # EnvData laden
-with open("jsons/env.json", "r", encoding="UTF-8") as f:
+with open("data/env.json", "r", encoding="UTF-8") as f:
   envData = json.load(f)
 
 # Emoji Listen laden
-with open("jsons/modeEmojis.json", "r", encoding="UTF-8") as f:
+with open("data/modeEmojis.json", "r", encoding="UTF-8") as f:
   modeEmojis = json.load(f)
 
-with open("jsons/esportEmojis.json", "r", encoding="UTF-8") as f:
+with open("data/esportEmojis.json", "r", encoding="UTF-8") as f:
   esportEmojis = json.load(f)
 
-# Texte laden
+# Texte languages
 with open("jsons/findTeamsTexts.json", "r", encoding="UTF-8") as f:
   findTeamsTexts = json.load(f)
 
-with open("jsons/generalTexts.json", "r", encoding="UTF-8") as f:
+with open("languages/generalTexts.json", "r", encoding="UTF-8") as f:
    generalTexts = json.load(f)
 
 
@@ -340,12 +340,10 @@ class findTeams(commands.Cog):
     profileData = requests.get(url, headers=headers).json()
 
     if "trophies" in profileData:
-      print("trophies given")
       await interaction.response.send_message(findTeamsTexts["sendingPosts"][language], ephemeral=True, delete_after=10)
     
       embeds = {"german" : [], "english" : [], "french" : [], "spanish" : [], "russian" : []}
       
-      print("creating embeds")
       for embedlanguage in embeds:
         # Titel mit user name darunter die trophäen des users
         searchPost = f"## <a:Announcement:1216306085565042710> `{interaction.user}`\n"
@@ -366,7 +364,6 @@ class findTeams(commands.Cog):
 
       JoinButton = LinkButton(findTeamsTexts["joinTeam"][language], f"https://link.brawlstars.com/invite/gameroom/en?tag={team_code}")
 
-      print("embeds generated")
       await sendToAllGuilds(self.bot, interaction, "findmates", "find-mates", embeds, View([JoinButton]), language)
     else:
       await interaction.response.send_message(findTeamsTexts["noProfileFound"][language].format(bs_id = bs_id), ephemeral=True, delete_after=3)

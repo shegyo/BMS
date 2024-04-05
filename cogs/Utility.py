@@ -7,7 +7,7 @@ import json
 format = "%a, %d %b %Y, %H:%M"
 
 # Texte laden
-with open("jsons/generalTexts.json", "r", encoding="UTF-8") as f:
+with open("languages/generalTexts.json", "r", encoding="UTF-8") as f:
   texts = json.load(f)
 
 # LinkButton Klasse
