@@ -2,6 +2,7 @@ import os, discord, json
 from discord.ext import commands
 from cogs.Utility import View, LinkButton
 import mongodb
+import asyncio
 
 class BMates(commands.Bot):
   
@@ -26,6 +27,8 @@ class BMates(commands.Bot):
       guild.default_role: discord.PermissionOverwrite(send_messages=False),
     }
     
+    await asyncio.sleep(5)
+
     # Map Rota Kanäle erstellen 
     try:
       # Kategorie suchen
@@ -38,7 +41,7 @@ class BMates(commands.Bot):
 
       # Kategorie erstellen falls nicht da
       if not mapRotaCategory:
-        mapRotaCategory = await guild.create_category_channel("Map Rotation", position = 0)
+        mapRotaCategory = await guild.create_category_channel("Map Rotation")
             
       # Kanäle suchen
       currentMapsChannel = None
@@ -54,7 +57,7 @@ class BMates(commands.Bot):
       # Erstellen und eine Nachricht senden falls nicht vorhanden
       if not currentMapsChannel:
         currentMapsChannel = await mapRotaCategory.create_text_channel("current-maps", overwrites=onlyRead, topic="Active Maps!")
-        await nextMapsChannel.send("<:info:1216306156222287894> Current maps will be here soon!")
+        await currentMapsChannel.send("<:info:1216306156222287894> Current maps will be here soon!")
       if not nextMapsChannel:
         nextMapsChannel = await mapRotaCategory.create_text_channel("next-maps", overwrites=onlyRead, topic="Predicted Upcoming Maps!")
         await nextMapsChannel.send("<:info:1216306156222287894> Predicted upcoming maps will be here soon!")
