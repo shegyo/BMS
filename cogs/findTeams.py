@@ -341,6 +341,7 @@ class findTeams(commands.Cog):
     print(profileData)
 
     if "trophies" in profileData:
+      print("trophies yes")
       await interaction.response.send_message(generalTexts["sendingPosts"][language], ephemeral=True, delete_after=10)
     
       embeds = {"german" : [], "english" : [], "french" : [], "spanish" : [], "russian" : []}
@@ -368,6 +369,7 @@ class findTeams(commands.Cog):
       print("embeds generated")
       await sendToAllGuilds(self.bot, interaction, "findmates", "find-mates", embeds, View([JoinButton]), language)
     else:
+      print("hi")
       await interaction.response.send_message(findTeamsTexts["noProfileFound"][language].format(bs_id = bs_id), ephemeral=True, delete_after=3)
 
   @quick_mates.error
