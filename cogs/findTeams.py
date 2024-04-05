@@ -322,12 +322,10 @@ class findTeams(commands.Cog):
   @app_commands.command(description="post a new quick search")
   @app_commands.checks.cooldown(1, 60*5, key=lambda i: (i.user.id))
   async def quick_mates(self, interaction: discord.Interaction, team_code: str, info: str=None, bs_id: str=None):
+    print(f"command invoked: {interaction.user}")
     # Ausgewählte Sprache fetchen
     options = mongodb.findGuildOptions(interaction.guild.id)
     language = options["language"]
-
-    
-    await interaction.response.send_message(generalTexts["sendingPosts"][language], ephemeral=True, delete_after=10)
 
     # Nutzer Id fetchen
     user_options = mongodb.findUserOptions(interaction.user.id)
@@ -345,6 +343,7 @@ class findTeams(commands.Cog):
     profileData = requests.get(url, headers=headers).json()
     
     if "trophies" in profileData:
+      await interaction.response.send_message(generalTexts["sendingPosts"][language], ephemeral=True, delete_after=10)
     
       embeds = {"german" : [], "english" : [], "french" : [], "spanish" : [], "russian" : []}
       

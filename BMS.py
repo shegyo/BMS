@@ -27,7 +27,7 @@ class BMates(commands.Bot):
       guild.default_role: discord.PermissionOverwrite(send_messages=False),
     }
     
-    await asyncio.sleep(5)
+    await asyncio.sleep(3)
 
     # Map Rota Kanäle erstellen 
     try:
