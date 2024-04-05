@@ -114,7 +114,7 @@ class brawlProfiles(commands.Cog):
     else:
       user_options = mongodb.findUserOptions(interaction.user.id)
       user_options["bs_id"] = bs_id 
-      await interaction.edit_original_response(content=generalTexts["invalidId"][language].format(bs_id=bs_id))
+      await interaction.edit_original_response(content=generalTexts["idSaved"][language].format(bs_id=bs_id))
 
 
 async def setup(bot):
