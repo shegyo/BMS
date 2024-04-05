@@ -338,14 +338,14 @@ class findTeams(commands.Cog):
         "Authorization": f"Bearer {envData['BsApi']}"
     }
     profileData = requests.get(url, headers=headers).json()
-    print(profileData)
 
     if "trophies" in profileData:
-      print("trophies yes")
+      print("trophies given")
       await interaction.response.send_message(generalTexts["sendingPosts"][language], ephemeral=True, delete_after=10)
     
       embeds = {"german" : [], "english" : [], "french" : [], "spanish" : [], "russian" : []}
       
+      print("creating embeds")
       for embedlanguage in embeds:
         # Titel mit user name darunter die trophäen des users
         searchPost = f"## <a:Announcement:1216306085565042710> `{interaction.user}`\n"
@@ -369,7 +369,6 @@ class findTeams(commands.Cog):
       print("embeds generated")
       await sendToAllGuilds(self.bot, interaction, "findmates", "find-mates", embeds, View([JoinButton]), language)
     else:
-      print("hi")
       await interaction.response.send_message(findTeamsTexts["noProfileFound"][language].format(bs_id = bs_id), ephemeral=True, delete_after=3)
 
   @quick_mates.error
