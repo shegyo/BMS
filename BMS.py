@@ -117,7 +117,7 @@ class BMates(commands.Bot):
 
 intents = discord.Intents.all()
 bot = BMates(intents=intents)
-with open("jsons/env.json", "r") as f:
+with open("data/env.json", "r") as f:
   env = json.load(f)
 bot.run(env['TOKEN'])
 
