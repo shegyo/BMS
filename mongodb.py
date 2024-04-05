@@ -29,7 +29,7 @@ def saveUser(user_options):
 
 # find guild options
 def findUserOptions(discord_id):
-    user_options = guilds.find_one({"discord_id" : discord_id})
+    user_options = users.find_one({"discord_id" : discord_id})
     if user_options:
         return user_options
     return {"discord_id" : discord_id, "bs_id" : None}
