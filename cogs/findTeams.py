@@ -329,10 +329,10 @@ class findTeams(commands.Cog):
 
     # Nutzer Id fetchen
     user_options = mongodb.findUserOptions(interaction.user.id)
-    user_options["bs_id"] = bs_id
+    bs_id = user_options["bs_id"]
 
     if not bs_id:
-      await interaction.response.send_message(findTeamsTexts["noIdGiven"][language], ephemeral=True, delete_after=3)
+      return await interaction.response.send_message(generalTexts["noIdGiven"][language], ephemeral=True, delete_after=3)
     
 
     bs_id = bs_id.upper().replace(" ", "").replace("#", "")
@@ -387,10 +387,10 @@ class findTeams(commands.Cog):
 
     # Nutzer Id fetchen
     user_options = mongodb.findUserOptions(interaction.user.id)
-    user_options["bs_id"] = bs_id
+    bs_id = user_options["bs_id"]
 
     if not bs_id:
-      await interaction.response.send_message(generalTexts["noIdGiven"][language], ephemeral=True, delete_after=3)
+      return await interaction.response.send_message(generalTexts["noIdGiven"][language], ephemeral=True, delete_after=3)
     
 
     bs_id = bs_id.upper().replace(" ", "").replace("#", "")
