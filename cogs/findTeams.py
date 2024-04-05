@@ -25,6 +25,10 @@ with open("jsons/esportEmojis.json", "r", encoding="UTF-8") as f:
 with open("jsons/findTeamsTexts.json", "r", encoding="UTF-8") as f:
   findTeamsTexts = json.load(f)
 
+with open("jsons/generalTexts.json", "r", encoding="UTF-8") as f:
+   generalTexts = json.load(f)
+
+   
 # Formular zum Ausfüllen, erstellt den Suchbeitrag
 class FindMatesModalGerman(discord.ui.Modal):
   def __init__(self, bot, trophies, language):
@@ -339,7 +343,7 @@ class findTeams(commands.Cog):
     profileData = requests.get(url, headers=headers).json()
     
     if "trophies" in profileData:
-      await interaction.response.send_message(findTeamsTexts["sendingPosts"][language], ephemeral=True, delete_after=10)
+      await interaction.response.send_message(generalTexts["sendingPosts"][language], ephemeral=True, delete_after=10)
     
       embeds = {"german" : [], "english" : [], "french" : [], "spanish" : [], "russian" : []}
       
@@ -386,7 +390,7 @@ class findTeams(commands.Cog):
     user_options["bs_id"] = bs_id
 
     if not bs_id:
-      await interaction.response.send_message(findTeamsTexts["noIdGiven"][language], ephemeral=True, delete_after=3)
+      await interaction.response.send_message(generalTexts["noIdGiven"][language], ephemeral=True, delete_after=3)
     
 
     bs_id = bs_id.upper().replace(" ", "").replace("#", "")
