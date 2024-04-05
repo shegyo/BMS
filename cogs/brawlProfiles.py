@@ -107,10 +107,10 @@ class brawlProfiles(commands.Cog):
     options = mongodb.findGuildOptions(interaction.guild.id)
     language = options["language"]
 
-    await interaction.response.defer()
+    await interaction.response.defer(ephemeral=True)
     player_name, bs_id = getPlayerNameForId(bs_id)
     if not player_name:
-      await interaction.edit_original_response(content=generalTexts["invalidId"][language])
+      await interaction.edit_original_response(content=generalTexts["invalidId"][language].format(id=bs_id))
     else:
       user_options = mongodb.findUserOptions(interaction.user.id)
       user_options["bs_id"] = bs_id 

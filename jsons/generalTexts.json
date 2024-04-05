@@ -14,11 +14,11 @@
         "russian": "Пожалуйста, укажите идентификатор!\nСовет: используйте /save_id, и вам больше никогда не придется его вводить!"
     },
     "invalidId" : {
-        "english": "Invalid ID!",
-        "german": "Ungültige ID!",
-        "french": "ID invalide !",
-        "spanish": "¡ID inválido!",
-        "russian": "Недопустимый идентификатор!"
+        "english": "Invalid ID: {id}!",
+        "german": "Ungültige ID: {id}!",
+        "french": "ID invalide: {id}!",
+        "spanish": "¡ID inválido: {id}!",
+        "russian": "Недопустимый идентификатор: {id}!"
     },
     "idSaved" : {
         "english": "ID: `{bs_id}` saved <a:verifyblack:1216302923441504287>",
