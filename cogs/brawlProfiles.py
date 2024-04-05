@@ -84,7 +84,7 @@ class brawlProfiles(commands.Cog):
       # Nutzer Id fetchen
       user_options = mongodb.findUserOptions(interaction.user.id)
       bs_id = user_options["bs_id"]
-      print(bs_id)
+      print(user_options)
 
       if not bs_id:
         return await interaction.response.send_message(generalTexts["noIdGiven"][language], ephemeral=True, delete_after=3)
