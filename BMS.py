@@ -75,7 +75,7 @@ class BMates(commands.Bot):
 
       # Erstellen falls nicht da
       if not findMatesCategory:
-        findMatesCategory = await guild.create_category_channel("FIND MATES")
+        findMatesCategory = await guild.create_category_channel("Find Mates")
 
       # Kanäle erstmal finden
       findMatesChannel = None

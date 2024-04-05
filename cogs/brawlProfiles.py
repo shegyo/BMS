@@ -8,6 +8,8 @@ import mongodb
 with open("jsons/env.json", "r", encoding="UTF-8") as f:
   envData = json.load(f)
 
+with open("jsons/generalTexts.json", "r", encoding="UTF-8") as f:
+   generalTexts = json.load(f)
 
 def getPlayerNameForId(bs_id):
   bs_id = bs_id.upper().replace(" ", "").replace("#", "")
@@ -48,7 +50,19 @@ class brawlProfiles(commands.Cog):
     
   # Get your Profile Image
   @app_commands.command(description="get your brawl stars profile")
-  async def brawl_profile(self, interaction: discord.Interaction, bs_id: str):
+  async def brawl_profile(self, interaction: discord.Interaction, bs_id: str=None):
+      # Ausgewählte Sprache fetchen
+      options = mongodb.findGuildOptions(interaction.guild.id)
+      language = options["language"]
+
+      # Nutzer Id fetchen
+      user_options = mongodb.findUserOptions(interaction.user.id)
+      user_options["bs_id"] = bs_id
+
+      if not bs_id:
+        await interaction.response.send_message(generalTexts["noIdGiven"][language], ephemeral=True, delete_after=3)
+
+
       await interaction.response.defer()
       profileImg, bs_id, player_name = getBsProfile(bs_id, "https://share.brawlify.com/player/")
       if not (profileImg and player_name):
@@ -62,7 +76,19 @@ class brawlProfiles(commands.Cog):
   
   # Get your Profile Ranks Image
   @app_commands.command(description="get your brawl stars profile")
-  async def brawl_ranks(self, interaction: discord.Interaction, bs_id: str):
+  async def brawl_ranks(self, interaction: discord.Interaction, bs_id: str=None):
+      # Ausgewählte Sprache fetchen
+      options = mongodb.findGuildOptions(interaction.guild.id)
+      language = options["language"]
+
+      # Nutzer Id fetchen
+      user_options = mongodb.findUserOptions(interaction.user.id)
+      user_options["bs_id"] = bs_id
+
+      if not bs_id:
+        await interaction.response.send_message(generalTexts["noIdGiven"][language], ephemeral=True, delete_after=3)
+
+
       await interaction.response.defer()
       profileImg, bs_id, player_name = getBsProfile(bs_id, "https://brawlbot.xyz/api/image/")
       if not (profileImg and player_name):
@@ -77,14 +103,18 @@ class brawlProfiles(commands.Cog):
   # Save your Id
   @app_commands.command(description="save your id and never type it again")
   async def save_id(self, interaction: discord.Interaction, bs_id: str):
+    # Ausgewählte Sprache fetchen
+    options = mongodb.findGuildOptions(interaction.guild.id)
+    language = options["language"]
+
     await interaction.response.defer()
     player_name, bs_id = getPlayerNameForId(bs_id)
     if not player_name:
-      await interaction.response.send_message("invalid id!", ephemeral=True, delete_after=3)
+      await interaction.response.send_message(generalTexts["invalidId"][language], ephemeral=True, delete_after=3)
     else:
       user_options = mongodb.findUserOptions(interaction.user.id)
       user_options["bs_id"] = bs_id
-      await interaction.response.send_message(f"id: `{bs_id}` saved <a:verifyblack:1216302923441504287>")
+      await interaction.response.send_message(generalTexts["invalidId"][language].format(bs_id=bs_id))
 
 
 async def setup(bot):

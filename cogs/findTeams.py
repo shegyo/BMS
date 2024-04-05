@@ -158,38 +158,41 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
 
     JoinButton = LinkButton(findTeamsTexts["joinTeam"][language], f"https://link.brawlstars.com/invite/gameroom/en?tag={teamCode}")
 
-    for guild in bot.guilds:
-      # Sprache suchen
-      options = mongodb.findGuildOptions(guild.id)
-      guildLanguage = options["language"]
-
-      # Kategorie suchen
-      findMatesCategory = None
-      i = 0
-      while not findMatesCategory and i < len(guild.categories):
-        if "FINDMATES" in guild.categories[i].name.upper().replace(" ", ""):
-          findMatesCategory = guild.categories[i]
-        i += 1
-
-      if not findMatesCategory:
-        continue
-            
-      # Kanal suchen
-      findMatesChannel = None
-      i = 0
-      while not findMatesChannel and i < len(findMatesCategory.text_channels):
-        if "find-mates" in findMatesCategory.text_channels[i].name.lower():
-          findMatesChannel = findMatesCategory.text_channels[i]
-        i += 1
-
-      
-      # Nachricht posten wenn Kanal gefunden wurde
-      if findMatesChannel:
-        await findMatesChannel.send(embeds=embeds[guildLanguage], view=View([JoinButton]))
-
-    await interaction.edit_original_response(content=findTeamsTexts["postSent"][language])
+    sendToAllGuilds(bot, interaction, "findmates", "find-mates", embeds, View([JoinButton]), language)
     
+
+async def sendToAllGuilds(bot, interaction, categoryName, channelName, embeds, view, language):
+  for guild in bot.guilds:
+    # Sprache suchen
+    options = mongodb.findGuildOptions(guild.id)
+    guildLanguage = options["language"]
+
+    # Kategorie suchen
+    category = None
+    i = 0
+    while not category and i < len(guild.categories):
+      if categoryName in guild.categories[i].name.lower().replace(" ", ""):
+        category = guild.categories[i]
+      i += 1
+
+    if not category:
+      continue
+          
+    # Kanal suchen
+    channel = None
+    i = 0
+    while not channelName and i < len(category.text_channels):
+      if channelName in category.text_channels[i].name.lower():
+        channel = category.text_channels[i]
+      i += 1
+
     
+    # Nachricht posten wenn Kanal gefunden wurde
+    if channelName:
+      await channelName.send(embeds=embeds[guildLanguage], view=view)
+
+  await interaction.edit_original_response(content=findTeamsTexts["postSent"][language])
+
 
 # Formulaire à remplir, crée la publication de recherche esport
 class FindEsportModalFrench(discord.ui.Modal):
@@ -301,38 +304,8 @@ async def handleFindEsportSubmit(interaction, bot, position, region, tier, note,
 
       embeds[embedlanguage].append(embed)
 
-
-    for guild in bot.guilds:
-      # Sprache suchen
-      options = mongodb.findGuildOptions(guild.id)
-      guildLanguage = options["language"]
-
-      # Kategorie suchen
-      findMatesCategory = None
-      i = 0
-      while not findMatesCategory and i < len(guild.categories):
-        if "FINDMATES" in guild.categories[i].name.upper().replace(" ", ""):
-          findMatesCategory = guild.categories[i]
-        i += 1
-
-      if not findMatesCategory:
-        continue
-            
-      # Kanal suchen
-      findEsportChannel = None
-      i = 0
-      while not findEsportChannel and i < len(findMatesCategory.text_channels):
-        if "find-esport" in findMatesCategory.text_channels[i].name.lower():
-          findEsportChannel = findMatesCategory.text_channels[i]
-        i += 1
-
-      
-      # Nachricht posten wenn Kanal gefunden wurde
-      if findEsportChannel:
-        await findEsportChannel.send(embeds=embeds[guildLanguage])
-
-    await interaction.edit_original_response(content=findTeamsTexts["postSent"][language])
-
+    
+    sendToAllGuilds(bot, interaction, "findmates", "find-esport", embeds, None, language)
 
 
 # The Commands
@@ -342,13 +315,21 @@ class findTeams(commands.Cog):
     self.bot = bot
 
 
-  # allgemeine Team Suche
+  # Team Suche Quick
   @app_commands.command(description="post a new inquiry")
   @app_commands.checks.cooldown(1, 60*5, key=lambda i: (i.user.id))
-  async def find_mates(self, interaction: discord.Interaction, bs_id: str):
+  async def quick_mates(self, interaction: discord.Interaction, team_code: str, info: str=None, bs_id: str=None):
     # Ausgewählte Sprache fetchen
     options = mongodb.findGuildOptions(interaction.guild.id)
     language = options["language"]
+
+    # Nutzer Id fetchen
+    user_options = mongodb.findUserOptions(interaction.user.id)
+    user_options["bs_id"] = bs_id
+
+    if not bs_id:
+      await interaction.response.send_message(findTeamsTexts["noIdGiven"][language], ephemeral=True, delete_after=3)
+    
 
     bs_id = bs_id.upper().replace(" ", "").replace("#", "")
     url = f"https://api.brawlstars.com/v1/players/%23{bs_id}"
@@ -356,6 +337,65 @@ class findTeams(commands.Cog):
         "Authorization": f"Bearer {envData['BsApi']}"
     }
     profileData = requests.get(url, headers=headers).json()
+    
+    if "trophies" in profileData:
+      await interaction.response.send_message(findTeamsTexts["sendingPosts"][language], ephemeral=True, delete_after=10)
+    
+      embeds = {"german" : [], "english" : [], "french" : [], "spanish" : [], "russian" : []}
+      
+      for embedlanguage in embeds:
+        # Titel mit user name darunter die trophäen des users
+        searchPost = f"## <a:Announcement:1216306085565042710> `{interaction.user}`\n"
+        searchPost += f"<:Trophy:1223277455821902046> **{profileData["trophies"]}**\n"
+        
+        # Team Code anheften
+        searchPost += f"<:right_arrow:1216305900961271859> **{team_code.upper()}**\n"
+        # Notiz anheften
+        if info:
+          searchPost += f"### <:info:1216306156222287894> `{info}` <:info:1216306156222287894>"
+
+        # Embed erstellen
+        embed = discord.Embed(title="", description=searchPost, color=int("ffffff", 16))
+        embed.set_author(name=findTeamsTexts["newInquiry"][embedlanguage], icon_url=interaction.user.display_avatar.url)
+        embed.set_footer(text=findTeamsTexts["sentFrom"][embedlanguage].format(guild=interaction.guild), icon_url=interaction.guild.icon.url)
+
+        embeds[embedlanguage].append(embed)
+
+      JoinButton = LinkButton(findTeamsTexts["joinTeam"][language], f"https://link.brawlstars.com/invite/gameroom/en?tag={team_code}")
+
+      sendToAllGuilds(self.bot, interaction, "findmates", "find-mates", embeds, View([JoinButton]), language)
+    else:
+      await interaction.response.send_message(findTeamsTexts["noProfileFound"][language].format(bs_id = bs_id), ephemeral=True, delete_after=3)
+
+  @quick_mates.error
+  async def quick_mates_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
+    if isinstance(error, app_commands.CommandOnCooldown):
+        await interaction.response.send_message(str(error), ephemeral=True)
+
+
+  # allgemeine Team Suche
+  @app_commands.command(description="post a new inquiry")
+  @app_commands.checks.cooldown(1, 60*5, key=lambda i: (i.user.id))
+  async def find_mates(self, interaction: discord.Interaction, bs_id: str=None):
+    # Ausgewählte Sprache fetchen
+    options = mongodb.findGuildOptions(interaction.guild.id)
+    language = options["language"]
+
+    # Nutzer Id fetchen
+    user_options = mongodb.findUserOptions(interaction.user.id)
+    user_options["bs_id"] = bs_id
+
+    if not bs_id:
+      await interaction.response.send_message(findTeamsTexts["noIdGiven"][language], ephemeral=True, delete_after=3)
+    
+
+    bs_id = bs_id.upper().replace(" ", "").replace("#", "")
+    url = f"https://api.brawlstars.com/v1/players/%23{bs_id}"
+    headers = {
+        "Authorization": f"Bearer {envData['BsApi']}"
+    }
+    profileData = requests.get(url, headers=headers).json()
+
     if "trophies" in profileData:
       if language == "german":
         await interaction.response.send_modal(FindMatesModalGerman(self.bot, profileData["trophies"], language))
@@ -371,7 +411,7 @@ class findTeams(commands.Cog):
       await interaction.response.send_message(findTeamsTexts["noProfileFound"][language].format(bs_id = bs_id), ephemeral=True, delete_after=3)
 
   @find_mates.error
-  async def ticket_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
+  async def find_mates_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
     if isinstance(error, app_commands.CommandOnCooldown):
         await interaction.response.send_message(str(error), ephemeral=True)
 
@@ -383,6 +423,7 @@ class findTeams(commands.Cog):
     # Ausgewählte Sprache fetchen
     options = mongodb.findGuildOptions(interaction.guild.id)
     language = options["language"]
+
     if language == "german":
       await interaction.response.send_modal(FindEsportModalGerman(self.bot, language))
     elif language == "english":
