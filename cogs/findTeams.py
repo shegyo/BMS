@@ -341,7 +341,7 @@ class findTeams(commands.Cog):
 
     if "trophies" in profileData:
       print("trophies given")
-      await interaction.response.send_message(generalTexts["sendingPosts"][language], ephemeral=True, delete_after=10)
+      await interaction.response.send_message(findTeamsTexts["sendingPosts"][language], ephemeral=True, delete_after=10)
     
       embeds = {"german" : [], "english" : [], "french" : [], "spanish" : [], "russian" : []}
       
