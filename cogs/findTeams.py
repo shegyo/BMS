@@ -326,6 +326,9 @@ class findTeams(commands.Cog):
     options = mongodb.findGuildOptions(interaction.guild.id)
     language = options["language"]
 
+    
+    await interaction.response.send_message(generalTexts["sendingPosts"][language], ephemeral=True, delete_after=10)
+
     # Nutzer Id fetchen
     user_options = mongodb.findUserOptions(interaction.user.id)
     bs_id = user_options["bs_id"]
@@ -333,7 +336,7 @@ class findTeams(commands.Cog):
     if not bs_id:
       return await interaction.response.send_message(generalTexts["noIdGiven"][language], ephemeral=True, delete_after=3)
     
-    await interaction.response.send_message(generalTexts["sendingPosts"][language], ephemeral=True, delete_after=10)
+
     bs_id = bs_id.upper().replace(" ", "").replace("#", "")
     url = f"https://api.brawlstars.com/v1/players/%23{bs_id}"
     headers = {
@@ -342,7 +345,6 @@ class findTeams(commands.Cog):
     profileData = requests.get(url, headers=headers).json()
     
     if "trophies" in profileData:
-      
     
       embeds = {"german" : [], "english" : [], "french" : [], "spanish" : [], "russian" : []}
       
