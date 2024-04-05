@@ -22,7 +22,7 @@ with open("data/esportEmojis.json", "r", encoding="UTF-8") as f:
   esportEmojis = json.load(f)
 
 # Texte languages
-with open("jsons/findTeamsTexts.json", "r", encoding="UTF-8") as f:
+with open("languages/findTeamsTexts.json", "r", encoding="UTF-8") as f:
   findTeamsTexts = json.load(f)
 
 with open("languages/generalTexts.json", "r", encoding="UTF-8") as f:
