@@ -29,6 +29,38 @@ with open("jsons/generalTexts.json", "r", encoding="UTF-8") as f:
    generalTexts = json.load(f)
 
 
+async def sendToAllGuilds(bot, interaction, categoryName, channelName, embeds, view, language):
+  for guild in bot.guilds:
+    # Sprache suchen
+    options = mongodb.findGuildOptions(guild.id)
+    guildLanguage = options["language"]
+
+    # Kategorie suchen
+    category = None
+    i = 0
+    while not category and i < len(guild.categories):
+      if categoryName in guild.categories[i].name.lower().replace(" ", ""):
+        category = guild.categories[i]
+      i += 1
+
+    if not category:
+      continue
+          
+    # Kanal suchen
+    channel = None
+    i = 0
+    while not channel and i < len(category.text_channels):
+      if channelName in category.text_channels[i].name.lower():
+        channel = category.text_channels[i]
+      i += 1
+
+    
+    # Nachricht posten wenn Kanal gefunden wurde
+    if channel:
+      await channel.send(embeds=embeds[guildLanguage], view=view)
+
+  await interaction.edit_original_response(content=findTeamsTexts["postSent"][language])
+
 # Formular zum Ausfüllen, erstellt den Suchbeitrag
 class FindMatesModalGerman(discord.ui.Modal):
   def __init__(self, bot, trophies, language):
@@ -162,40 +194,7 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
 
     JoinButton = LinkButton(findTeamsTexts["joinTeam"][language], f"https://link.brawlstars.com/invite/gameroom/en?tag={teamCode}")
 
-    sendToAllGuilds(bot, interaction, "findmates", "find-mates", embeds, View([JoinButton]), language)
-    
-
-async def sendToAllGuilds(bot, interaction, categoryName, channelName, embeds, view, language):
-  for guild in bot.guilds:
-    # Sprache suchen
-    options = mongodb.findGuildOptions(guild.id)
-    guildLanguage = options["language"]
-
-    # Kategorie suchen
-    category = None
-    i = 0
-    while not category and i < len(guild.categories):
-      if categoryName in guild.categories[i].name.lower().replace(" ", ""):
-        category = guild.categories[i]
-      i += 1
-
-    if not category:
-      continue
-          
-    # Kanal suchen
-    channel = None
-    i = 0
-    while not channelName and i < len(category.text_channels):
-      if channelName in category.text_channels[i].name.lower():
-        channel = category.text_channels[i]
-      i += 1
-
-    
-    # Nachricht posten wenn Kanal gefunden wurde
-    if channelName:
-      await channelName.send(embeds=embeds[guildLanguage], view=view)
-
-  await interaction.edit_original_response(content=findTeamsTexts["postSent"][language])
+    await sendToAllGuilds(bot, interaction, "findmates", "find-mates", embeds, View([JoinButton]), language)
 
 
 # Formulaire à remplir, crée la publication de recherche esport
@@ -309,7 +308,7 @@ async def handleFindEsportSubmit(interaction, bot, position, region, tier, note,
       embeds[embedlanguage].append(embed)
 
     
-    sendToAllGuilds(bot, interaction, "findmates", "find-esport", embeds, None, language)
+    await sendToAllGuilds(bot, interaction, "findmates", "find-esport", embeds, None, language)
 
 
 # The Commands
@@ -320,7 +319,7 @@ class findTeams(commands.Cog):
 
 
   # Team Suche Quick
-  @app_commands.command(description="post a new inquiry")
+  @app_commands.command(description="post a new quick search")
   @app_commands.checks.cooldown(1, 60*5, key=lambda i: (i.user.id))
   async def quick_mates(self, interaction: discord.Interaction, team_code: str, info: str=None, bs_id: str=None):
     # Ausgewählte Sprache fetchen
@@ -367,7 +366,7 @@ class findTeams(commands.Cog):
 
       JoinButton = LinkButton(findTeamsTexts["joinTeam"][language], f"https://link.brawlstars.com/invite/gameroom/en?tag={team_code}")
 
-      sendToAllGuilds(self.bot, interaction, "findmates", "find-mates", embeds, View([JoinButton]), language)
+      await sendToAllGuilds(self.bot, interaction, "findmates", "find-mates", embeds, View([JoinButton]), language)
     else:
       await interaction.response.send_message(findTeamsTexts["noProfileFound"][language].format(bs_id = bs_id), ephemeral=True, delete_after=3)
 
