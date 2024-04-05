@@ -2,6 +2,7 @@ from discord.ext import commands
 import discord, requests, tempfile, json
 from discord import app_commands
 from cogs.Utility import View, LinkButton
+import mongodb
 
 # ENV Daten laden
 with open("jsons/env.json", "r", encoding="UTF-8") as f:
@@ -71,6 +72,19 @@ class brawlProfiles(commands.Cog):
         viewItems = [LinkButton("Brawlify", "https://brawlify.com/stats/profile/"+bs_id)]
         embed = discord.Embed(title=player_name, description=f"### <:info:1216306156222287894> ID: #{bs_id}", color=int("000000", 16))
         await interaction.edit_original_response(content="", attachments=[discord.File(profileImg, filename="profile_image.png")], embed=embed, view=View(viewItems))
+
+
+  # Save your Id
+  @app_commands.command(description="save your id and never type it again")
+  async def save_id(self, interaction: discord.Interaction, bs_id: str):
+    await interaction.response.defer()
+    player_name, bs_id = getPlayerNameForId(bs_id)
+    if not player_name:
+      await interaction.response.send_message("invalid id!", ephemeral=True, delete_after=3)
+    else:
+      user_options = mongodb.findUserOptions(interaction.user.id)
+      user_options["bs_id"] = bs_id
+      await interaction.response.send_message(f"id: `{bs_id}` saved <a:verifyblack:1216302923441504287>")
 
 
 async def setup(bot):

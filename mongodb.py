@@ -6,6 +6,7 @@ client = MongoClient('localhost', 27017)
 # Datenbank und Collections holen
 btsDB = client["BTS"]
 guilds = btsDB["guilds"]
+users = btsDB["users"]
 
 # Guild Metadata
 
@@ -19,3 +20,16 @@ def findGuildOptions(guild_id):
     if guild_options:
         return guild_options
     return {"guild_id" : guild_id, "language" : "english"}
+
+
+# User Options
+
+def saveUser(user_options):
+    users.update_one({"discord_id": user_options["discord_id"]}, {"$set": user_options}, upsert=True)
+
+# find guild options
+def findUserOptions(discord_id):
+    user_options = guilds.find_one({"discord_id" : discord_id})
+    if user_options:
+        return user_options
+    return {"discord_id" : discord_id, "bs_id" : None}
