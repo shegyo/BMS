@@ -90,7 +90,7 @@ def buildLanguageEmbed(content, language):
   for text in texts[content]["content"][language]:
     description += text
 
-  embed = discord.Embed(title=texts[content]["title"][language], description=description, color=int("ffffff", 16))
+  return discord.Embed(title=texts[content]["title"][language], description=description, color=int("ffffff", 16))
 
 def currentSettingEmbed(guild_id):
   guild_options = mongodb.findGuildOptions(guild_id)
