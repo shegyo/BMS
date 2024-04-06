@@ -135,7 +135,8 @@ class Utility(commands.Cog):
     description += "<:right_arrow:1216305900961271859> Keep track of current and upcoming maps for free!\n"
     description += "<:right_arrow:1216305900961271859> Enjoy free profile images!"
     embed = discord.Embed(title="<:discord:1216307276927733800>  Invite me to your Server!", description=description, color=int("ffffff", 16))
-    viewItems = [LinkButton("Invite", "https://discord.com/oauth2/authorize?client_id=1223344546260193280&permissions=8&scope=bot", "<:discord:1216307276927733800>")]
+    viewItems = [LinkButton("Invite", "https://discord.com/oauth2/authorize?client_id=1223344546260193280&permissions=8&scope=bot", "<:discord:1216307276927733800>"),
+                 LinkButton("Review", "https://top.gg/bot/1223344546260193280?s=015d6ecaeaefb", "<:topgg:1226193810338611301>")]
     await interaction.response.send_message(embed=embed, view=View(viewItems))
 
 
@@ -148,11 +149,10 @@ class Utility(commands.Cog):
     description += "Share your experience with others by leaving a review on top.gg and giving us a vote. Your feedback is invaluable and helps others discover our services.\n\n"
 
     description += "### <:paypal:1226193285526327376> Donate\n"
-    description += "Even small contributions can make a big difference! If you're able, consider supporting us financially to help us improve and expand our services.\n\n"
+    description += "Even small contributions can make a big difference! If you're able to do so, consider supporting us financially to help us improve and expand our services.\n\n"
 
-    description += "We're incredibly grateful for your support and appreciation. let's make this bot an amazing experience for everyone together!\n\n"
+    description += "<:thx:1216304741949374504> We're incredibly grateful for your support and appreciation. Let's make this bot an amazing experience for everyone together!"
 
-    description += "<:thx:1216304741949374504> Thank you for your help!"
     embed = discord.Embed(title="<:Hi:1216304655861284974> Hi my Friend!", description=description, color=int("ffffff", 16))
     viewItems = [LinkButton("Review", "https://top.gg/bot/1223344546260193280?s=015d6ecaeaefb", "<:topgg:1226193810338611301>"),
                  LinkButton("Donate", "https://paypal.me/brawlsystems", "<:paypal:1226193285526327376>")]
