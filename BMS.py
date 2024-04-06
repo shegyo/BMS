@@ -1,6 +1,6 @@
 import os, discord, json
 from discord.ext import commands
-from cogs.Utility import View, LinkButton
+from cogs.Utility import View, LinkButton, buildLanguageEmbed
 import mongodb
 import asyncio
 
@@ -105,14 +105,14 @@ class BMates(commands.Bot):
       if not teamInquiriesChannel:
         teamInquiriesChannel = await findMatesCategory.create_text_channel("team-inquiries", topic="run /find_mates to post your search!")
 
-        await teamInquiriesChannel.send(findTeamsTexts["findTeamsAnnouncement"][language])
+        await teamInquiriesChannel.send(embed=buildLanguageEmbed("findTeamsAnnouncement", language))
 
+      
       systemChannel = guild.system_channel
       if systemChannel:
-        await systemChannel.send(generalTexts["welcome"][language], view=View([LinkButton("Linktree", "https://linktr.ee/bsystems")]))
-    except discord.errors.Forbidden:
-      if systemChannel:
-        await systemChannel.send(generalTexts["welcomeNoPermissions"][language], view=View([LinkButton("Linktree", "https://linktr.ee/bsystems")]))
+        await systemChannel.send(embed=buildLanguageEmbed("welcome", language), view=View([LinkButton("Linktree", "https://linktr.ee/bsystems", "<:Linktree:1218980236260278292>")]))
+    except:
+      pass
       
 
 intents = discord.Intents.all()

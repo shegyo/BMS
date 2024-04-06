@@ -1,24 +1,85 @@
 {
     "findTeamsAnnouncement" : {
-        "english": "# <a:Announcement:1216306085565042710> Welcome to the BMS <:BMSlogo:1223389796450308197>\n\n<:right_arrow:1216305900961271859> Use the command `/find_mates` to create a request if you are looking for ladder/ranked players\n<:right_arrow:1216305900961271859> Use the command `/find_esport` to create a request if you are looking for a Competitive Team or Team Member\n\n<:info:1216306156222287894> You can use the command `/cancel_search` to delete your request",
-        "german": "# <a:Announcement:1216306085565042710> Willkommen bei BMS <:BMSlogo:1223389796450308197>\n\n<:right_arrow:1216305900961271859> Verwende den Befehl `/find_mates`, um eine Anfrage zu erstellen, wenn du nach Leitern-/Rangspielern suchst\n<:right_arrow:1216305900961271859> Verwende den Befehl `/find_esport`, um eine Anfrage zu erstellen, wenn du nach einem Wettkampfteam oder Teammitglied suchst\n\n<:info:1216306156222287894> Du kannst den Befehl `/cancel_search` verwenden, um deine Anfrage zu löschen",
-        "french": "# <a:Announcement:1216306085565042710> Bienvenue sur le BMS <:BMSlogo:1223389796450308197>\n\n<:right_arrow:1216305900961271859> Utilisez la commande `/find_mates` pour créer une demande si vous recherchez des joueurs en échelle/rangés\n<:right_arrow:1216305900961271859> Utilisez la commande `/find_esport` pour créer une demande si vous recherchez une équipe compétitive ou un membre d'équipe\n\n<:info:1216306156222287894> Vous pouvez utiliser la commande `/cancel_search` pour supprimer votre demande",
-        "spanish": "# <a:Announcement:1216306085565042710> Bienvenido a BMS <:BMSlogo:1223389796450308197>\n\n<:right_arrow:1216305900961271859> Usa el comando `/find_mates` para crear una solicitud si estás buscando jugadores de escalera/clasificados\n<:right_arrow:1216305900961271859> Usa el comando `/find_esport` para crear una solicitud si estás buscando un equipo competitivo o un miembro de equipo\n\n<:info:1216306156222287894> Puedes usar el comando `/cancel_search` para eliminar tu solicitud",
-        "russian" : "# <a:Announcement:1216306085565042710> Добро пожаловать в BMS <:BMSlogo:1223389796450308197>\n\n<:right_arrow:1216305900961271859> Используйте команду `/find_mates`, чтобы создать запрос, если вы ищете игроков по лестнице/ранжированных\n<:right_arrow:1216305900961271859> Используйте команду `/find_esport`, чтобы создать запрос, если вы ищете конкурентную команду или члена команды\n\n<:info:1216306156222287894> Вы можете использовать команду `/cancel_search`, чтобы удалить свой запрос"
+        "english": [
+            "# <a:Announcement:1216306085565042710> Welcome to the BMS <:BMSlogo:1223389796450308197>\n\n",
+            "<:right_arrow:1216305900961271859> Use the command `/find_mates` to create a request if you are looking for ladder/ranked players\n",
+            "<:right_arrow:1216305900961271859> Use the command `/find_esport` to create a request if you are looking for a Competitive Team or Team Member\n\n",
+            "<:,info:1216306156222287894> You can use the command `/cancel_search` to delete your request"
+        ],
+        "german": [
+            "# <a:Announcement:1216306085565042710> Willkommen bei BMS <:BMSlogo:1223389796450308197>\n\n",
+            "<:right_arrow:1216305900961271859> Verwende den Befehl `/find_mates`, um eine Anfrage zu erstellen, wenn du nach Leitern-/Rangspielern suchst\n",
+            "<:right_arrow:1216305900961271859> Verwende den Befehl `/find_esport`, um eine Anfrage zu erstellen, wenn du nach einem Wettkampfteam oder Teammitglied suchst\n\n",
+            "<:info:1216306156222287894> Du kannst den Befehl `/cancel_search` verwenden, um deine Anfrage zu löschen"
+        ],
+        "french": [
+            "# <a:Announcement:1216306085565042710> Bienvenue sur le BMS <:BMSlogo:1223389796450308197>\n\n",
+            "<:right_arrow:1216305900961271859> Utilisez la commande `/find_mates` pour créer une demande si vous recherchez des joueurs en échelle/rangés\n",
+            "<:right_arrow:1216305900961271859> Utilisez la commande `/find_esport` pour créer une demande si vous recherchez une équipe compétitive ou un membre d'équipe\n\n",
+            "<:info:1216306156222287894> Vous pouvez utiliser la commande `/cancel_search` pour supprimer votre demande"
+        ],
+        "spanish": [
+            "# <a:Announcement:1216306085565042710> Bienvenido a BMS <:BMSlogo:1223389796450308197>\n\n",
+            "<:right_arrow:1216305900961271859> Usa el comando `/find_mates` para crear una solicitud si estás buscando jugadores de escalera/clasificados\n",
+            "<:right_arrow:1216305900961271859> Usa el comando `/find_esport` para crear una solicitud si estás buscando un equipo competitivo o un miembro de equipo\n\n",
+            "<:info:1216306156222287894> Puedes usar el comando `/cancel_search` para eliminar tu solicitud"
+        ],
+        "russian" : [
+            "# <a:Announcement:1216306085565042710> Добро пожаловать в BMS <:BMSlogo:1223389796450308197>\n\n",
+            "<:right_arrow:1216305900961271859> Используйте команду `/find_mates`, чтобы создать запрос, если вы ищете игроков по лестнице/ранжированных\n",
+            "<:right_arrow:1216305900961271859> Используйте команду `/find_esport`, чтобы создать запрос, если вы ищете конкурентную команду или члена команды\n\n",
+            "<:info:1216306156222287894> Вы можете использовать команду `/cancel_search`, чтобы удалить свой запрос"
+        ]   
     },
     "welcome" : {
-        "english": "<:Hi:1216304655861284974> I am the **Brawl Mates System!** <:BMSlogo:1223389796450308197>\n\nI'm glad you've decided to use my service!\nI have already freed up your work and created all the channels for you and activated the system directly\nIf you still need help, please use the `/help` command <:settings:1223374255232651476>\n\nTo support me, check out our Social Media in the Linktree <:Linktree:1218980236260278292>\n<:thx:1216304741949374504> for your support! You are the best",
-        "german": "<:Hi:1216304655861284974> Ich bin das **Brawl Mates System!** <:BMSlogo:1223389796450308197>\n\nIch freue mich, dass du dich entschieden hast, meinen Service zu nutzen!\nIch habe bereits deine Arbeit erleichtert und alle Kanäle für dich erstellt und das System direkt aktiviert\nWenn du noch Hilfe benötigst, benutze bitte den Befehl `/help` <:settings:1223374255232651476>\n\nUm mich zu unterstützen, schau dir unsere Social Media in der Linktree <:Linktree:1218980236260278292>\n<:thx:1216304741949374504> für deine Unterstützung! Du bist der Beste",
-        "french": "<:Hi:1216304655861284974> Je suis le **Système Brawl Mates!** <:BMSlogo:1223389796450308197>\n\nJe suis ravi que vous ayez décidé d'utiliser mon service!\nJ'ai déjà libéré votre travail et créé tous les canaux pour vous et activé le système directement\nSi vous avez encore besoin d'aide, veuillez utiliser la commande `/help` <:settings:1223374255232651476>\n\nPour me soutenir, consultez nos réseaux sociaux dans le Linktree <:Linktree:1218980236260278292>\n<:thx:1216304741949374504> pour votre soutien! Vous êtes le meilleur",
-        "spanish": "<:Hi:1216304655861284974> ¡Soy el Sistema de Compañeros de Brawl! <:BMSlogo:1223389796450308197>\n\n¡Me alegra que hayas decidido usar mi servicio!\nYa he liberado tu trabajo y creado todos los canales para ti y activado el sistema directamente\nSi aún necesitas ayuda, por favor usa el comando /help <:settings:1223374255232651476>\n\nPara apoyarme, revisa nuestras redes sociales en el Linktree <:Linktree:1218980236260278292>\n<:thx:1216304741949374504> ¡Gracias por tu apoyo! ¡Eres el mejor",
-        "russian": "<:Hi:1216304655861284974> Я Система Brawl Mates! <:BMSlogo:1223389796450308197>\n\nЯ рад, что вы решили воспользоваться моим сервисом!\nЯ уже освободил вашу работу, создал все каналы для вас и активировал систему непосредственно\nЕсли вам все еще нужна помощь, пожалуйста, используйте команду /help <:settings:1223374255232651476>\n\nЧтобы поддержать меня, ознакомьтесь с нашими социальными сетями в Linktree <:Linktree:1218980236260278292>\n<:thx:1216304741949374504> за вашу поддержку! Вы лучшие"
-    },
-    "welcomeNoPermissions" : {
-        "english": "<:Hi:1216304655861284974> I am the **Brawl Mates System!** <:BMSlogo:1223389796450308197>\n\nSeems like I am missing permissions!\nTo get started, create the category `find mates` with the channels `#find-mates` and `#find-esport`\nAs well as the category `map rotation` with the channels `#current-maps` and `#next-maps`\nAlternatively, you could just ensure I have admin permission and reinvite me.\nIf you still need help, please use the `/help` command <:settings:1223374255232651476>\n\nTo support me, check out our Social Media in the Linktree <:Linktree:1218980236260278292>\n<:thx:1216304741949374504> for your support! You are the best",
-        "german": "<:Hi:1216304655861284974> Ich bin das **Brawl Mates System!** <:BMSlogo:1223389796450308197>\n\nEs scheint, als hätte ich nicht die erforderlichen Berechtigungen!\nUm loszulegen, erstelle die Kategorie `find mates` mit den Kanälen `#find-mates` und `#find-esport`\nSowie die Kategorie `map rotation` mit den Kanälen `#current-maps` und `#next-maps`\nAlternativ kannst du sicherstellen, dass ich Administratorberechtigungen habe und mich neu einladen.\nWenn du immer noch Hilfe benötigst, benutze bitte den `/help` Befehl <:settings:1223374255232651476>\n\nUm mich zu unterstützen, besuche unsere Social Media im Linktree <:Linktree:1218980236260278292>\n<:thx:1216304741949374504> für deine Unterstützung! Du bist der Beste",
-        "french": "<:Hi:1216304655861284974> Je suis le **Système de Brawl Mates!** <:BMSlogo:1223389796450308197>\n\nIl semble que je manque d'autorisations!\nPour commencer, créez la catégorie `find mates` avec les canaux `#find-mates` et `#find-esport`\nAinsi que la catégorie `map rotation` avec les canaux `#current-maps` et `#next-maps`\nAlternativement, vous pouvez simplement vous assurer que j'ai la permission d'administrateur et de me réinviter.\nSi vous avez encore besoin d'aide, veuillez utiliser la commande `/help` <:settings:1223374255232651476>\n\nPour me soutenir, consultez nos réseaux sociaux dans le Linktree <:Linktree:1218980236260278292>\n<:thx:1216304741949374504> pour votre soutien! Vous êtes le meilleur",
-        "spanish": "<:Hi:1216304655861284974> ¡Soy el Sistema de Compañeros de Brawl! <:BMSlogo:1223389796450308197>\n\nParece que me faltan permisos.\nPara empezar, crea la categoría encontrar compañeros con los canales #buscar-companeros y #buscar-esport\nAsí como la categoría rotación de mapas con los canales #mapas-actuales y #proximos-mapas\nAlternativamente, simplemente asegúrate de que tengo permisos de administrador y vuelve a invitarme.\nSi aún necesitas ayuda, por favor usa el comando /help <:settings:1223374255232651476>\n\nPara apoyarme, visita nuestras redes sociales en el Linktree <:Linktree:1218980236260278292>\n<:thx:1216304741949374504> ¡Gracias por tu apoyo! ¡Eres el mejor!",
-        "russian": "<:Hi:1216304655861284974> Я Система товарищей по Brawl! <:BMSlogo:1223389796450308197>\n\nКажется, у меня не хватает разрешений.\nДля начала создайте категорию найти товарищей с каналами #найти-товарищей и #найти-спорт\nА также категорию поворот карт с каналами #текущие-карты и #следующие-карты\nКак альтернативу, вы можете просто убедиться, что у меня есть права администратора и снова пригласить меня.\nЕсли вам все еще нужна помощь, пожалуйста, используйте команду /help <:settings:1223374255232651476>\n\nЧтобы поддержать меня, посетите наши социальные сети в Linktree <:Linktree:1218980236260278292>\n<:thx:1216304741949374504> Спасибо за вашу поддержку! Вы лучшие!"
+        "title" : {
+            "english": "<:Hi:1216304655861284974> I am the **Brawl Mates System!** <:BMSlogo:1223389796450308197>",
+            "german": "<:Hi:1216304655861284974> Ich bin das **Brawl Mates System!** <:BMSlogo:1223389796450308197>",
+            "french": "<:Hi:1216304655861284974> Je suis le **Système Brawl Mates!** <:BMSlogo:1223389796450308197>",
+            "spanish": "<:Hi:1216304655861284974> ¡Soy el Sistema de Compañeros de Brawl! <:BMSlogo:1223389796450308197>",
+            "russian": "<:Hi:1216304655861284974> Я Система Brawl Mates! <:BMSlogo:1223389796450308197>"
+        },
+        "content" : {
+            "english": [
+                "<:Hi:1216304655861284974> I am the **Brawl Mates System!** <:BMSlogo:1223389796450308197>\n\n",
+                "I'm glad you've decided to use my service!\n",
+                "I have already freed up your work and created all the channels for you and activated the system directly\n",
+                "If you still need help, please use the `/help` command <:settings:1223374255232651476>\n\n",
+                "To support me, check out our Social Media in the Linktree <:Linktree:1218980236260278292>\n",
+                "<:thx:1216304741949374504> for your support! You are the best"
+            ],
+            "german": [
+                "<:Hi:1216304655861284974> Ich bin das **Brawl Mates System!** <:BMSlogo:1223389796450308197>\n\n",
+                "Ich freue mich, dass du dich entschieden hast, meinen Service zu nutzen!\n",
+                "Ich habe bereits deine Arbeit erleichtert und alle Kanäle für dich erstellt und das System direkt aktiviert\n",
+                "Wenn du noch Hilfe benötigst, benutze bitte den Befehl `/help` <:settings:1223374255232651476>\n\n",
+                "Um mich zu unterstützen, schau dir unsere Social Media in der Linktree <:Linktree:1218980236260278292>\n",
+                "<:thx:1216304741949374504> für deine Unterstützung! Du bist der Beste"
+            ],
+            "french": [
+                "<:Hi:1216304655861284974> Je suis le **Système Brawl Mates!** <:BMSlogo:1223389796450308197>\n\n",
+                "Je suis ravi que vous ayez décidé d'utiliser mon service!\nJ'ai déjà libéré votre travail et créé tous les canaux pour vous et activé le système directement\n",
+                "Si vous avez encore besoin d'aide, veuillez utiliser la commande `/help` <:settings:1223374255232651476>\n\n",
+                "Pour me soutenir, consultez nos réseaux sociaux dans le Linktree <:Linktree:1218980236260278292>\n",
+                "<:thx:1216304741949374504> pour votre soutien! Vous êtes le meilleur"
+            ],
+            "spanish": [
+                "<:Hi:1216304655861284974> ¡Soy el Sistema de Compañeros de Brawl! <:BMSlogo:1223389796450308197>\n\n",
+                "¡Me alegra que hayas decidido usar mi servicio!\n",
+                "Ya he liberado tu trabajo y creado todos los canales para ti y activado el sistema directamente\n",
+                "Si aún necesitas ayuda, por favor usa el comando /help <:settings:1223374255232651476>\n\n",
+                "Para apoyarme, revisa nuestras redes sociales en el Linktree <:Linktree:1218980236260278292>\n",
+                "<:thx:1216304741949374504> ¡Gracias por tu apoyo! ¡Eres el mejor"
+            ],
+            "russian": [
+                "<:Hi:1216304655861284974> Я Система Brawl Mates! <:BMSlogo:1223389796450308197>\n\n",
+                "Я рад, что вы решили воспользоваться моим сервисом!\n",
+                "Я уже освободил вашу работу, создал все каналы для вас и активировал систему непосредственно\n",
+                "Если вам все еще нужна помощь, пожалуйста, используйте команду /help <:settings:1223374255232651476>\n\n",
+                "Чтобы поддержать меня, ознакомьтесь с нашими социальными сетями в Linktree <:Linktree:1218980236260278292>\n",
+                "<:thx:1216304741949374504> за вашу поддержку! Вы лучшие"
+            ]
+        }
     },
     "upcomingSoon" : {
         "english" : "<:info:1216306156222287894> Predicted upcoming maps will be here soon!",
@@ -150,7 +211,7 @@
                 "Teilen Sie Ihre Erfahrungen mit anderen, indem Sie eine Bewertung auf top.gg hinterlassen und uns eine Stimme geben. Ihr Feedback ist unbezahlbar und hilft anderen, unsere Dienste zu entdecken.\n\n",
                 "### <:paypal:1226193285526327376> Spenden\n",
                 "Auch kleine Beiträge können einen großen Unterschied machen! Wenn Sie dazu in der Lage sind, unterstützen Sie uns finanziell, um uns bei der Verbesserung und Erweiterung unserer Dienste zu helfen.\n\n",
-                "<:thx:1216304741949374504> Wir sind unglaublich dankbar für Ihre Unterstützung und Wertschätzung. Lassen Sie uns gemeinsam diese Bot-Erfahrung für alle zu etwas Besonderem machen!"
+                "<:thx:1216304741949374504> Wir sind unglaublich dankbar für Ihre Unterstützung und Wertschätzung. Lassen Sie uns gemeinsam diesen Bot für alle zu etwas Besonderem machen!"
             ],
             "spanish": [
                 "Si te gusta y quieres apoyarme, puedes hacer dos pequeñas cosas por mí:\n\n",

@@ -85,6 +85,13 @@ def getNiceFormatLanguage(language):
     else:
       return "French 🇫🇷",
 
+def buildLanguageEmbed(content, language):
+  description = ""
+  for text in texts[content]["content"][language]:
+    description += text
+
+  embed = discord.Embed(title=texts[content]["title"][language], description=description, color=int("ffffff", 16))
+
 def currentSettingEmbed(guild_id):
   guild_options = mongodb.findGuildOptions(guild_id)
   # Sprache anzeigen
@@ -108,9 +115,7 @@ class Utility(commands.Cog):
 
   @set_language.error
   async def set_language_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
-    if isinstance(error, app_commands.CheckFailure):
-      return await interaction.response.send_message("Only the Bot Admins can use this command.", delete_after=5, ephemeral=True)
-    elif isinstance(error, app_commands.NoPrivateMessage):
+    if isinstance(error, app_commands.NoPrivateMessage):
       return await interaction.response.send_message("Command can't be run in Private Messages.", delete_after=5, ephemeral=True)
     else:
       return await interaction.response.send_message(f"Unknown error: {error}", delete_after=5, ephemeral=True)
@@ -123,14 +128,17 @@ class Utility(commands.Cog):
     options = mongodb.findGuildOptions(interaction.guild.id)
     language = options["language"]
 
-    description = ""
-    for text in texts["helpCommand"]["content"][language]:
-      description += text
-
-    embed = discord.Embed(title=texts["helpCommand"]["title"][language], description=description, color=int("ffffff", 16))
+    embed = buildLanguageEmbed("helpCommand", language)
     embed.set_image(url="https://media.discordapp.net/attachments/1216040586348593213/1223366470088790046/bms_avatar.jpg")
     viewItems = [LinkButton("Linktree", "https://linktr.ee/bsystems", "<:Linktree:1218980236260278292>")]
     await interaction.response.send_message(embed=embed, view=View(viewItems))
+
+  @help.error
+  async def help_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
+    if isinstance(error, app_commands.NoPrivateMessage):
+      return await interaction.response.send_message("Command can't be run in Private Messages.", delete_after=5, ephemeral=True)
+    else:
+      return await interaction.response.send_message(f"Unknown error: {error}", delete_after=5, ephemeral=True)
 
 
   # Invite Command -> get Link
@@ -140,15 +148,16 @@ class Utility(commands.Cog):
     options = mongodb.findGuildOptions(interaction.guild.id)
     language = options["language"]
 
-    description = ""
-    for text in texts["inviteCommand"]["content"][language]:
-      description += text
-
-    embed = discord.Embed(title=texts["inviteCommand"]["title"][language], description=description, color=int("ffffff", 16))
     viewItems = [LinkButton(texts["inviteLabel"][language], "https://discord.com/oauth2/authorize?client_id=1223344546260193280&permissions=8&scope=bot", "<:discord:1216307276927733800>"),
                  LinkButton(texts["topGGLabel"][language], "https://top.gg/bot/1223344546260193280?s=015d6ecaeaefb", "<:topgg:1226193810338611301>")]
-    await interaction.response.send_message(embed=embed, view=View(viewItems))
+    await interaction.response.send_message(embed=buildLanguageEmbed("inviteCommand", language), view=View(viewItems))
 
+  @invite.error
+  async def invite_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
+    if isinstance(error, app_commands.NoPrivateMessage):
+      return await interaction.response.send_message("Command can't be run in Private Messages.", delete_after=5, ephemeral=True)
+    else:
+      return await interaction.response.send_message(f"Unknown error: {error}", delete_after=5, ephemeral=True)
 
   # Support Command -> Top.gg, Paypal Link
   @app_commands.command(description="want to give something back? cool. learn how.")
@@ -157,15 +166,16 @@ class Utility(commands.Cog):
     options = mongodb.findGuildOptions(interaction.guild.id)
     language = options["language"]
 
-    description = ""
-    for text in texts["supportUs"]["content"][language]:
-      description += text
-
-    embed = discord.Embed(title=texts["supportUs"]["title"][language], description=description, color=int("ffffff", 16))
     viewItems = [LinkButton(texts["topGGLabel"][language], "https://top.gg/bot/1223344546260193280?s=015d6ecaeaefb", "<:topgg:1226193810338611301>"),
                  LinkButton(texts["paypalLabel"][language], "https://paypal.me/brawlsystems", "<:paypal:1226193285526327376>")]
-    await interaction.response.send_message(embed=embed, view=View(viewItems))
+    await interaction.response.send_message(embed=buildLanguageEmbed("supportUs", language), view=View(viewItems))
 
+  @support_us.error
+  async def support_us_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
+    if isinstance(error, app_commands.NoPrivateMessage):
+      return await interaction.response.send_message("Command can't be run in Private Messages.", delete_after=5, ephemeral=True)
+    else:
+      return await interaction.response.send_message(f"Unknown error: {error}", delete_after=5, ephemeral=True)
 
 async def setup(bot):
   await bot.add_cog(Utility(bot))
