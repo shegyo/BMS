@@ -54,6 +54,26 @@
         "french": "ID : `{bs_id}` sauvegardé <a:verifyblack:1216302923441504287>",
         "spanish": "ID: `{bs_id}` guardado <a:verifyblack:1216302923441504287>",
         "russian": "ID: `{bs_id}` сохранен <a:verifyblack:1216302923441504287>"
+    },
+    "supportUs" : {
+        "title": {
+            "english": "<:Hi:1216304655861284974> Hi my Friend!",
+            "german": "<:Hi:1216304655861284974> Hallo mein Freund!",
+            "spanish": "<:Hi:1216304655861284974> ¡Hola mi amigo!",
+            "russian": "<:Hi:1216304655861284974> Привет, мой друг!",
+            "french": "<:Hi:1216304655861284974> Salut mon ami!"
+        },
+        "content" : {
+            "english" : [
+                "If you like and want to support me, you are welcome to do two little things for me:\n\n",
+                "### <:topgg:1226193810338611301> Leave a review and upvote on top.gg\n",
+                "Share your experience with others by leaving a review on top.gg and giving us a vote. Your feedback is invaluable and helps others discover our services.\n\n",
+                "### <:paypal:1226193285526327376> Donate\n",
+                "Even small contributions can make a big difference! If you're able to do so, consider supporting us financially to help us improve and expand our services.\n\n",
+                "<:thx:1216304741949374504> We're incredibly grateful for your support and appreciation. Let's make this bot an amazing experience for everyone together!"
+            ],
+            "german" : ""
+        }
     }
     
 }

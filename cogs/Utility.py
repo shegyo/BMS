@@ -143,17 +143,15 @@ class Utility(commands.Cog):
   # Support Command -> Top.gg, Paypal Link
   @app_commands.command(description="want to give something back? cool. learn how.")
   async def support_us(self, interaction: discord.Interaction):
-    description = "If you like and want to support me, you are welcome to do two little things for me:\n\n"
+    # Ausgewählte Sprache fetchen
+    options = mongodb.findGuildOptions(interaction.guild.id)
+    language = options["language"]
 
-    description += "### <:topgg:1226193810338611301> Leave a review and upvote on top.gg\n"
-    description += "Share your experience with others by leaving a review on top.gg and giving us a vote. Your feedback is invaluable and helps others discover our services.\n\n"
+    description = ""
+    for text in texts["supportUs"]["content"][language]:
+      description += text
 
-    description += "### <:paypal:1226193285526327376> Donate\n"
-    description += "Even small contributions can make a big difference! If you're able to do so, consider supporting us financially to help us improve and expand our services.\n\n"
-
-    description += "<:thx:1216304741949374504> We're incredibly grateful for your support and appreciation. Let's make this bot an amazing experience for everyone together!"
-
-    embed = discord.Embed(title="<:Hi:1216304655861284974> Hi my Friend!", description=description, color=int("ffffff", 16))
+    embed = discord.Embed(title=texts["supportUs"]["title"][language], description=description, color=int("ffffff", 16))
     viewItems = [LinkButton("Review", "https://top.gg/bot/1223344546260193280?s=015d6ecaeaefb", "<:topgg:1226193810338611301>"),
                  LinkButton("Donate", "https://paypal.me/brawlsystems", "<:paypal:1226193285526327376>")]
     await interaction.response.send_message(embed=embed, view=View(viewItems))
