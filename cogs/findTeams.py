@@ -192,7 +192,7 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
 
       embeds[embedlanguage].append(embed)
 
-    JoinButton = LinkButton(findTeamsTexts["joinTeam"][language], f"https://link.brawlstars.com/invite/gameroom/en?tag={teamCode}")
+    JoinButton = LinkButton(findTeamsTexts["joinTeam"][language], f"https://link.brawlstars.com/invite/gameroom/en?tag={teamCode}", "<:BrawlStar:1216305064231174185>")
 
     await sendToAllGuilds(bot, interaction, "findmates", "find-mates", embeds, View([JoinButton]), language)
 
@@ -362,7 +362,7 @@ class findTeams(commands.Cog):
 
         embeds[embedlanguage].append(embed)
 
-      JoinButton = LinkButton(findTeamsTexts["joinTeam"][language], f"https://link.brawlstars.com/invite/gameroom/en?tag={team_code}")
+      JoinButton = LinkButton(findTeamsTexts["joinTeam"][language], f"https://link.brawlstars.com/invite/gameroom/en?tag={team_code}", "<:BrawlStar:1216305064231174185>")
 
       await sendToAllGuilds(self.bot, interaction, "findmates", "find-mates", embeds, View([JoinButton]), language)
     else:

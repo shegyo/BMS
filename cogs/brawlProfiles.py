@@ -69,7 +69,7 @@ class brawlProfiles(commands.Cog):
         embed = discord.Embed(title=player_name, description=f"### <:info:1216306156222287894> ID: #{bs_id}", color=int("000000", 16))
         await interaction.edit_original_response(content="", attachments=[discord.File("playerNotFound.webp", filename="playerNotFound.webp")], embed=embed)
       else:
-        viewItems = [LinkButton("Brawlify", "https://brawlify.com/stats/profile/"+bs_id)]
+        viewItems = [LinkButton("Brawlify", "https://brawlify.com/stats/profile/"+bs_id, "<:brawlify:1226211333540941844>")]
         embed = discord.Embed(title=player_name, description=f"### <:info:1216306156222287894> ID: #{bs_id}", color=int("000000", 16))
         await interaction.edit_original_response(content="", attachments=[discord.File(profileImg, filename="profile_image.png")], embed=embed, view=View(viewItems))
 
@@ -95,7 +95,7 @@ class brawlProfiles(commands.Cog):
         embed = discord.Embed(title=player_name, description=f"### <:info:1216306156222287894> ID: #{bs_id}", color=int("000000", 16))
         await interaction.edit_original_response(content="", attachments=[discord.File("playerNotFound.webp", filename="playerNotFound.webp")], embed=embed)
       else:
-        viewItems = [LinkButton("Brawlify", "https://brawlify.com/stats/profile/"+bs_id)]
+        viewItems = [LinkButton("Brawlify", "https://brawlify.com/stats/profile/"+bs_id, "<:brawlify:1226211333540941844>")]
         embed = discord.Embed(title=player_name, description=f"### <:info:1216306156222287894> ID: #{bs_id}", color=int("000000", 16))
         await interaction.edit_original_response(content="", attachments=[discord.File(profileImg, filename="profile_image.png")], embed=embed, view=View(viewItems))
 

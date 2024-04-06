@@ -119,10 +119,15 @@ class Utility(commands.Cog):
   # Help Command -> get Support
   @app_commands.command(description="bot help")
   async def help(self, interaction: discord.Interaction):
-    description = "For help and Support, please contact the System Administrators!\n\n"
-    description += "<:discord:1216307276927733800> <@324607583841419276>\n"
-    description += "<:discord:1216307276927733800> <@818879706350092298>\n"
-    embed = discord.Embed(title="SUPPORT", description=description, color=int("ffffff", 16))
+    # Ausgewählte Sprache fetchen
+    options = mongodb.findGuildOptions(interaction.guild.id)
+    language = options["language"]
+
+    description = ""
+    for text in texts["helpCommand"]["content"][language]:
+      description += text
+
+    embed = discord.Embed(title=texts["helpCommand"]["title"][language], description=description, color=int("ffffff", 16))
     embed.set_image(url="https://media.discordapp.net/attachments/1216040586348593213/1223366470088790046/bms_avatar.jpg")
     viewItems = [LinkButton("Linktree", "https://linktr.ee/bsystems", "<:Linktree:1218980236260278292>")]
     await interaction.response.send_message(embed=embed, view=View(viewItems))
@@ -131,12 +136,17 @@ class Utility(commands.Cog):
   # Invite Command -> get Link
   @app_commands.command(description="get link")
   async def invite(self, interaction: discord.Interaction):
-    description = "<:right_arrow:1216305900961271859> Make use of free Cross Server Team Search!\n"
-    description += "<:right_arrow:1216305900961271859> Keep track of current and upcoming maps for free!\n"
-    description += "<:right_arrow:1216305900961271859> Enjoy free profile images!"
-    embed = discord.Embed(title="<:discord:1216307276927733800>  Invite me to your Server!", description=description, color=int("ffffff", 16))
-    viewItems = [LinkButton("Invite", "https://discord.com/oauth2/authorize?client_id=1223344546260193280&permissions=8&scope=bot", "<:discord:1216307276927733800>"),
-                 LinkButton("Review", "https://top.gg/bot/1223344546260193280?s=015d6ecaeaefb", "<:topgg:1226193810338611301>")]
+    # Ausgewählte Sprache fetchen
+    options = mongodb.findGuildOptions(interaction.guild.id)
+    language = options["language"]
+
+    description = ""
+    for text in texts["inviteCommand"]["content"][language]:
+      description += text
+
+    embed = discord.Embed(title=texts["inviteCommand"]["title"][language], description=description, color=int("ffffff", 16))
+    viewItems = [LinkButton(texts["inviteLabel"][language], "https://discord.com/oauth2/authorize?client_id=1223344546260193280&permissions=8&scope=bot", "<:discord:1216307276927733800>"),
+                 LinkButton(texts["topGGLabel"][language], "https://top.gg/bot/1223344546260193280?s=015d6ecaeaefb", "<:topgg:1226193810338611301>")]
     await interaction.response.send_message(embed=embed, view=View(viewItems))
 
 
@@ -152,8 +162,8 @@ class Utility(commands.Cog):
       description += text
 
     embed = discord.Embed(title=texts["supportUs"]["title"][language], description=description, color=int("ffffff", 16))
-    viewItems = [LinkButton("Review", "https://top.gg/bot/1223344546260193280?s=015d6ecaeaefb", "<:topgg:1226193810338611301>"),
-                 LinkButton("Donate", "https://paypal.me/brawlsystems", "<:paypal:1226193285526327376>")]
+    viewItems = [LinkButton(texts["topGGLabel"][language], "https://top.gg/bot/1223344546260193280?s=015d6ecaeaefb", "<:topgg:1226193810338611301>"),
+                 LinkButton(texts["paypalLabel"][language], "https://paypal.me/brawlsystems", "<:paypal:1226193285526327376>")]
     await interaction.response.send_message(embed=embed, view=View(viewItems))
 
 

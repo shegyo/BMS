@@ -55,6 +55,34 @@
         "spanish": "ID: `{bs_id}` guardado <a:verifyblack:1216302923441504287>",
         "russian": "ID: `{bs_id}` сохранен <a:verifyblack:1216302923441504287>"
     },
+    "helpCommand" : {
+        "title": {
+            "english": "💁 Get support!",
+            "german": "💁 Erhalte Hilfe!"
+        },
+        "content" : {
+            "english" : [
+                "For help and Support, please contact the System Administrators!\n\n",
+                "<:discord:1216307276927733800> <@324607583841419276>\n",
+                "<:discord:1216307276927733800> <@818879706350092298>\n"
+            ],
+            "german" : ""
+        }
+    },
+    "inviteCommand" : {
+        "title": {
+            "english": "<:discord:1216307276927733800> Invite me to your Server!",
+            "german": "<:discord:1216307276927733800> Lade mich auf deinen Server ein!"
+        },
+        "content" : {
+            "english" : [
+                "<:right_arrow:1216305900961271859> Make use of free Cross Server Team Search!\n",
+                "<:right_arrow:1216305900961271859> Keep track of current and upcoming maps for free!\n",
+                "<:right_arrow:1216305900961271859> Enjoy free profile images!"
+            ],
+            "german" : ""
+        }
+    },
     "supportUs" : {
         "title": {
             "english": "<:Hi:1216304655861284974> Hi my Friend!",
@@ -74,6 +102,15 @@
             ],
             "german" : ""
         }
+    },
+    "topGGLabel" : {
+        "english" : "Review"
+    },
+    "paypalLabel" : {
+        "english" : "Donate"
+    },
+    "inviteLabel" : {
+        "english" : "Invite"
     }
     
 }
