@@ -70,7 +70,7 @@ class SelectLanguage(discord.ui.Select):
           newInquiryChannel = await teamInquiriesChannel.clone()
           await teamInquiriesChannel.delete(reason="language change")
           # Hier neue Nachricht schicken
-          await newInquiryChannel.send(buildLanguageEmbed("findTeamsAnnouncement", language))
+          await newInquiryChannel.send(embed=buildLanguageEmbed("findTeamsAnnouncement", language))
           
 
 def getNiceFormatLanguage(language):
