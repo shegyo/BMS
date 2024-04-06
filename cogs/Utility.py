@@ -12,8 +12,8 @@ with open("languages/generalTexts.json", "r", encoding="UTF-8") as f:
 
 # LinkButton Klasse
 class LinkButton(discord.ui.Button):
-  def __init__(self, label, url):
-    super().__init__(label=label, style=discord.ButtonStyle.link, url=url)
+  def __init__(self, label, url, emoji=None):
+    super().__init__(label=label, style=discord.ButtonStyle.link, url=url, emoji=emoji)
 
 
 # View Klasse zum Anzeigen der Items wie Buttons und Auswahllisten
@@ -124,18 +124,38 @@ class Utility(commands.Cog):
     description += "<:discord:1216307276927733800> <@818879706350092298>\n"
     embed = discord.Embed(title="SUPPORT", description=description, color=int("ffffff", 16))
     embed.set_image(url="https://media.discordapp.net/attachments/1216040586348593213/1223366470088790046/bms_avatar.jpg")
-    viewItems = [LinkButton("Linktree", "https://linktr.ee/bsystems")]
+    viewItems = [LinkButton("Linktree", "https://linktr.ee/bsystems", "<:Linktree:1218980236260278292>")]
     await interaction.response.send_message(embed=embed, view=View(viewItems))
 
 
   # Invite Command -> get Link
   @app_commands.command(description="get link")
   async def invite(self, interaction: discord.Interaction):
-    description = "- Make use of FREE Cross Server Team Search!\n"
-    description += "- Keep track of current and upcoming maps for FREE!\n"
-    description += "- Enjoy FREE profile images!"
+    description = "- Make use of free Cross Server Team Search!\n"
+    description += "- Keep track of current and upcoming maps for free!\n"
+    description += "- Enjoy free profile images!"
     embed = discord.Embed(title="<:discord:1216307276927733800>  Invite me to your Server!", description=description, color=int("ffffff", 16))
-    viewItems = [LinkButton("Invite me!", "https://discord.com/oauth2/authorize?client_id=1223344546260193280&permissions=8&scope=bot")]
+    viewItems = [LinkButton("Invite me!", "https://discord.com/oauth2/authorize?client_id=1223344546260193280&permissions=8&scope=bot", "<:discord:1216307276927733800>")]
+    await interaction.response.send_message(embed=embed, view=View(viewItems))
+
+
+  # Support Command -> Top.gg, Paypal Link
+  @app_commands.command(description="want to give something back? cool. learn how.")
+  async def support_us(self, interaction: discord.Interaction):
+    description = "If you like and want to support me, you are welcome to do two little things for me:\n\n"
+
+    description += "### <:topgg:1226193810338611301> Leave a review and upvote on top.gg!\n"
+    description += "Share your experience with others by leaving a review on top.gg and giving us a vote. Your feedback is invaluable and helps others discover our services.\n\n"
+
+    description += "### <:paypal:1226193285526327376> Donate:\n"
+    description += "Even small contributions can make a big difference! If you're able, consider supporting us financially to help us improve and expand our services.\n\n"
+
+    description += "We're incredibly grateful for your support and appreciation. let's make together this bot an amazing experience for everyone!\n\n"
+
+    description += "<:thx:1216304741949374504> Thank you for your help!"
+    embed = discord.Embed(title="<:Hi:1216304655861284974> Hi my Friend!", description=description, color=int("ffffff", 16))
+    viewItems = [LinkButton("review", "https://top.gg/bot/1223344546260193280?s=015d6ecaeaefb", "<:topgg:1226193810338611301>"),
+                 LinkButton("donate", "https://paypal.me/brawlsystems", "<:paypal:1226193285526327376>")]
     await interaction.response.send_message(embed=embed, view=View(viewItems))
 
 
