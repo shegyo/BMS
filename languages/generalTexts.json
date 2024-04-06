@@ -58,7 +58,10 @@
     "helpCommand" : {
         "title": {
             "english": "💁 Get support!",
-            "german": "💁 Erhalte Hilfe!"
+            "german": "💁 Erhalte Hilfe!",
+            "spanish": "💁 ¡Obtener ayuda!",
+            "russian": "💁 Получить поддержку!",
+            "french": "💁 Obtenir de l'aide!"
         },
         "content" : {
             "english" : [
@@ -66,21 +69,62 @@
                 "<:discord:1216307276927733800> <@324607583841419276>\n",
                 "<:discord:1216307276927733800> <@818879706350092298>\n"
             ],
-            "german" : ""
+            "german": [
+                "Für Hilfe und Unterstützung wenden Sie sich bitte an die Systemadministratoren!\n\n",
+                "<:discord:1216307276927733800> <@324607583841419276>\n",
+                "<:discord:1216307276927733800> <@818879706350092298>\n"
+            ],
+            "spanish": [
+                "¡Para obtener ayuda y soporte, comuníquese con los Administradores del Sistema!\n\n",
+                "<:discord:1216307276927733800> <@324607583841419276>\n",
+                "<:discord:1216307276927733800> <@818879706350092298>\n"
+            ],
+            "russian": [
+            "Для помощи и поддержки обратитесь к системным администраторам!\n\n",
+            "<:discord:1216307276927733800> <@324607583841419276>\n",
+            "<:discord:1216307276927733800> <@818879706350092298>\n"
+            ],
+            "french": [
+            "Pour obtenir de l'aide et du support, veuillez contacter les administrateurs du système !\n\n",
+            "<:discord:1216307276927733800> <@324607583841419276>\n",
+            "<:discord:1216307276927733800> <@818879706350092298>\n"
+            ]
         }
     },
     "inviteCommand" : {
         "title": {
             "english": "<:discord:1216307276927733800> Invite me to your Server!",
-            "german": "<:discord:1216307276927733800> Lade mich auf deinen Server ein!"
+            "german": "<:discord:1216307276927733800> Lade mich auf deinen Server ein!",
+            "french": "<:discord:1216307276927733800> Invitez-moi sur votre serveur!",
+            "spanish": "<:discord:1216307276927733800> ¡Invítame a tu servidor!",
+            "russian": "<:discord:1216307276927733800> Пригласите меня на ваш сервер!"
         },
-        "content" : {
-            "english" : [
+        "content": {
+            "english": [
                 "<:right_arrow:1216305900961271859> Make use of free Cross Server Team Search!\n",
                 "<:right_arrow:1216305900961271859> Keep track of current and upcoming maps for free!\n",
                 "<:right_arrow:1216305900961271859> Enjoy free profile images!"
             ],
-            "german" : ""
+            "german": [
+                "<:right_arrow:1216305900961271859> Nutzen Sie die kostenlose Cross-Server-Team-Suche!\n",
+                "<:right_arrow:1216305900961271859> Behalten Sie kostenlos den Überblick über aktuelle und kommende Karten!\n",
+                "<:right_arrow:1216305900961271859> Genießen Sie kostenlose Profilbilder!"
+                ],
+            "french": [
+                "<:right_arrow:1216305900961271859> Utilisez la recherche d'équipe multi-serveurs gratuite !\n",
+                "<:right_arrow:1216305900961271859> Suivez gratuitement les cartes actuelles et à venir !\n",
+                "<:right_arrow:1216305900961271859> Profitez des images de profil gratuites !"
+            ],
+            "spanish": [
+                "<:right_arrow:1216305900961271859> ¡Utilice la búsqueda de equipos multi-servidores gratuita!\n",
+                "<:right_arrow:1216305900961271859> ¡Siga gratis los mapas actuales y futuros!\n",
+                "<:right_arrow:1216305900961271859> ¡Disfrute de las imágenes de perfil gratis!"
+            ],
+            "russian": [
+                "<:right_arrow:1216305900961271859> Воспользуйтесь бесплатным поиском команд через несколько серверов!\n",
+                "<:right_arrow:1216305900961271859> Бесплатно следите за текущими и предстоящими картами!\n",
+                "<:right_arrow:1216305900961271859> Наслаждайтесь бесплатными изображениями профиля!"
+            ]
         }
     },
     "supportUs" : {
@@ -91,8 +135,8 @@
             "russian": "<:Hi:1216304655861284974> Привет, мой друг!",
             "french": "<:Hi:1216304655861284974> Salut mon ami!"
         },
-        "content" : {
-            "english" : [
+        "content": {
+            "english": [
                 "If you like and want to support me, you are welcome to do two little things for me:\n\n",
                 "### <:topgg:1226193810338611301> Leave a review and upvote on top.gg\n",
                 "Share your experience with others by leaving a review on top.gg and giving us a vote. Your feedback is invaluable and helps others discover our services.\n\n",
@@ -100,17 +144,60 @@
                 "Even small contributions can make a big difference! If you're able to do so, consider supporting us financially to help us improve and expand our services.\n\n",
                 "<:thx:1216304741949374504> We're incredibly grateful for your support and appreciation. Let's make this bot an amazing experience for everyone together!"
             ],
-            "german" : ""
+            "german": [
+                "Wenn Sie mich mögen und unterstützen möchten, sind Sie herzlich eingeladen, zwei kleine Dinge für mich zu tun:\n\n",
+                "### <:topgg:1226193810338611301> Hinterlassen Sie eine Bewertung und stimmen Sie auf top.gg ab\n",
+                "Teilen Sie Ihre Erfahrungen mit anderen, indem Sie eine Bewertung auf top.gg hinterlassen und uns eine Stimme geben. Ihr Feedback ist unbezahlbar und hilft anderen, unsere Dienste zu entdecken.\n\n",
+                "### <:paypal:1226193285526327376> Spenden\n",
+                "Auch kleine Beiträge können einen großen Unterschied machen! Wenn Sie dazu in der Lage sind, unterstützen Sie uns finanziell, um uns bei der Verbesserung und Erweiterung unserer Dienste zu helfen.\n\n",
+                "<:thx:1216304741949374504> Wir sind unglaublich dankbar für Ihre Unterstützung und Wertschätzung. Lassen Sie uns gemeinsam diese Bot-Erfahrung für alle zu etwas Besonderem machen!"
+            ],
+            "spanish": [
+                "Si te gusta y quieres apoyarme, puedes hacer dos pequeñas cosas por mí:\n\n",
+                "### <:topgg:1226193810338611301> Deja una reseña y vota en top.gg\n",
+                "Comparte tu experiencia con otros dejando una reseña en top.gg y dándonos un voto. Tu opinión es invaluable y ayuda a otros a descubrir nuestros servicios.\n\n",
+                "### <:paypal:1226193285526327376> Donar\n",
+                "¡Incluso pequeñas contribuciones pueden marcar la diferencia! Si puedes hacerlo, considera apoyarnos financieramente para ayudarnos a mejorar y expandir nuestros servicios.\n\n",
+                "<:thx:1216304741949374504> Estamos increíblemente agradecidos por tu apoyo y aprecio. ¡Hagamos que esta experiencia de bot sea increíble para todos juntos!"
+            ],
+            "french": [
+                "Si vous aimez et souhaitez me soutenir, vous êtes invités à faire deux petites choses pour moi :\n\n",
+                "### <:topgg:1226193810338611301> Laissez un avis et votez sur top.gg\n",
+                "Partagez votre expérience avec les autres en laissant un avis sur top.gg et en nous donnant un vote. Votre avis est inestimable et aide les autres à découvrir nos services.\n\n",
+                "### <:paypal:1226193285526327376> Faire un don\n",
+                "Même de petites contributions peuvent faire une grande différence ! Si vous le pouvez, envisagez de nous soutenir financièrement pour nous aider à améliorer et à étendre nos services.\n\n",
+                "<:thx:1216304741949374504> Nous vous sommes incroyablement reconnaissants pour votre soutien et votre appréciation. Faisons de ce bot une expérience incroyable pour tout le monde ensemble !"
+            ],
+            "russian": [
+                "Если вам нравится и хотите поддержать меня, добро пожаловать к выполнению двух маленьких вещей для меня:\n\n",
+                "### <:topgg:1226193810338611301> Оставьте отзыв и проголосуйте на top.gg\n",
+                "Поделитесь своим опытом с другими, оставив отзыв на top.gg и дав нам голос. Ваш отзыв бесценен и помогает другим узнать о наших услугах.\n\n",
+                "### <:paypal:1226193285526327376> Пожертвовать\n",
+                "Даже небольшие вклады могут сделать большую разницу! Если у вас есть возможность, подумайте о финансовой поддержке нас, чтобы помочь нам улучшить и расширить наши услуги.\n\n",
+                "<:thx:1216304741949374504> Мы безмерно благодарны за вашу поддержку и признание. Давайте сделаем этого бота удивительным опытом для всех вместе!"
+            ]
         }
     },
-    "topGGLabel" : {
-        "english" : "Review"
+    "topGGLabel": {
+        "english": "Review",
+        "german": "Bewerten",
+        "french": "Évaluer",
+        "spanish": "Reseñar",
+        "russian": "Оценить"
     },
-    "paypalLabel" : {
-        "english" : "Donate"
+    "paypalLabel": {
+        "english": "Support",
+        "german": "Unterstützen",
+        "french": "Soutenir",
+        "spanish": "Apoyar",
+        "russian": "Поддержать"
     },
-    "inviteLabel" : {
-        "english" : "Invite"
+    "inviteLabel": {
+        "english": "Invite",
+        "german": "Einladen",
+        "french": "Inviter",
+        "spanish": "Invitar",
+        "russian": "Пригласить"
     }
     
 }
