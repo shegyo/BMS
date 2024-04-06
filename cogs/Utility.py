@@ -144,18 +144,18 @@ class Utility(commands.Cog):
   async def support_us(self, interaction: discord.Interaction):
     description = "If you like and want to support me, you are welcome to do two little things for me:\n\n"
 
-    description += "### <:topgg:1226193810338611301> Leave a review and upvote on top.gg!\n"
+    description += "### <:topgg:1226193810338611301> Leave a review and upvote on top.gg\n"
     description += "Share your experience with others by leaving a review on top.gg and giving us a vote. Your feedback is invaluable and helps others discover our services.\n\n"
 
-    description += "### <:paypal:1226193285526327376> Donate:\n"
+    description += "### <:paypal:1226193285526327376> Donate\n"
     description += "Even small contributions can make a big difference! If you're able, consider supporting us financially to help us improve and expand our services.\n\n"
 
-    description += "We're incredibly grateful for your support and appreciation. let's make together this bot an amazing experience for everyone!\n\n"
+    description += "We're incredibly grateful for your support and appreciation. let's make this bot an amazing experience for everyone together!\n\n"
 
     description += "<:thx:1216304741949374504> Thank you for your help!"
     embed = discord.Embed(title="<:Hi:1216304655861284974> Hi my Friend!", description=description, color=int("ffffff", 16))
-    viewItems = [LinkButton("review", "https://top.gg/bot/1223344546260193280?s=015d6ecaeaefb", "<:topgg:1226193810338611301>"),
-                 LinkButton("donate", "https://paypal.me/brawlsystems", "<:paypal:1226193285526327376>")]
+    viewItems = [LinkButton("Review", "https://top.gg/bot/1223344546260193280?s=015d6ecaeaefb", "<:topgg:1226193810338611301>"),
+                 LinkButton("Donate", "https://paypal.me/brawlsystems", "<:paypal:1226193285526327376>")]
     await interaction.response.send_message(embed=embed, view=View(viewItems))
 
 
