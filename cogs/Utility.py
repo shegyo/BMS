@@ -130,10 +130,10 @@ class Utility(commands.Cog):
 
   # Invite Command -> get Link
   @app_commands.command(description="get link")
-  async def invite(self, interaction: discord.Interaction, hey: str):
-    description = "> Make use of free Cross Server Team Search!\n"
-    description += "> Keep track of current and upcoming maps for free!\n"
-    description += "> Enjoy free profile images!"
+  async def invite(self, interaction: discord.Interaction):
+    description = "<:right_arrow:1216305900961271859> Make use of free Cross Server Team Search!\n"
+    description += "<:right_arrow:1216305900961271859> Keep track of current and upcoming maps for free!\n"
+    description += "<:right_arrow:1216305900961271859> Enjoy free profile images!"
     embed = discord.Embed(title="<:discord:1216307276927733800>  Invite me to your Server!", description=description, color=int("ffffff", 16))
     viewItems = [LinkButton("Invite", "https://discord.com/oauth2/authorize?client_id=1223344546260193280&permissions=8&scope=bot", "<:discord:1216307276927733800>")]
     await interaction.response.send_message(embed=embed, view=View(viewItems))
