@@ -46,42 +46,37 @@
         },
         "content" : {
             "english": [
-                "<:Hi:1216304655861284974> I am the **Brawl Mates System!** <:BMSlogo:1223389796450308197>\n\n",
                 "I'm glad you've decided to use my service!\n",
                 "I have already freed up your work and created all the channels for you and activated the system directly\n",
                 "If you still need help, please use the `/help` command <:settings:1223374255232651476>\n\n",
-                "To support me, check out our Social Media in the Linktree <:Linktree:1218980236260278292>\n",
+                "To support me, check out our Social Media in the Linktree <:Linktree:1218980236260278292>\n\n",
                 "<:thx:1216304741949374504> for your support! You are the best"
             ],
             "german": [
-                "<:Hi:1216304655861284974> Ich bin das **Brawl Mates System!** <:BMSlogo:1223389796450308197>\n\n",
                 "Ich freue mich, dass du dich entschieden hast, meinen Service zu nutzen!\n",
                 "Ich habe bereits deine Arbeit erleichtert und alle Kanäle für dich erstellt und das System direkt aktiviert\n",
                 "Wenn du noch Hilfe benötigst, benutze bitte den Befehl `/help` <:settings:1223374255232651476>\n\n",
-                "Um mich zu unterstützen, schau dir unsere Social Media in der Linktree <:Linktree:1218980236260278292>\n",
+                "Um mich zu unterstützen, schau dir unsere Social Media in der Linktree <:Linktree:1218980236260278292>\n\n",
                 "<:thx:1216304741949374504> für deine Unterstützung! Du bist der Beste"
             ],
             "french": [
-                "<:Hi:1216304655861284974> Je suis le **Système Brawl Mates!** <:BMSlogo:1223389796450308197>\n\n",
                 "Je suis ravi que vous ayez décidé d'utiliser mon service!\nJ'ai déjà libéré votre travail et créé tous les canaux pour vous et activé le système directement\n",
                 "Si vous avez encore besoin d'aide, veuillez utiliser la commande `/help` <:settings:1223374255232651476>\n\n",
-                "Pour me soutenir, consultez nos réseaux sociaux dans le Linktree <:Linktree:1218980236260278292>\n",
+                "Pour me soutenir, consultez nos réseaux sociaux dans le Linktree <:Linktree:1218980236260278292>\n\n",
                 "<:thx:1216304741949374504> pour votre soutien! Vous êtes le meilleur"
             ],
             "spanish": [
-                "<:Hi:1216304655861284974> ¡Soy el Sistema de Compañeros de Brawl! <:BMSlogo:1223389796450308197>\n\n",
                 "¡Me alegra que hayas decidido usar mi servicio!\n",
                 "Ya he liberado tu trabajo y creado todos los canales para ti y activado el sistema directamente\n",
                 "Si aún necesitas ayuda, por favor usa el comando /help <:settings:1223374255232651476>\n\n",
-                "Para apoyarme, revisa nuestras redes sociales en el Linktree <:Linktree:1218980236260278292>\n",
+                "Para apoyarme, revisa nuestras redes sociales en el Linktree <:Linktree:1218980236260278292>\n\n",
                 "<:thx:1216304741949374504> ¡Gracias por tu apoyo! ¡Eres el mejor"
             ],
             "russian": [
-                "<:Hi:1216304655861284974> Я Система Brawl Mates! <:BMSlogo:1223389796450308197>\n\n",
                 "Я рад, что вы решили воспользоваться моим сервисом!\n",
                 "Я уже освободил вашу работу, создал все каналы для вас и активировал систему непосредственно\n",
                 "Если вам все еще нужна помощь, пожалуйста, используйте команду /help <:settings:1223374255232651476>\n\n",
-                "Чтобы поддержать меня, ознакомьтесь с нашими социальными сетями в Linktree <:Linktree:1218980236260278292>\n",
+                "Чтобы поддержать меня, ознакомьтесь с нашими социальными сетями в Linktree <:Linktree:1218980236260278292>\n\n",
                 "<:thx:1216304741949374504> за вашу поддержку! Вы лучшие"
             ]
         }
