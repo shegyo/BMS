@@ -1,17 +1,17 @@
 {
     "findTeamsAnnouncement" : {
         "title" : {
-            "english" : "# <a:Announcement:1216306085565042710> Welcome to the BMS <:BMSlogo:1223389796450308197>",
-            "german" : "# <a:Announcement:1216306085565042710> Willkommen bei BMS <:BMSlogo:1223389796450308197>",
-            "french" : "# <a:Announcement:1216306085565042710> Bienvenue sur le BMS <:BMSlogo:1223389796450308197>",
-            "spanish" : "# <a:Announcement:1216306085565042710> Bienvenido a BMS <:BMSlogo:1223389796450308197>",
-            "russian" : "# <a:Announcement:1216306085565042710> Добро пожаловать в BMS <:BMSlogo:1223389796450308197>"
+            "english" : "<a:Announcement:1216306085565042710> Welcome to the BMS <:BMSlogo:1223389796450308197>",
+            "german" : "<a:Announcement:1216306085565042710> Willkommen bei BMS <:BMSlogo:1223389796450308197>",
+            "french" : "<a:Announcement:1216306085565042710> Bienvenue sur le BMS <:BMSlogo:1223389796450308197>",
+            "spanish" : "<a:Announcement:1216306085565042710> Bienvenido a BMS <:BMSlogo:1223389796450308197>",
+            "russian" : "<a:Announcement:1216306085565042710> Добро пожаловать в BMS <:BMSlogo:1223389796450308197>"
         },
         "content" : {
             "english": [
                 "<:right_arrow:1216305900961271859> Use the command `/find_mates` to create a request if you are looking for ladder/ranked players\n",
                 "<:right_arrow:1216305900961271859> Use the command `/find_esport` to create a request if you are looking for a Competitive Team or Team Member\n\n",
-                "<:,info:1216306156222287894> You can use the command `/cancel_search` to delete your request"
+                "<:info:1216306156222287894> You can use the command `/cancel_search` to delete your request"
             ],
             "german": [
                 "<:right_arrow:1216305900961271859> Verwende den Befehl `/find_mates`, um eine Anfrage zu erstellen, wenn du nach Leitern-/Rangspielern suchst\n",
