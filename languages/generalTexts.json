@@ -1,35 +1,40 @@
 {
     "findTeamsAnnouncement" : {
-        "english": [
-            "# <a:Announcement:1216306085565042710> Welcome to the BMS <:BMSlogo:1223389796450308197>\n\n",
-            "<:right_arrow:1216305900961271859> Use the command `/find_mates` to create a request if you are looking for ladder/ranked players\n",
-            "<:right_arrow:1216305900961271859> Use the command `/find_esport` to create a request if you are looking for a Competitive Team or Team Member\n\n",
-            "<:,info:1216306156222287894> You can use the command `/cancel_search` to delete your request"
-        ],
-        "german": [
-            "# <a:Announcement:1216306085565042710> Willkommen bei BMS <:BMSlogo:1223389796450308197>\n\n",
-            "<:right_arrow:1216305900961271859> Verwende den Befehl `/find_mates`, um eine Anfrage zu erstellen, wenn du nach Leitern-/Rangspielern suchst\n",
-            "<:right_arrow:1216305900961271859> Verwende den Befehl `/find_esport`, um eine Anfrage zu erstellen, wenn du nach einem Wettkampfteam oder Teammitglied suchst\n\n",
-            "<:info:1216306156222287894> Du kannst den Befehl `/cancel_search` verwenden, um deine Anfrage zu löschen"
-        ],
-        "french": [
-            "# <a:Announcement:1216306085565042710> Bienvenue sur le BMS <:BMSlogo:1223389796450308197>\n\n",
-            "<:right_arrow:1216305900961271859> Utilisez la commande `/find_mates` pour créer une demande si vous recherchez des joueurs en échelle/rangés\n",
-            "<:right_arrow:1216305900961271859> Utilisez la commande `/find_esport` pour créer une demande si vous recherchez une équipe compétitive ou un membre d'équipe\n\n",
-            "<:info:1216306156222287894> Vous pouvez utiliser la commande `/cancel_search` pour supprimer votre demande"
-        ],
-        "spanish": [
-            "# <a:Announcement:1216306085565042710> Bienvenido a BMS <:BMSlogo:1223389796450308197>\n\n",
-            "<:right_arrow:1216305900961271859> Usa el comando `/find_mates` para crear una solicitud si estás buscando jugadores de escalera/clasificados\n",
-            "<:right_arrow:1216305900961271859> Usa el comando `/find_esport` para crear una solicitud si estás buscando un equipo competitivo o un miembro de equipo\n\n",
-            "<:info:1216306156222287894> Puedes usar el comando `/cancel_search` para eliminar tu solicitud"
-        ],
-        "russian" : [
-            "# <a:Announcement:1216306085565042710> Добро пожаловать в BMS <:BMSlogo:1223389796450308197>\n\n",
-            "<:right_arrow:1216305900961271859> Используйте команду `/find_mates`, чтобы создать запрос, если вы ищете игроков по лестнице/ранжированных\n",
-            "<:right_arrow:1216305900961271859> Используйте команду `/find_esport`, чтобы создать запрос, если вы ищете конкурентную команду или члена команды\n\n",
-            "<:info:1216306156222287894> Вы можете использовать команду `/cancel_search`, чтобы удалить свой запрос"
-        ]   
+        "title" : {
+            "english" : "# <a:Announcement:1216306085565042710> Welcome to the BMS <:BMSlogo:1223389796450308197>",
+            "german" : "# <a:Announcement:1216306085565042710> Willkommen bei BMS <:BMSlogo:1223389796450308197>",
+            "french" : "# <a:Announcement:1216306085565042710> Bienvenue sur le BMS <:BMSlogo:1223389796450308197>",
+            "spanish" : "# <a:Announcement:1216306085565042710> Bienvenido a BMS <:BMSlogo:1223389796450308197>",
+            "russian" : "# <a:Announcement:1216306085565042710> Добро пожаловать в BMS <:BMSlogo:1223389796450308197>"
+        },
+        "content" : {
+            "english": [
+                "<:right_arrow:1216305900961271859> Use the command `/find_mates` to create a request if you are looking for ladder/ranked players\n",
+                "<:right_arrow:1216305900961271859> Use the command `/find_esport` to create a request if you are looking for a Competitive Team or Team Member\n\n",
+                "<:,info:1216306156222287894> You can use the command `/cancel_search` to delete your request"
+            ],
+            "german": [
+                "<:right_arrow:1216305900961271859> Verwende den Befehl `/find_mates`, um eine Anfrage zu erstellen, wenn du nach Leitern-/Rangspielern suchst\n",
+                "<:right_arrow:1216305900961271859> Verwende den Befehl `/find_esport`, um eine Anfrage zu erstellen, wenn du nach einem Wettkampfteam oder Teammitglied suchst\n\n",
+                "<:info:1216306156222287894> Du kannst den Befehl `/cancel_search` verwenden, um deine Anfrage zu löschen"
+            ],
+            "french": [
+                "<:right_arrow:1216305900961271859> Utilisez la commande `/find_mates` pour créer une demande si vous recherchez des joueurs en échelle/rangés\n",
+                "<:right_arrow:1216305900961271859> Utilisez la commande `/find_esport` pour créer une demande si vous recherchez une équipe compétitive ou un membre d'équipe\n\n",
+                "<:info:1216306156222287894> Vous pouvez utiliser la commande `/cancel_search` pour supprimer votre demande"
+            ],
+            "spanish": [
+                "<:right_arrow:1216305900961271859> Usa el comando `/find_mates` para crear una solicitud si estás buscando jugadores de escalera/clasificados\n",
+                "<:right_arrow:1216305900961271859> Usa el comando `/find_esport` para crear una solicitud si estás buscando un equipo competitivo o un miembro de equipo\n\n",
+                "<:info:1216306156222287894> Puedes usar el comando `/cancel_search` para eliminar tu solicitud"
+            ],
+            "russian" : [
+                "<:right_arrow:1216305900961271859> Используйте команду `/find_mates`, чтобы создать запрос, если вы ищете игроков по лестнице/ранжированных\n",
+                "<:right_arrow:1216305900961271859> Используйте команду `/find_esport`, чтобы создать запрос, если вы ищете конкурентную команду или члена команды\n\n",
+                "<:info:1216306156222287894> Вы можете использовать команду `/cancel_search`, чтобы удалить свой запрос"
+            ]
+        }
+           
     },
     "welcome" : {
         "title" : {
