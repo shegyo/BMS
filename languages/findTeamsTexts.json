@@ -27,6 +27,13 @@
         "spanish": "Enviando publicación de búsqueda en todos los servidores...",
         "russian": "Отправка сообщения о поиске на всех серверах..."
     },
+    "sendingPostsProgress" : {
+        "english": "Sending search post on all servers {count}",
+        "german": "Sende Suchbeitrag auf allen Servern {count}.",
+        "french": "Envoi du message de recherche sur tous les serveurs {count}",
+        "spanish": "Enviando publicación de búsqueda en todos los servidores {count}",
+        "russian": "Отправка сообщения о поиске на всех серверах {count}."
+    },
     "postSent" : {
         "english": "Search post sent successfully on all servers <a:verifyblack:1216302923441504287>",
         "german": "Suchbeitrag erfolgreich auf allen Servern gesendet <a:verifyblack:1216302923441504287>",

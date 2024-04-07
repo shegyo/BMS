@@ -35,7 +35,7 @@ for i, gamemode in enumerate(modeEmojis, start=1):
 
 
 async def sendToAllGuilds(bot, interaction, categoryName, channelName, embeds, view, language):
-  for guild in bot.guilds:
+  for i, guild in enumerate(bot.guilds, start=1):
     # Sprache suchen
     options = mongodb.findGuildOptions(guild.id)
     guildLanguage = options["language"]
@@ -63,6 +63,9 @@ async def sendToAllGuilds(bot, interaction, categoryName, channelName, embeds, v
     # Nachricht posten wenn Kanal gefunden wurde
     if channel:
       await channel.send(embeds=embeds[guildLanguage], view=view)
+
+    if i % 5 == 0:
+      await interaction.edit_original_response(content=findTeamsTexts["postSentProgress"][language].format(count=i))
 
   await interaction.edit_original_response(content=findTeamsTexts["postSent"][language])
 
@@ -152,7 +155,7 @@ class FindMatesModalEnglish(discord.ui.Modal):
     await handleFindMatesSubmit(interaction, self.bot, self.gameMode.value, self.teamCode.value, self.trophyRange.value, self.region.value, self.note.value, self.trophies, self.language)
 
 async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRange, region, note, trophies, language):
-    await interaction.response.send_message(findTeamsTexts["sendingPosts"][language], ephemeral=True, delete_after=10)
+    await interaction.response.send_message(findTeamsTexts["sendingPosts"][language], ephemeral=True, delete_after=30)
     
     embeds = {"german" : [], "english" : [], "french" : [], "spanish" : [], "russian" : []}
     
@@ -161,7 +164,8 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
       searchPost = f"## <a:Announcement:1216306085565042710> `{interaction.user}`\n"
       searchPost += f"<:Trophy:1223277455821902046> **{trophies}**\n"
       # Gamemode anheften
-      searchPost += f"{modeEmojis[gameMode]} **{gameMode}**\n"
+      if gameMode:
+        searchPost += f"{modeEmojis[gameMode]} **{gameMode}**\n"
       # Trophy Range anheften
       if trophyRange:
         searchPost += f"<:list:1216305645083689111> **{trophyRange}**\n"
