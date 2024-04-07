@@ -155,6 +155,7 @@ class FindMatesModalEnglish(discord.ui.Modal):
     await handleFindMatesSubmit(interaction, self.bot, self.gameMode, self.teamCode.value, self.trophyRange.value, self.region.value, self.note.value, self.trophies, self.language)
 
 async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRange, region, note, trophies, language):
+    print("lol")
     await interaction.response.send_message(findTeamsTexts["sendingPosts"][language], ephemeral=True, delete_after=30)
     
     embeds = {"german" : [], "english" : [], "french" : [], "spanish" : [], "russian" : []}
@@ -167,7 +168,7 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
       if gameMode:
         searchPost += f"{modeEmojis[gameMode]} **{gameMode}**\n"
       
-      print("lol")
+      
       # Trophy Range anheften
       if trophyRange:
         searchPost += f"<:list:1216305645083689111> **{trophyRange}**\n"
