@@ -166,6 +166,8 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
       # Gamemode anheften
       if gameMode:
         searchPost += f"{modeEmojis[gameMode]} **{gameMode}**\n"
+      
+      print("lol")
       # Trophy Range anheften
       if trophyRange:
         searchPost += f"<:list:1216305645083689111> **{trophyRange}**\n"
@@ -393,11 +395,13 @@ class findTeams(commands.Cog):
     profileData = requests.get(url, headers=headers).json()
 
     if "trophies" in profileData:
+      print("hi")
       if game_mode:
         gameMode = game_mode.name
       if language == "german":
         await interaction.response.send_modal(FindMatesModalGerman(self.bot, profileData["trophies"], gameMode, language))
       elif language == "english":
+        print("ok")
         await interaction.response.send_modal(FindMatesModalEnglish(self.bot, profileData["trophies"], gameMode, language))
       elif language == "spanish":
         await interaction.response.send_modal(FindMatesModalSpanish(self.bot, profileData["trophies"], gameMode, language))
