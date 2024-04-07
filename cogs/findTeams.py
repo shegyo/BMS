@@ -31,7 +31,7 @@ with open("languages/generalTexts.json", "r", encoding="UTF-8") as f:
 
 gamemodeChoices = []
 for i, gamemode in enumerate(modeEmojis, start=1):
-  gamemodeChoices.append(app_commands.Choice(name=f"{gamemode} <:showdown:1223373386168926288> 😌", value=i))
+  gamemodeChoices.append(app_commands.Choice(name=gamemode, value=i))
 
 
 async def sendToAllGuilds(bot, interaction, categoryName, channelName, embeds, view, language):
