@@ -4,12 +4,6 @@ from discord import app_commands
 from cogs.Utility import View, LinkButton
 import mongodb
 
-gamemodes = requests.get("https://api.brawlapi.com/v1/gamemodes").json()["list"]
-gamemodes.append({"name" : "Ranked"})
-gamemodes.append({"name" : "Showdown"})
-gamemodes.append({"name" : "Present Plunder"})
-gamemodes.append({"name" : "Pumpkin Plunder"})
-
 # EnvData laden
 with open("data/env.json", "r", encoding="UTF-8") as f:
   envData = json.load(f)
@@ -155,7 +149,6 @@ class FindMatesModalEnglish(discord.ui.Modal):
     await handleFindMatesSubmit(interaction, self.bot, self.gameMode, self.teamCode.value, self.trophyRange.value, self.region.value, self.note.value, self.trophies, self.language)
 
 async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRange, region, note, trophies, language):
-    print("lol")
     await interaction.response.send_message(findTeamsTexts["sendingPosts"][language], ephemeral=True, delete_after=30)
     
     embeds = {"german" : [], "english" : [], "french" : [], "spanish" : [], "russian" : []}
