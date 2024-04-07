@@ -4,6 +4,12 @@ from discord import app_commands
 from cogs.Utility import View, LinkButton
 import mongodb
 
+gamemodes = requests.get("https://api.brawlapi.com/v1/gamemodes").json()["list"]
+gamemodes.append({"name" : "Ranked"})
+gamemodes.append({"name" : "Showdown"})
+gamemodes.append({"name" : "Present Plunder"})
+gamemodes.append({"name" : "Pumpkin Plunder"})
+
 # EnvData laden
 with open("data/env.json", "r", encoding="UTF-8") as f:
   envData = json.load(f)
@@ -25,7 +31,7 @@ with open("languages/generalTexts.json", "r", encoding="UTF-8") as f:
 
 gamemodeChoices = []
 for i, gamemode in enumerate(modeEmojis, start=1):
-  gamemodeChoices.append(app_commands.Choice(name='apple', value=i))
+  gamemodeChoices.append(app_commands.Choice(name=gamemode, value=i))
 
 
 async def sendToAllGuilds(bot, interaction, categoryName, channelName, embeds, view, language):
@@ -320,7 +326,7 @@ class findTeams(commands.Cog):
   # Team Suche Quick
   @app_commands.command(description="post a new quick search")
   @app_commands.choices(game_mode=gamemodeChoices)
-  async def quick_mates(self, interaction: discord.Interaction, team_code: str, game_mode: app_commands.Choice[int], info: str=None, bs_id: str=None):
+  async def quick_mates(self, interaction: discord.Interaction, team_code: str, game_mode: app_commands.Choice[int]=None, info: str=None, bs_id: str=None):
     # Ausgewählte Sprache fetchen
     options = mongodb.findGuildOptions(interaction.guild.id)
     language = options["language"]
