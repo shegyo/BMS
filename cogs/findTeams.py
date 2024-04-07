@@ -71,12 +71,12 @@ async def sendToAllGuilds(bot, interaction, categoryName, channelName, embeds, v
 
 # Formular zum Ausfüllen, erstellt den Suchbeitrag
 class FindMatesModalGerman(discord.ui.Modal):
-  def __init__(self, bot, trophies, game_mode, language):
+  def __init__(self, bot, trophies, gameMode, language):
     super().__init__(title="Neue Team Suche erstellen")
     self.bot = bot
     self.trophies = trophies
     self.language = language
-    self.gameMode = game_mode
+    self.gameMode = gameMode
 
   teamCode = discord.ui.TextInput(label="Team-Code", placeholder="X??????", style=discord.TextStyle.short, min_length=4, max_length=25)
   trophyRange = discord.ui.TextInput(label="Gewünschter Trophäenbereich", placeholder="z.B. 600-750", style=discord.TextStyle.short, max_length=11, required=False)
@@ -88,12 +88,12 @@ class FindMatesModalGerman(discord.ui.Modal):
 
 # Formulario para completar, crea la publicación de búsqueda
 class FindMatesModalSpanish(discord.ui.Modal):
-  def __init__(self, bot, trophies, game_mode, language):
+  def __init__(self, bot, trophies, gameMode, language):
     super().__init__(title="Publicar nueva consulta")
     self.bot = bot
     self.trophies = trophies
     self.language = language
-    self.gameMode = game_mode
+    self.gameMode = gameMode
 
   teamCode = discord.ui.TextInput(label="Código de equipo", placeholder="X??????", style=discord.TextStyle.short, min_length=4, max_length=25)
   trophyRange = discord.ui.TextInput(label="Rango de trofeos deseado", placeholder="p. ej. 600-750", style=discord.TextStyle.short, max_length=11, required=False)
@@ -105,12 +105,12 @@ class FindMatesModalSpanish(discord.ui.Modal):
 
 # Formulaire à remplir, crée la publication de recherche
 class FindMatesModalFrench(discord.ui.Modal):
-  def __init__(self, bot, trophies, game_mode, language):
+  def __init__(self, bot, trophies, gameMode, language):
     super().__init__(title="Poster une nouvelle demande")
     self.bot = bot
     self.trophies = trophies
     self.language = language
-    self.gameMode = game_mode
+    self.gameMode = gameMode
 
   teamCode = discord.ui.TextInput(label="Code d'équipe", placeholder="X??????", style=discord.TextStyle.short, min_length=4, max_length=25)
   trophyRange = discord.ui.TextInput(label="Plage de trophées souhaitée", placeholder="par exemple, 600-750", style=discord.TextStyle.short, max_length=11, required=False)
@@ -122,12 +122,12 @@ class FindMatesModalFrench(discord.ui.Modal):
 
 # Форма для заполнения, создающая поиск
 class FindMatesModalRussian(discord.ui.Modal):
-  def __init__(self, bot, trophies, game_mode, language):
+  def __init__(self, bot, trophies, gameMode, language):
     super().__init__(title="Опубликовать новый запрос")
     self.bot = bot
     self.trophies = trophies
     self.language = language
-    self.gameMode = game_mode
+    self.gameMode = gameMode
 
   teamCode = discord.ui.TextInput(label="Код команды", placeholder="X??????", style=discord.TextStyle.short, min_length=4, max_length=25)
   trophyRange = discord.ui.TextInput(label="Желаемый диапазон трофеев", placeholder="например, 600-750", style=discord.TextStyle.short, max_length=11, required=False)
@@ -139,12 +139,12 @@ class FindMatesModalRussian(discord.ui.Modal):
 
 # Formular to fill out, creates the Search post
 class FindMatesModalEnglish(discord.ui.Modal):
-  def __init__(self, bot, trophies, game_mode, language):
+  def __init__(self, bot, trophies, gameMode, language):
     super().__init__(title="Post New Inquiry")
     self.bot = bot
     self.trophies = trophies
     self.language = language
-    self.gameMode = game_mode
+    self.gameMode = gameMode
 
   teamCode = discord.ui.TextInput(label="Team Code", placeholder="X??????", style=discord.TextStyle.short, min_length=4, max_length=25)
   trophyRange = discord.ui.TextInput(label="Desired trophy range", placeholder="e.g. 600-750", style=discord.TextStyle.short, max_length=11, required=False)
@@ -152,7 +152,7 @@ class FindMatesModalEnglish(discord.ui.Modal):
   note = discord.ui.TextInput(label="Additional Info", placeholder="only people with brain pls. Ill be offline at 12:00", style=discord.TextStyle.long, max_length=999, required=False)
 
   async def on_submit(self, interaction: discord.Interaction):
-    await handleFindMatesSubmit(interaction, self.bot, self.gameMode.value, self.teamCode.value, self.trophyRange.value, self.region.value, self.note.value, self.trophies, self.language)
+    await handleFindMatesSubmit(interaction, self.bot, self.gameMode, self.teamCode.value, self.trophyRange.value, self.region.value, self.note.value, self.trophies, self.language)
 
 async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRange, region, note, trophies, language):
     await interaction.response.send_message(findTeamsTexts["sendingPosts"][language], ephemeral=True, delete_after=30)
@@ -165,7 +165,7 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
       searchPost += f"<:Trophy:1223277455821902046> **{trophies}**\n"
       # Gamemode anheften
       if gameMode:
-        searchPost += f"{modeEmojis[gameMode.name]} **{gameMode.name}**\n"
+        searchPost += f"{modeEmojis[gameMode]} **{gameMode}**\n"
       # Trophy Range anheften
       if trophyRange:
         searchPost += f"<:list:1216305645083689111> **{trophyRange}**\n"
@@ -393,16 +393,18 @@ class findTeams(commands.Cog):
     profileData = requests.get(url, headers=headers).json()
 
     if "trophies" in profileData:
+      if game_mode:
+        gameMode = game_mode.name
       if language == "german":
-        await interaction.response.send_modal(FindMatesModalGerman(self.bot, profileData["trophies"], game_mode, language))
+        await interaction.response.send_modal(FindMatesModalGerman(self.bot, profileData["trophies"], gameMode, language))
       elif language == "english":
-        await interaction.response.send_modal(FindMatesModalEnglish(self.bot, profileData["trophies"], game_mode, language))
+        await interaction.response.send_modal(FindMatesModalEnglish(self.bot, profileData["trophies"], gameMode, language))
       elif language == "spanish":
-        await interaction.response.send_modal(FindMatesModalSpanish(self.bot, profileData["trophies"], game_mode, language))
+        await interaction.response.send_modal(FindMatesModalSpanish(self.bot, profileData["trophies"], gameMode, language))
       elif language == "russian":
-        await interaction.response.send_modal(FindMatesModalRussian(self.bot, profileData["trophies"], game_mode, language))
+        await interaction.response.send_modal(FindMatesModalRussian(self.bot, profileData["trophies"], gameMode, language))
       else:
-        await interaction.response.send_modal(FindMatesModalFrench(self.bot, profileData["trophies"], game_mode, language))
+        await interaction.response.send_modal(FindMatesModalFrench(self.bot, profileData["trophies"], gameMode, language))
     else:
       await interaction.response.send_message(findTeamsTexts["noProfileFound"][language].format(bs_id = bs_id), ephemeral=True, delete_after=3)
 
