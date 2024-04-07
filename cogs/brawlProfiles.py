@@ -73,7 +73,14 @@ class brawlProfiles(commands.Cog):
         embed = discord.Embed(title=player_name, description=f"### <:info:1216306156222287894> ID: #{bs_id}", color=int("000000", 16))
         await interaction.edit_original_response(content="", attachments=[discord.File(profileImg, filename="profile_image.png")], embed=embed, view=View(viewItems))
 
-  
+  @brawl_profile.error
+  async def brawl_profile_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
+    if isinstance(error, app_commands.NoPrivateMessage):
+      return await interaction.response.send_message("Command can't be run in Private Messages.", delete_after=5, ephemeral=True)
+    else:
+      return await interaction.response.send_message(f"Unknown error: {error}", delete_after=5, ephemeral=True)
+    
+    
   # Get your Profile Ranks Image
   @app_commands.command(description="get your brawl stars profile")
   async def brawl_ranks(self, interaction: discord.Interaction, bs_id: str=None):
@@ -99,6 +106,13 @@ class brawlProfiles(commands.Cog):
         embed = discord.Embed(title=player_name, description=f"### <:info:1216306156222287894> ID: #{bs_id}", color=int("000000", 16))
         await interaction.edit_original_response(content="", attachments=[discord.File(profileImg, filename="profile_image.png")], embed=embed, view=View(viewItems))
 
+  @brawl_ranks.error
+  async def brawl_ranks_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
+    if isinstance(error, app_commands.NoPrivateMessage):
+      return await interaction.response.send_message("Command can't be run in Private Messages.", delete_after=5, ephemeral=True)
+    else:
+      return await interaction.response.send_message(f"Unknown error: {error}", delete_after=5, ephemeral=True)
+    
 
   # Save your Id
   @app_commands.command(description="save your id and never type it again")
@@ -117,6 +131,12 @@ class brawlProfiles(commands.Cog):
       mongodb.saveUser(user_options)
       await interaction.edit_original_response(content=generalTexts["idSaved"][language].format(bs_id=bs_id))
 
-
+  @save_id.error
+  async def save_id_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
+    if isinstance(error, app_commands.NoPrivateMessage):
+      return await interaction.response.send_message("Command can't be run in Private Messages.", delete_after=5, ephemeral=True)
+    else:
+      return await interaction.response.send_message(f"Unknown error: {error}", delete_after=5, ephemeral=True)
+    
 async def setup(bot):
   await bot.add_cog(brawlProfiles(bot))

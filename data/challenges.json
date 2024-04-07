@@ -1,0 +1,27 @@
+[
+    {"title" : {
+            "english" : "No Move Challenge!",
+            "german" : ""
+    },
+    "content" : {
+            "english": [
+                "You have to go solo into a random Duo showdown round with Mortis and can only move with dashes.",
+                "The one who moves normally is out!"
+            ],
+            "german" : [
+
+            ]
+    }},
+    {"title" : {
+        "english" : "Another Challenge!",
+        "german" : ""
+    },
+    "content" : {
+            "english": [
+                "bla bla"
+            ],
+            "german" : [
+
+            ]
+    }}
+]
