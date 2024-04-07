@@ -1,10 +1,10 @@
 {
     "cancelStart" : {
-        "german": "Iteriere über alle Server...",
-        "english": "Iterating over all servers...",
-        "french": "Itération sur tous les serveurs...",
-        "spanish": "Iterando sobre todos los servidores...",
-        "russian": "Итерация по всем серверам..."
+        "german": "Iteriere über alle Server <a:error:1216302991045427251>",
+        "english": "Iterating over all servers <a:error:1216302991045427251>",
+        "french": "Itération sur tous les serveurs <a:error:1216302991045427251>",
+        "spanish": "Iterando sobre todos los servidores <a:error:1216302991045427251>",
+        "russian": "Итерация по всем серверам <a:error:1216302991045427251>"
     },
     "cancelSuccessful" : {
         "german": "Alle deine neuesten Beiträge, die in den letzten 25 Nachrichten gefunden wurden, wurden gelöscht <a:verifyblack:1216302923441504287>",
@@ -21,11 +21,11 @@
         "russian": "Профиль не найден по ID: {bs_id}"
     },
     "sendingPosts" : {
-        "english": "Sending search post on all servers...",
-        "german": "Sende Suchbeitrag auf allen Servern...",
-        "french": "Envoi du message de recherche sur tous les serveurs...",
-        "spanish": "Enviando publicación de búsqueda en todos los servidores...",
-        "russian": "Отправка сообщения о поиске на всех серверах..."
+        "english": "Sending search post on all servers <a:error:1216302991045427251>",
+        "german": "Sende Suchbeitrag auf allen Servern <a:error:1216302991045427251>",
+        "french": "Envoi du message de recherche sur tous les serveurs <a:error:1216302991045427251>",
+        "spanish": "Enviando publicación de búsqueda en todos los servidores <a:error:1216302991045427251>",
+        "russian": "Отправка сообщения о поиске на всех серверах <a:error:1216302991045427251>"
     },
     "sendingPostsProgress" : {
         "english": "Sending search post on all servers {count}",
