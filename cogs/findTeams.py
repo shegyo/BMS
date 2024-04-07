@@ -165,7 +165,7 @@ async def handleFindMatesSubmit(interaction, bot, gameMode, teamCode, trophyRang
       searchPost += f"<:Trophy:1223277455821902046> **{trophies}**\n"
       # Gamemode anheften
       if gameMode:
-        searchPost += f"{modeEmojis[gameMode]} **{gameMode}**\n"
+        searchPost += f"{modeEmojis[gameMode.name]} **{gameMode.name}**\n"
       # Trophy Range anheften
       if trophyRange:
         searchPost += f"<:list:1216305645083689111> **{trophyRange}**\n"
