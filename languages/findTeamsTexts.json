@@ -68,12 +68,5 @@
         "french": "Rejoindre l'équipe",
         "spanish": "Unirse al equipo",
         "russian": "Присоединиться к команде"
-    },
-    "gameModeNotFound" : {
-        "english": "Could not find desired gamemode.",
-        "german": "Gewünschten Spielmodus nicht gefunden.",
-        "french": "Impossible de trouver le mode de jeu désiré.",
-        "spanish": "No se pudo encontrar el modo de juego deseado.",
-        "russian": "Не удалось найти желаемый режим игры."
-    }    
+    }  
 }
