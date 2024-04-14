@@ -65,7 +65,7 @@ class randomBrawlers(commands.Cog):
         brawlersToChooseFrom = brawlers
 
     # Random Picks raussuchen
-    if brawlersToChooseFrom < amount:
+    if len(brawlersToChooseFrom) < amount:
        randomPicks = brawlersToChooseFrom
     else:
         for _ in range(amount):
