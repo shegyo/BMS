@@ -65,11 +65,15 @@ class randomBrawlers(commands.Cog):
         brawlersToChooseFrom = brawlers
 
     # Random Picks raussuchen
-    if len(brawlersToChooseFrom) < amount:
+    if len(brawlersToChooseFrom) <= amount:
        randomPicks = brawlersToChooseFrom
     else:
         for _ in range(amount):
-            randomPicks.append(random.choice(brawlersToChooseFrom))
+            newBrawler = random.choice(brawlersToChooseFrom)
+            while newBrawler in randomPicks:
+                newBrawler = random.choice(brawlersToChooseFrom)
+               
+            randomPicks.append(newBrawler)
 
     # Embeds machen und schicken
     randomPicksEmbeds = []
