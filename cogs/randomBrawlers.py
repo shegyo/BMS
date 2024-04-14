@@ -70,6 +70,7 @@ class randomBrawlers(commands.Cog):
     else:
         for _ in range(amount):
             newBrawler = random.choice(brawlersToChooseFrom)
+            # So oft neuen Brawler ziehen bis man einen hat der nicht schon in der liste ist
             while newBrawler in randomPicks:
                 newBrawler = random.choice(brawlersToChooseFrom)
                
