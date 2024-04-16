@@ -49,7 +49,7 @@ class brawlProfiles(commands.Cog):
     self.bot = bot
     
   # Get your Profile Image
-  @app_commands.command(description="get your brawl stars profile")
+  @app_commands.command(description="get your bs profile's meta info")
   async def brawl_profile(self, interaction: discord.Interaction, bs_id: str=None):
       # Ausgewählte Sprache fetchen
       options = mongodb.findGuildOptions(interaction.guild.id)
@@ -82,7 +82,7 @@ class brawlProfiles(commands.Cog):
     
     
   # Get your Profile Ranks Image
-  @app_commands.command(description="get your brawl stars profile")
+  @app_commands.command(description="get your bs profile's brawler ranks")
   async def brawl_ranks(self, interaction: discord.Interaction, bs_id: str=None):
       # Ausgewählte Sprache fetchen
       options = mongodb.findGuildOptions(interaction.guild.id)

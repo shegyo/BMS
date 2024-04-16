@@ -107,7 +107,7 @@ class Utility(commands.Cog):
     
   # Öffnet Server Einstellungen
   @app_commands.checks.has_permissions(administrator=True, manage_channels=True)
-  @app_commands.command(description="sets the language")
+  @app_commands.command(description="set the language for the bot")
   async def set_language(self, interaction: discord.Interaction):
     viewItems = [SelectLanguage(self.bot, interaction)]
     await interaction.response.send_message(embed=currentSettingEmbed(interaction.guild.id), view=View(viewItems), ephemeral=True)
@@ -122,7 +122,7 @@ class Utility(commands.Cog):
 
 
   # Help Command -> get Support
-  @app_commands.command(description="bot help")
+  @app_commands.command(description="contact info for help")
   async def help(self, interaction: discord.Interaction):
     # Ausgewählte Sprache fetchen
     options = mongodb.findGuildOptions(interaction.guild.id)
@@ -142,7 +142,7 @@ class Utility(commands.Cog):
 
 
   # Invite Command -> get Link
-  @app_commands.command(description="get link")
+  @app_commands.command(description="get the bot invitation link")
   async def invite(self, interaction: discord.Interaction):
     # Ausgewählte Sprache fetchen
     options = mongodb.findGuildOptions(interaction.guild.id)

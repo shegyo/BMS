@@ -365,7 +365,7 @@ class findTeams(commands.Cog):
 
 
   # allgemeine Team Suche
-  @app_commands.command(description="post a new inquiry")
+  @app_commands.command(description="post a new casual inquiry")
   @app_commands.choices(game_mode=gamemodeChoices)
   @app_commands.checks.cooldown(1, 60*5, key=lambda i: (i.user.id))
   async def find_mates(self, interaction: discord.Interaction, game_mode: app_commands.Choice[int]=None, bs_id: str=None):
@@ -413,7 +413,7 @@ class findTeams(commands.Cog):
 
 
   # Esport Team Suche Command
-  @app_commands.command(description="post a new inquiry")
+  @app_commands.command(description="post a new esport inquiry")
   @app_commands.checks.cooldown(1, 60*5, key=lambda i: (i.user.id))
   async def find_esport(self, interaction: discord.Interaction):
     # Ausgewählte Sprache fetchen
@@ -438,7 +438,7 @@ class findTeams(commands.Cog):
 
 
   # Esport Team Suche Command
-  @app_commands.command(description="remove all your search posts")
+  @app_commands.command(description="remove your latest search posts")
   @app_commands.checks.cooldown(1, 60*5, key=lambda i: (i.user.id))
   async def cancel_search(self, interaction: discord.Interaction):
     # Ausgewählte Sprache fetchen
