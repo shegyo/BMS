@@ -1,11 +1,11 @@
 {
     "findTeamsAnnouncement" : {
         "title" : {
-            "english" : "<a:Announcement:1216306085565042710> Welcome to the BMS <:BMSlogo:1223389796450308197>",
-            "german" : "<a:Announcement:1216306085565042710> Willkommen bei BMS <:BMSlogo:1223389796450308197>",
-            "french" : "<a:Announcement:1216306085565042710> Bienvenue sur le BMS <:BMSlogo:1223389796450308197>",
-            "spanish" : "<a:Announcement:1216306085565042710> Bienvenido a BMS <:BMSlogo:1223389796450308197>",
-            "russian" : "<a:Announcement:1216306085565042710> Добро пожаловать в BMS <:BMSlogo:1223389796450308197>"
+            "english" : "<a:Announcement:1216306085565042710> Welcome to the BMS",
+            "german" : "<a:Announcement:1216306085565042710> Willkommen bei BMS",
+            "french" : "<a:Announcement:1216306085565042710> Bienvenue sur le BMS",
+            "spanish" : "<a:Announcement:1216306085565042710> Bienvenido a BMS",
+            "russian" : "<a:Announcement:1216306085565042710> Добро пожаловать в BMS"
         },
         "content" : {
             "english": [
@@ -38,11 +38,11 @@
     },
     "welcome" : {
         "title" : {
-            "english": "<:Hi:1216304655861284974> I am the **Brawl Mates System!** <:BMSlogo:1223389796450308197>",
-            "german": "<:Hi:1216304655861284974> Ich bin das **Brawl Mates System!** <:BMSlogo:1223389796450308197>",
-            "french": "<:Hi:1216304655861284974> Je suis le **Système Brawl Mates!** <:BMSlogo:1223389796450308197>",
-            "spanish": "<:Hi:1216304655861284974> ¡Soy el Sistema de Compañeros de Brawl! <:BMSlogo:1223389796450308197>",
-            "russian": "<:Hi:1216304655861284974> Я Система Brawl Mates! <:BMSlogo:1223389796450308197>"
+            "english": "<:Hi:1216304655861284974> I am the **Brawl Mates System!**",
+            "german": "<:Hi:1216304655861284974> Ich bin das **Brawl Mates System!**",
+            "french": "<:Hi:1216304655861284974> Je suis le **Système Brawl Mates!**",
+            "spanish": "<:Hi:1216304655861284974> ¡Soy el Sistema de Compañeros de Brawl!",
+            "russian": "<:Hi:1216304655861284974> Я Система Brawl Mates!"
         },
         "content" : {
             "english": [
