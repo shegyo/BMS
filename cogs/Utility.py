@@ -149,7 +149,7 @@ class Utility(commands.Cog):
     language = options["language"]
 
     viewItems = [LinkButton(texts["inviteLabel"][language], "https://discord.com/oauth2/authorize?client_id=1223344546260193280&permissions=8&scope=bot", "<:discord:1216307276927733800>"),
-                 LinkButton(texts["topGGLabel"][language], "https://top.gg/bot/1223344546260193280?s=015d6ecaeaefb", "<:topgg:1226193810338611301>")]
+                 LinkButton(texts["topGGLabel"][language], "https://top.gg/bot/1223344546260193280", "<:topgg:1226193810338611301>")]
     await interaction.response.send_message(embed=buildLanguageEmbed("inviteCommand", language), view=View(viewItems))
 
   @invite.error
@@ -166,7 +166,7 @@ class Utility(commands.Cog):
     options = mongodb.findGuildOptions(interaction.guild.id)
     language = options["language"]
 
-    viewItems = [LinkButton(texts["topGGLabel"][language], "https://top.gg/bot/1223344546260193280?s=015d6ecaeaefb", "<:topgg:1226193810338611301>"),
+    viewItems = [LinkButton(texts["topGGLabel"][language], "https://top.gg/bot/1223344546260193280", "<:topgg:1226193810338611301>"),
                  LinkButton(texts["paypalLabel"][language], "https://paypal.me/brawlsystems", "<:paypal:1226193285526327376>")]
     await interaction.response.send_message(embed=buildLanguageEmbed("supportUs", language), view=View(viewItems))
 
