@@ -1,5 +1,5 @@
 from discord.ext import commands, tasks
-import discord, requests, datetime, json
+import discord, requests, datetime, json, asyncio
 import mongodb
 
 icons = requests.get("https://api.brawlapi.com/v1/icons").json()
@@ -16,7 +16,7 @@ class getMaps(commands.Cog):
     self.mapRota.start()
 
 
-  @tasks.loop(seconds=120)
+  @tasks.loop(minutes=5)
   async def mapRota(self):
     mapRota = requests.get("https://api.brawlapi.com/v1/events").json()
     
@@ -115,6 +115,7 @@ class getMaps(commands.Cog):
           else:
               await msg.edit(content=f'# {mapsTexts["upcomingMapsTitle"][language]}', embeds=embeds["upcoming"][language])
               break
+      await asyncio.sleep(1)
 
 
 async def setup(bot):
