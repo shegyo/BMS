@@ -4,7 +4,7 @@ from discord import app_commands
 import mongodb
 import random
 
-# ENV Daten laden
+# Daten laden
 with open("data/challenges.json", "r", encoding="UTF-8") as f:
   bsChallengesList = json.load(f)
   
@@ -24,6 +24,8 @@ class bsChallenges(commands.Cog):
     challenge = random.choice(bsChallengesList)
     description = challenge["content"][language]
     embed = discord.Embed(title=challenge["title"][language], description=description, color=int("000000", 16))
+    embed.set_thumbnail(url="https://imgur.com/Eg6oy61")
+    embed.set_footer(icon_url=self.bot.display_avatar.url, text=challenge["difficulty"][language])
     
     await interaction.response.send_message(embed=embed)
 
