@@ -17,14 +17,16 @@ class bsChallenges(commands.Cog):
   # Get your Random Challenge
   @app_commands.command(description="get a random bs challenge (soon)")
   async def challenge(self, interaction: discord.Interaction):
-    # Ausgewählte Sprache fetchen
+    # Fetch selected language
     options = mongodb.findGuildOptions(interaction.guild.id)
     language = options["language"]
 
     challenge = random.choice(bsChallengesList)
     description = challenge["content"][language]
     embed = discord.Embed(title=challenge["title"][language], description=description, color=int("000000", 16))
+    
     await interaction.response.send_message(content="", attachments=[discord.File("playerNotFound.webp", filename="playerNotFound.webp")], embed=embed)
+
       
   # @challenge.error
   # async def challenge_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
