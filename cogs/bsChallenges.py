@@ -16,7 +16,7 @@ class bsChallenges(commands.Cog):
     
   # Get your Random Challenge
   @app_commands.command(description="get a random bs challenge (soon)")
-  async def challenge(self, interaction: discord.InteractionResponseType):
+  async def challenge(self, interaction: discord.Interaction):
     # Ausgewählte Sprache fetchen
     options = mongodb.findGuildOptions(interaction.guild.id)
     language = options["language"]
