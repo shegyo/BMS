@@ -6,7 +6,7 @@ import random
 
 # ENV Daten laden
 with open("data/challenges.json", "r", encoding="UTF-8") as f:
-  bsChallenges = json.load(f)
+  bsChallengesList = json.load(f)
   
 
 class bsChallenges(commands.Cog):
@@ -21,7 +21,7 @@ class bsChallenges(commands.Cog):
     options = mongodb.findGuildOptions(interaction.guild.id)
     language = options["language"]
 
-    challenge = random.choice(bsChallenges)
+    challenge = random.choice(bsChallengesList)
     description = challenge["content"][language]
     embed = discord.Embed(title=challenge["title"][language], description=description, color=int("000000", 16))
     await interaction.edit_original_response(content="", attachments=[discord.File("playerNotFound.webp", filename="playerNotFound.webp")], embed=embed)
