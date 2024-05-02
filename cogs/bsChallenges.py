@@ -16,7 +16,7 @@ class bsChallenges(commands.Cog):
 
   # Get your Random Challenge
   @app_commands.command(description="get a random bs challenge")
-  async def herausforderung(self, interaction: discord.Interaction, challenge: str):
+  async def challenge(self, interaction: discord.Interaction):
     # Fetch selected language
     options = mongodb.findGuildOptions(interaction.guild.id)
     language = options["language"]
@@ -25,11 +25,11 @@ class bsChallenges(commands.Cog):
     description = challenge["content"][language]
     embed = discord.Embed(title=challenge["title"][language], description=description, color=int("000000", 16))
     
-    await interaction.response.send_message(content="", attachments=[discord.File("playerNotFound.webp", filename="playerNotFound.webp")], embed=embed)
+    await interaction.response.send_message(embed=embed)
 
       
-  @herausforderung.error
-  async def herausforderung_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
+  @challenge.error
+  async def challenge_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
     if isinstance(error, app_commands.NoPrivateMessage):
       return await interaction.response.send_message("Command can't be run in Private Messages.", delete_after=5, ephemeral=True)
     else:
