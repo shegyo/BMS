@@ -23,9 +23,7 @@ class bsChallenges(commands.Cog):
     language = options["language"]
 
     challenge = random.choice(bsChallenges)
-    description = ""
-    for text in challenge["content"][language]:
-      description += text
+    description = challenge["content"][language]
     embed = discord.Embed(title=challenge["title"][language], description=description, color=int("000000", 16))
     await interaction.edit_original_response(content="", attachments=[discord.File("playerNotFound.webp", filename="playerNotFound.webp")], embed=embed)
       
