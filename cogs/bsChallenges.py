@@ -24,7 +24,7 @@ class bsChallenges(commands.Cog):
     challenge = random.choice(bsChallengesList)
     description = challenge["content"][language]
     embed = discord.Embed(title=challenge["title"][language], description=description, color=int("000000", 16))
-    await interaction.edit_original_response(content="", attachments=[discord.File("playerNotFound.webp", filename="playerNotFound.webp")], embed=embed)
+    await interaction.response.send_message(content="", attachments=[discord.File("playerNotFound.webp", filename="playerNotFound.webp")], embed=embed)
       
   # @challenge.error
   # async def challenge_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
