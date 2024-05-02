@@ -25,7 +25,7 @@ class bsChallenges(commands.Cog):
     description = challenge["content"][language]
     embed = discord.Embed(title=challenge["title"][language], description=description, color=int("000000", 16))
     embed.set_thumbnail(url="https://imgur.com/Eg6oy61")
-    embed.set_footer(icon_url=self.bot.display_avatar.url, text=challenge["difficulty"][language])
+    embed.set_footer(icon_url=self.bot.user.display_avatar.url, text=challenge["difficulty"][language])
     
     await interaction.response.send_message(embed=embed)
 
