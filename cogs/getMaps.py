@@ -71,27 +71,16 @@ class getMaps(commands.Cog):
       # Sprache suchen
       options = mongodb.findGuildOptions(guild.id)
       language = options["language"]
-
-      # Kategorie suchen
-      mapRotaCategory = None
-      i = 0
-      while not mapRotaCategory and i < len(guild.categories):
-        if "maprotation" in guild.categories[i].name.lower().replace(" ", ""):
-          mapRotaCategory = guild.categories[i]
-        i += 1
-
-      if not mapRotaCategory:
-        continue
             
       # Kanal suchen
       currentMapsChannel = None
       nextMapsChannel = None
       i = 0
-      while (not currentMapsChannel or not nextMapsChannel) and i < len(mapRotaCategory.text_channels):
-        if "current-maps" in mapRotaCategory.text_channels[i].name.lower():
-          currentMapsChannel = mapRotaCategory.text_channels[i]
-        elif "next-maps" in mapRotaCategory.text_channels[i].name.lower():
-          nextMapsChannel = mapRotaCategory.text_channels[i]
+      while (not currentMapsChannel or not nextMapsChannel) and i < len(guild.text_channels):
+        if "current-maps" in guild.text_channels[i].name.lower():
+          currentMapsChannel = guild.text_channels[i]
+        elif "next-maps" in guild.text_channels[i].name.lower():
+          nextMapsChannel = guild.text_channels[i]
         i += 1
       if not currentMapsChannel or not nextMapsChannel:
           continue
