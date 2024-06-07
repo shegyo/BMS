@@ -82,7 +82,7 @@ class getMaps(commands.Cog):
         elif "next-maps" in guild.text_channels[i].name.lower():
           nextMapsChannel = guild.text_channels[i]
         i += 1
-      if not currentMapsChannel or not nextMapsChannel:
+      if not currentMapsChannel and not nextMapsChannel:
           continue
     
       messages = [message async for message in currentMapsChannel.history()]
