@@ -37,36 +37,24 @@ class BMates(commands.Bot):
     await asyncio.sleep(3)
 
     # Map Rota Kanäle erstellen 
-    try:
-      # Kategorie suchen
-      mapRotaCategory = None
-      i = 0
-      while not mapRotaCategory and i < len(guild.categories):
-        if "maprotation" in guild.categories[i].name.lower().replace(" ", ""):
-          mapRotaCategory = guild.categories[i]
-        i += 1
-
-      # Kategorie erstellen falls nicht da
-      if not mapRotaCategory:
-        mapRotaCategory = await guild.create_category_channel("Map Rotation")
-            
+    try:            
       # Kanäle suchen
       currentMapsChannel = None
       nextMapsChannel = None
       i = 0
-      while (not currentMapsChannel or not nextMapsChannel) and i < len(mapRotaCategory.text_channels):
-        if "current-maps" in mapRotaCategory.text_channels[i].name.lower():
-          currentMapsChannel = mapRotaCategory.text_channels[i]
-        elif "next-maps" in mapRotaCategory.text_channels[i].name.lower():
-          nextMapsChannel = mapRotaCategory.text_channels[i]
+      while (not currentMapsChannel or not nextMapsChannel) and i < len(guild.text_channels):
+        if "current-maps" in guild.text_channels[i].name.lower():
+          currentMapsChannel = guild.text_channels[i]
+        elif "next-maps" in guild.text_channels[i].name.lower():
+          nextMapsChannel = guild.text_channels[i]
         i += 1
 
       # Erstellen und eine Nachricht senden falls nicht vorhanden
       if not currentMapsChannel:
-        currentMapsChannel = await mapRotaCategory.create_text_channel("current-maps", overwrites=onlyRead, topic="Active Maps!")
+        currentMapsChannel = await guild.create_text_channel("current-maps", overwrites=onlyRead, topic="Active Maps!")
         await currentMapsChannel.send(generalTexts["currentSoon"][language])
       if not nextMapsChannel:
-        nextMapsChannel = await mapRotaCategory.create_text_channel("next-maps", overwrites=onlyRead, topic="Predicted Upcoming Maps!")
+        nextMapsChannel = await guild.create_text_channel("next-maps", overwrites=onlyRead, topic="Predicted Upcoming Maps!")
         await nextMapsChannel.send(generalTexts["upcomingSoon"][language])
       
 
