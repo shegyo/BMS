@@ -75,6 +75,8 @@ class getMaps(commands.Cog):
       # Kanal suchen
       currentMapsChannel = None
       nextMapsChannel = None
+      if guild.id == 1214698918395510785:
+         print("hi")
       i = 0
       while (not currentMapsChannel or not nextMapsChannel) and i < len(guild.text_channels):
         if "current-maps" in guild.text_channels[i].name.lower():
@@ -82,8 +84,13 @@ class getMaps(commands.Cog):
         elif "next-maps" in guild.text_channels[i].name.lower():
           nextMapsChannel = guild.text_channels[i]
         i += 1
+      if guild.id == 1214698918395510785:
+        print("hi")
       if not currentMapsChannel and not nextMapsChannel:
           continue
+      
+      if guild.id == 1214698918395510785:
+         print("hi")
     
       messages = [message async for message in currentMapsChannel.history()]
       if not messages:
