@@ -57,7 +57,8 @@ class brawlProfiles(commands.Cog):
 
       # Nutzer Id fetchen
       user_options = mongodb.findUserOptions(interaction.user.id)
-      bs_id = user_options["bs_id"]
+      if not bs_id:
+        bs_id = user_options["bs_id"]
 
       if not bs_id:
         return await interaction.response.send_message(generalTexts["noIdGiven"][language], ephemeral=True, delete_after=60)
@@ -90,7 +91,8 @@ class brawlProfiles(commands.Cog):
 
       # Nutzer Id fetchen
       user_options = mongodb.findUserOptions(interaction.user.id)
-      bs_id = user_options["bs_id"]
+      if not bs_id:
+        bs_id = user_options["bs_id"]
 
       if not bs_id:
         return await interaction.response.send_message(generalTexts["noIdGiven"][language], ephemeral=True, delete_after=60)
@@ -123,7 +125,8 @@ class brawlProfiles(commands.Cog):
 
       # Nutzer Id fetchen
       user_options = mongodb.findUserOptions(interaction.user.id)
-      bs_id = user_options["bs_id"]
+      if not bs_id:
+        bs_id = user_options["bs_id"]
 
       if not bs_id:
         return await interaction.response.send_message(generalTexts["noIdGiven"][language], ephemeral=True, delete_after=60)
