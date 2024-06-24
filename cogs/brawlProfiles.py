@@ -25,12 +25,12 @@ def getPlayerNameForId(bs_id):
 
 
 # Funktion zum laden der Profilbilder mit Brawlerranks
-def getBsProfile(bs_id, source):
+def getBsProfile(bs_id, source, sourceSuffix: str = ""):
   # Check player exists
   player_name, bs_id = getPlayerNameForId(bs_id)
 
   if player_name:
-    response = requests.get(f"{source}{bs_id}")
+    response = requests.get(f"{source}{bs_id}{sourceSuffix}")
     if response.status_code == 200:
         # Speichern der binären Daten in einer temporären Datei
         with tempfile.NamedTemporaryFile(delete=False) as temp_file:
@@ -65,7 +65,7 @@ class brawlProfiles(commands.Cog):
 
 
       await interaction.response.defer()
-      profileImg, bs_id, player_name = getBsProfile(bs_id, "https://share.brawlify.com/player/")
+      profileImg, bs_id, player_name = getBsProfile(bs_id, "https://brawltime.ninja/api/render/profile/", "/best.png?background=cyber_week_lobby.jpg")
       if not (profileImg and player_name):
         embed = discord.Embed(title=player_name, description=f"### <:info:1216306156222287894> ID: #{bs_id}", color=int("000000", 16))
         await interaction.edit_original_response(content="", attachments=[discord.File("playerNotFound.webp", filename="playerNotFound.webp")], embed=embed)
