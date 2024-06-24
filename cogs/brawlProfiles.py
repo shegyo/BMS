@@ -65,7 +65,7 @@ class brawlProfiles(commands.Cog):
 
 
       await interaction.response.defer()
-      profileImg, bs_id, player_name = getBsProfile(bs_id, "https://brawltime.ninja/api/render/profile/", "/best.png?background=cyber_week_lobby.jpg")
+      profileImg, bs_id, player_name = getBsProfile(bs_id, "https://brawltime.ninja/api/render/profile/", "/best.png?background=golden_week_lobby.jpg")
       if not (profileImg and player_name):
         embed = discord.Embed(title=player_name, description=f"### <:info:1216306156222287894> ID: #{bs_id}", color=int("000000", 16))
         await interaction.edit_original_response(content="", attachments=[discord.File("playerNotFound.webp", filename="playerNotFound.webp")], embed=embed)
