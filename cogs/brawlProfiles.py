@@ -17,17 +17,19 @@ def getPlayerNameForId(bs_id):
   headers = {
       "Authorization": f"Bearer {envData['BsApi']}"
   }
-  response = requests.get(url, headers=headers)
-  if response.status_code == 200:
-      return response.json()["name"], bs_id
+  response = requests.get(url, headers=headers).json()
+  if not "reason" in response:
+      return response["name"], bs_id, False
+  elif response["resaon"] == "inMaintenance":
+      return "", bs_id, True
   else:
-      return "", bs_id
+      return "", bs_id, False
 
 
 # Funktion zum laden der Profilbilder mit Brawlerranks
 def getBsProfile(bs_id, source, sourceSuffix: str = ""):
   # Check player exists
-  player_name, bs_id = getPlayerNameForId(bs_id)
+  player_name, bs_id, maintenance = getPlayerNameForId(bs_id)
 
   if player_name:
     response = requests.get(f"{source}{bs_id}{sourceSuffix}")
@@ -36,11 +38,11 @@ def getBsProfile(bs_id, source, sourceSuffix: str = ""):
         with tempfile.NamedTemporaryFile(delete=False) as temp_file:
             temp_file.write(response.content)
             temp_filename = temp_file.name
-            return temp_filename, bs_id, player_name
+            return temp_filename, bs_id, player_name, maintenance, False
     else:
-      return None, bs_id, player_name
+      return None, bs_id, player_name, maintenance, True
   else:
-    return None, bs_id, player_name
+    return None, bs_id, player_name, maintenance, False
   
 
 class brawlProfiles(commands.Cog):
@@ -65,7 +67,13 @@ class brawlProfiles(commands.Cog):
 
 
       await interaction.response.defer()
-      profileImg, bs_id, player_name = getBsProfile(bs_id, "https://brawltime.ninja/api/render/profile/", "/best.png?background=golden_week_lobby.jpg")
+      profileImg, bs_id, player_name, BsMaintenance, imgMaintenance = getBsProfile(bs_id, "https://brawltime.ninja/api/render/profile/", "/best.png?background=golden_week_lobby.jpg")
+      if BsMaintenance:
+        embed = discord.Embed(title="Brawl Stars API in Maintenance", description=f"Please try again later", color=int("000000", 16))
+        return await interaction.edit_original_response(content="", embed=embed)
+      elif imgMaintenance:
+        embed = discord.Embed(title="Brawl Time Ninja Image Service in Maintenance", description=f"Please try again later", color=int("000000", 16))
+        return await interaction.edit_original_response(content="", embed=embed)
       if not (profileImg and player_name):
         embed = discord.Embed(title=player_name, description=f"### <:info:1216306156222287894> ID: #{bs_id}", color=int("000000", 16))
         await interaction.edit_original_response(content="", attachments=[discord.File("playerNotFound.webp", filename="playerNotFound.webp")], embed=embed)
@@ -99,7 +107,13 @@ class brawlProfiles(commands.Cog):
 
 
       await interaction.response.defer()
-      profileImg, bs_id, player_name = getBsProfile(bs_id, "https://brawlbot.xyz/api/image/rank/")
+      profileImg, bs_id, player_name, BsMaintenance, imgMaintenance = getBsProfile(bs_id, "https://brawlbot.xyz/api/image/rank/")
+      if BsMaintenance:
+        embed = discord.Embed(title="Brawl Stars API in Maintenance", description=f"Please try again later", color=int("000000", 16))
+        return await interaction.edit_original_response(content="", embed=embed)
+      elif imgMaintenance:
+        embed = discord.Embed(title="Brawl Bot Image Service in Maintenance", description=f"Please try again later", color=int("000000", 16))
+        return await interaction.edit_original_response(content="", embed=embed)
       if not (profileImg and player_name):
         embed = discord.Embed(title=player_name, description=f"### <:info:1216306156222287894> ID: #{bs_id}", color=int("000000", 16))
         await interaction.edit_original_response(content="", attachments=[discord.File("playerNotFound.webp", filename="playerNotFound.webp")], embed=embed)
@@ -133,7 +147,13 @@ class brawlProfiles(commands.Cog):
 
 
       await interaction.response.defer()
-      profileImg, bs_id, player_name = getBsProfile(bs_id, "https://brawlbot.xyz/api/image/mastery/")
+      profileImg, bs_id, player_name, BsMaintenance, imgMaintenance = getBsProfile(bs_id, "https://brawlbot.xyz/api/image/mastery/")
+      if BsMaintenance:
+        embed = discord.Embed(title="Brawl Stars API in Maintenance", description=f"Please try again later", color=int("000000", 16))
+        return await interaction.edit_original_response(content="", embed=embed)
+      elif imgMaintenance:
+        embed = discord.Embed(title="Brawl Bot Image Service in Maintenance", description=f"Please try again later", color=int("000000", 16))
+        return await interaction.edit_original_response(content="", embed=embed)  
       if not (profileImg and player_name):
         embed = discord.Embed(title=player_name, description=f"### <:info:1216306156222287894> ID: #{bs_id}", color=int("000000", 16))
         await interaction.edit_original_response(content="", attachments=[discord.File("playerNotFound.webp", filename="playerNotFound.webp")], embed=embed)
