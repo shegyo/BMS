@@ -25,8 +25,7 @@ def getPlayerNameForId(bs_id):
   else:
       return "", bs_id, False
 
-
-# Funktion zum laden der Profilbilder mit Brawlerranks
+# Funktion zum laden der Profilbilder
 def getBsProfile(bs_id, source, sourceSuffix: str = ""):
   # Check player exists
   player_name, bs_id, maintenance = getPlayerNameForId(bs_id)
