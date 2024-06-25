@@ -17,7 +17,10 @@ def getPlayerNameForId(bs_id):
   headers = {
       "Authorization": f"Bearer {envData['BsApi']}"
   }
-  response = requests.get(url, headers=headers, timeout=3).json()
+  try:
+    response = requests.get(url, headers=headers, timeout=3).json()
+  except:
+    return "", bs_id, True
   if not "reason" in response:
       return response["name"], bs_id, False
   elif response["resaon"] == "inMaintenance":
@@ -31,7 +34,10 @@ def getBsProfile(bs_id, source, sourceSuffix: str = ""):
   player_name, bs_id, maintenance = getPlayerNameForId(bs_id)
 
   if player_name:
-    response = requests.get(f"{source}{bs_id}{sourceSuffix}")
+    try:
+      response = requests.get(f"{source}{bs_id}{sourceSuffix}", timeout=3)
+    except:
+      return None, bs_id, player_name, maintenance, True
     if response.status_code == 200:
         # Speichern der binären Daten in einer temporären Datei
         with tempfile.NamedTemporaryFile(delete=False) as temp_file:
