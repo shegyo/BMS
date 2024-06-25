@@ -17,7 +17,7 @@ def getPlayerNameForId(bs_id):
   headers = {
       "Authorization": f"Bearer {envData['BsApi']}"
   }
-  response = requests.get(url, headers=headers).json()
+  response = requests.get(url, headers=headers, timeout=3).json()
   if not "reason" in response:
       return response["name"], bs_id, False
   elif response["resaon"] == "inMaintenance":
