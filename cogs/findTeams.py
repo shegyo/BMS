@@ -31,6 +31,8 @@ for i, gamemode in enumerate(modeEmojis, start=1):
 
 async def sendToAllGuilds(bot, interaction, categoryName, channelName, embeds, view, language):
   for i, guild in enumerate(bot.guilds, start=1):
+    print(guild.name)
+
     # Sprache suchen
     options = mongodb.findGuildOptions(guild.id)
     guildLanguage = options["language"]
@@ -59,7 +61,7 @@ async def sendToAllGuilds(bot, interaction, categoryName, channelName, embeds, v
     if channel:
       await channel.send(embeds=embeds[guildLanguage], view=view)
 
-    if i % 5 == 0:
+    if i % 5 == 0 and i > 4:
       await interaction.edit_original_response(content=findTeamsTexts["sendingPostsProgress"][language].format(count=i))
 
     # Avoid Rate limiting
