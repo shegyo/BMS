@@ -105,7 +105,7 @@ class getMaps(commands.Cog):
             else:
                 await msg.edit(content=f'# {mapsTexts["upcomingMapsTitle"][language]}', embeds=embeds["upcoming"][language])
                 break
-      await asyncio.sleep(3)
+      await asyncio.sleep(5)
 
 
 async def setup(bot):

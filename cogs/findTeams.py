@@ -3,6 +3,7 @@ import discord, requests, json
 from discord import app_commands
 from cogs.Utility import View, LinkButton
 import mongodb
+import asyncio
 
 # EnvData laden
 with open("data/env.json", "r", encoding="UTF-8") as f:
@@ -60,6 +61,9 @@ async def sendToAllGuilds(bot, interaction, categoryName, channelName, embeds, v
 
     if i % 5 == 0:
       await interaction.edit_original_response(content=findTeamsTexts["postSentProgress"][language].format(count=i))
+
+    # Avoid Rate limiting
+    await asyncio.sleep(5)
 
   await interaction.edit_original_response(content=findTeamsTexts["postSent"][language])
 
