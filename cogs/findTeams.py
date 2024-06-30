@@ -30,8 +30,7 @@ for i, gamemode in enumerate(modeEmojis, start=1):
 
 
 async def sendToAllGuilds(bot, interaction, categoryName, channelName, embeds, view, language):
-  for i, guild in enumerate(bot.guilds, start=1):
-    print(guild.name)
+  for i, guild in enumerate(bot.guilds, start=1):a
 
     # Sprache suchen
     options = mongodb.findGuildOptions(guild.id)
@@ -61,13 +60,10 @@ async def sendToAllGuilds(bot, interaction, categoryName, channelName, embeds, v
     if channel:
       await channel.send(embeds=embeds[guildLanguage], view=view)
 
-    if i % 5 == 0 and i > 4:
-      await interaction.edit_original_response(content=findTeamsTexts["sendingPostsProgress"][language].format(count=i))
-
     # Avoid Rate limiting
     await asyncio.sleep(5)
 
-  await interaction.edit_original_response(content=findTeamsTexts["postSent"][language])
+  await interaction.channel.send(findTeamsTexts["postSent"][language])
 
 # Formular zum Ausfüllen, erstellt den Suchbeitrag
 class FindMatesModalGerman(discord.ui.Modal):
