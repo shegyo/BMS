@@ -60,7 +60,7 @@ async def sendToAllGuilds(bot, interaction, categoryName, channelName, embeds, v
       await channel.send(embeds=embeds[guildLanguage], view=view)
 
     if i % 5 == 0:
-      await interaction.edit_original_response(content=findTeamsTexts["postSentProgress"][language].format(count=i))
+      await interaction.edit_original_response(content=findTeamsTexts["sendingPostsProgress"][language].format(count=i))
 
     # Avoid Rate limiting
     await asyncio.sleep(5)
