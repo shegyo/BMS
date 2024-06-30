@@ -30,8 +30,7 @@ for i, gamemode in enumerate(modeEmojis, start=1):
 
 
 async def sendToAllGuilds(bot, interaction, categoryName, channelName, embeds, view, language):
-  for i, guild in enumerate(bot.guilds, start=1):a
-
+  for i, guild in enumerate(bot.guilds, start=1):
     # Sprache suchen
     options = mongodb.findGuildOptions(guild.id)
     guildLanguage = options["language"]
